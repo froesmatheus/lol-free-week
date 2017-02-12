@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.matheusfroes.lolfreeweek">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".CustomApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.ChampionDetailsActivity"
+            android:parentActivityName=".activities.MainActivity" />
+
+
+        <activity
+            android:name=".activities.AddChampionAlertActivity"
+            android:label="@string/add_alert" />
+
+
+        <activity
+            android:name=".activities.IntroActivity"
+            android:theme="@style/Theme.Intro" />
+
+        <activity
+            android:name=".activities.MyAlertsActivity"
+            android:label="@string/my_alerts"
+            android:parentActivityName=".activities.MainActivity" />
+
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName=".activities.MainActivity" />
+    </application>
+
+</manifest>

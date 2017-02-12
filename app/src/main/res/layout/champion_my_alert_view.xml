@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardChampion"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/ivChampion"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:contentDescription="Champion Image"
+            android:minHeight="200dp"
+            android:src="@drawable/lucian" />
+
+        <TextView
+            android:id="@+id/tvChampionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/ivChampion"
+            android:layout_toRightOf="@+id/ivChampion"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="Champion Name"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvChampionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvChampionName"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/ivChampion"
+            android:layout_toRightOf="@+id/ivChampion"
+            android:paddingLeft="10dp"
+            android:text="Champion Title" />
+
+        <ImageView
+            android:id="@+id/ivDeleteAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivChampion"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_delete" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

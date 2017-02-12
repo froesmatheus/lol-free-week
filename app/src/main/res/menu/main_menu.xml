@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.matheusfroes.lolfreeweek.FreeWeekChampionsActivity">
+
+    <item
+        android:id="@+id/actionShowAlerts"
+        android:icon="@drawable/ic_alert"
+        android:title="@string/action_alerts"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionConfigs"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+
+</menu>
+

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivChampionImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:src="@drawable/lucian"
+                app:civ_border_overlay="true" />
+
+            <TextView
+                android:id="@+id/tvChampionName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvChampionTitle"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/tvChampionTitle"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:lineSpacingExtra="8dp"
+                android:text="Lucian"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvChampionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvChampionName"
+                android:layout_toEndOf="@+id/ivChampionImage"
+                android:layout_toRightOf="@+id/ivChampionImage"
+                android:gravity="center"
+                android:text="O Atirador"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/habilidades"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivSpellQ"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="5dp"
+                android:src="@drawable/examplespell" />
+
+            <ImageView
+                android:id="@+id/ivSpellW"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="5dp"
+                android:src="@drawable/examplespell" />
+
+            <ImageView
+                android:id="@+id/ivSpellE"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="5dp"
+                android:src="@drawable/examplespell" />
+
+            <ImageView
+                android:id="@+id/ivSpellR"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="5dp"
+                android:src="@drawable/examplespell" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/skins"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvChampionSkins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/champion_skin_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/descricao"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tvChampionLore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:minHeight="100dp"
+            ext:documentView_antialias="true"
+            ext:documentView_cacheConfig="auto_quality"
+            ext:documentView_hyphen="-"
+            ext:documentView_maxLines="100"
+            ext:documentView_reverse="false"
+            ext:documentView_textAlignment="justified"
+            ext:documentView_textColor="@android:color/white"
+            ext:documentView_textFormat="plain"
+            ext:documentView_textSize="18sp"
+            ext:documentView_textSubPixel="true" />
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">LOL Free Week</string>
+    <string name="title_activity_champion_details">ChampionDetailsActivity</string>
+
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="title_activity_free_week_champions">FreeWeekChampionsActivity</string>
+    <string name="action_alerts">My alerts</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="alert_message">Adicione alertas para que quando seus campeões favoritos estejam na Free Week você seja notificado</string>
+    <string name="habilidades">Spells</string>
+    <string name="skins">Skins</string>
+    <string name="descricao">Description</string>
+    <string name="my_alerts">My Alerts</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="champion_name">Champion name</string>
+    <string name="add_alert">Add Alert</string>
+</resources>
