@@ -10,6 +10,12 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/actionRefreshList"
+        android:icon="@drawable/ic_refresh"
+        android:title="@string/refresh_list"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/actionConfigs"
         android:title="@string/action_settings"
         app:showAsAction="never" />

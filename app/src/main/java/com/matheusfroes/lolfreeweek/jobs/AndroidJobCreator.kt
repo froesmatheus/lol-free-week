@@ -2,8 +2,6 @@ package com.matheusfroes.lolfreeweek.jobs
 
 import com.evernote.android.job.Job
 import com.evernote.android.job.JobCreator
-import com.matheusfroes.lolfreeweek.CreateFirstFetchJob
-import com.matheusfroes.lolfreeweek.FetchFreeWeekChampionsJob
 
 /**
  * Created by matheusfroes on 12/02/2017.

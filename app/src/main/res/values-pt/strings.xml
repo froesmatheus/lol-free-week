@@ -16,4 +16,6 @@
     <string name="my_alerts">Meus Alertas</string>
     <string name="champion_name">Nome do campeão</string>
     <string name="add_alert">Adicionar Alerta</string>
+    <string name="title_activity_settings">Configurações</string>
+    <string name="refresh_list">Atualizar Lista</string>
 </resources>

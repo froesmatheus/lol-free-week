@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.preference.Preference
 import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
+import android.view.MenuItem
 import android.widget.Toast
 import com.matheusfroes.lolfreeweek.R
 
@@ -57,7 +58,20 @@ class SettingsActivity : AppCompatPreferenceActivity() {
      */
     private fun setupActionBar() {
         val actionBar = supportActionBar
-        //actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            android.R.id.home -> {
+                this.finish()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     /**
