@@ -11,7 +11,5 @@ class CustomApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         JobManager.create(this).addJobCreator(AndroidJobCreator())
-
-        CreateFirstFetchJob.scheduleFirstWeeklyJob()
     }
 }

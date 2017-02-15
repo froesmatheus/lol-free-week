@@ -30,7 +30,7 @@ class ChampionAlertAdapter(val context: Context, var championList: List<Champion
 
         Picasso
                 .with(context)
-                .load("http://ddragon.leagueoflegends.com/cdn/7.3.1/img/champion/${champion.image}")
+                .load("http://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/${champion.image}")
                 .fit()
                 .centerCrop()
                 .into(holder.itemView.ivChampion)

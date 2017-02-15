@@ -73,11 +73,6 @@ class ChampionDAO(context: Context) {
     fun update(champion: Champion) {
         val cv = ContentValues()
 
-        cv.put(Db.COLUMN_NAME_CHAMPIONS, champion.name)
-        cv.put(Db.COLUMN_KEY_CHAMPIONS, champion.key)
-        cv.put(Db.COLUMN_IMAGE_CHAMPIONS, champion.image)
-        cv.put(Db.COLUMN_LORE_CHAMPIONS, champion.lore)
-        cv.put(Db.COLUMN_TITLE_CHAMPIONS, champion.title)
         cv.put(Db.COLUMN_ALERT_ON_CHAMPIONS, if (champion.alertOn) 1 else 0)
 
         db.update(Db.TABLE_CHAMPIONS, cv, "_id = ?", arrayOf(champion.id.toString()))
@@ -89,11 +84,6 @@ class ChampionDAO(context: Context) {
             val cv = ContentValues()
 
             champions.forEach { champion ->
-                cv.put(Db.COLUMN_NAME_CHAMPIONS, champion.name)
-                cv.put(Db.COLUMN_KEY_CHAMPIONS, champion.key)
-                cv.put(Db.COLUMN_IMAGE_CHAMPIONS, champion.image)
-                cv.put(Db.COLUMN_LORE_CHAMPIONS, champion.lore)
-                cv.put(Db.COLUMN_TITLE_CHAMPIONS, champion.title)
                 cv.put(Db.COLUMN_ALERT_ON_CHAMPIONS, if (champion.alertOn) 1 else 0)
 
                 db.update(Db.TABLE_CHAMPIONS, cv, "_id = ?", arrayOf(champion.id.toString()))
@@ -160,8 +150,6 @@ class ChampionDAO(context: Context) {
         val columns = arrayOf(
                 Db.COLUMN_ID_CHAMPIONS,
                 Db.COLUMN_IMAGE_CHAMPIONS,
-                Db.COLUMN_KEY_CHAMPIONS,
-                Db.COLUMN_LORE_CHAMPIONS,
                 Db.COLUMN_NAME_CHAMPIONS,
                 Db.COLUMN_TITLE_CHAMPIONS,
                 Db.COLUMN_ALERT_ON_CHAMPIONS)
@@ -177,17 +165,13 @@ class ChampionDAO(context: Context) {
                 val name = cursor.getString(cursor.getColumnIndex(Db.COLUMN_NAME_CHAMPIONS))
                 val id = cursor.getInt(cursor.getColumnIndex(Db.COLUMN_ID_CHAMPIONS))
                 val image = cursor.getString(cursor.getColumnIndex(Db.COLUMN_IMAGE_CHAMPIONS))
-                val key = cursor.getString(cursor.getColumnIndex(Db.COLUMN_KEY_CHAMPIONS))
-                val lore = cursor.getString(cursor.getColumnIndex(Db.COLUMN_LORE_CHAMPIONS))
                 val title = cursor.getString(cursor.getColumnIndex(Db.COLUMN_TITLE_CHAMPIONS))
 
                 val alertOnInt = cursor.getInt(cursor.getColumnIndex(Db.COLUMN_ALERT_ON_CHAMPIONS))
                 val alertOn = alertOnInt == 1
 
-                val champion = Champion(id, image, key, lore, name, title, alertOn = alertOn)
 
-                champion.spells = spellDAO.getSpellsByChampionId(id)
-                champion.skins = skinDAO.getSkinsByChampionId(id)
+                val champion = Champion(name = name, title = title, id = id, image = image, alertOn = alertOn)
 
                 champions.add(champion)
             } while (cursor.moveToNext())

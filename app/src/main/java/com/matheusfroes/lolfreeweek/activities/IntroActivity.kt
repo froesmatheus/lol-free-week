@@ -14,25 +14,26 @@ class IntroActivity : MaterialIntroActivity() {
         addSlide(SlideFragmentBuilder()
                 .backgroundColor(R.color.colorPrimary)
                 .buttonsColor(R.color.colorPrimaryDark)
-                .image(agency.tango.materialintroscreen.R.drawable.ic_next)
-                .title(resources.getString(R.string.app_name))
-                .description("Veja os campeões que estão na Free Week no LOL")
-                .build())
-
-        addSlide(SlideFragmentBuilder()
-                .backgroundColor(R.color.colorPrimary)
-                .buttonsColor(R.color.colorPrimaryDark)
                 .image(R.drawable.intro_image)
-                .title("Informações sobre os campeões")
-                .description("Veja as informações sobre os campeões \n(Habilidades, Skins, Descrição)")
+                .title(resources.getString(R.string.app_name))
+                .description(getString(R.string.intro_1))
                 .build())
 
         addSlide(SlideFragmentBuilder()
                 .backgroundColor(R.color.colorPrimary)
                 .buttonsColor(R.color.colorPrimaryDark)
                 .image(R.drawable.intro_image2)
-                .title("Alertas")
+                .title(getString(R.string.info_intro_1_title))
+                .description(getString(R.string.info_intro_1_description))
+                .build())
+
+        addSlide(SlideFragmentBuilder()
+                .backgroundColor(R.color.colorPrimary)
+                .buttonsColor(R.color.colorPrimaryDark)
+                .image(R.drawable.intro_image3)
+                .title(getString(R.string.info_intro_2_title))
                 .description(resources.getString(R.string.alert_message))
                 .build())
+
     }
 }

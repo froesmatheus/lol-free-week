@@ -17,5 +17,17 @@
     <string name="champion_name">Nome do campeão</string>
     <string name="add_alert">Adicionar Alerta</string>
     <string name="title_activity_settings">Configurações</string>
-    <string name="refresh_list">Atualizar Lista</string>
+    <string name="refresh_list">Atualizar Free Week</string>
+    <string name="free_week_notification_message">Confira os campeões da Free Week nesta semana!</string>
+    <string name="intro_1">Veja os campeões que estão na Free Week no LOL</string>
+    <string name="added_alert_success">Alerta adicionado com sucesso</string>
+    <string name="info_add_alert">Adicione alertas dos seus campeões favoritos para ser notificado quando eles entrarem na Free Week</string>
+    <string name="info_intro_1_title">Informações sobre os campeões</string>
+    <string name="info_intro_1_description">Veja as informações sobre os campeões \\n(Habilidades, Skins, Descrição)</string>
+    <string name="info_intro_2_title">Alertas</string>
+    <string name="info_download_champion_information">Baixando informações sobre os campeões</string>
+    <string name="empty_alerts_list">Você ainda não adicionou nenhum alerta</string>
+
+    <string name="champion_alert_message">%1$s está na Free Week</string>
+    <string name="add_at_least_one_champion">Você precisa adicionar pelo menos um campeão como favorito</string>
 </resources>

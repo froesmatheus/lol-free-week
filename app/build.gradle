@@ -38,7 +38,9 @@ dependencies {
     compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
     compile 'agency.tango.android:material-intro-screen:0.0.5'
     compile 'com.evernote:android-job:1.1.5'
+    compile 'com.google.firebase:firebase-ads:10.0.1'
 }
 repositories {
     mavenCentral()
 }
+apply plugin: 'com.google.gms.google-services'

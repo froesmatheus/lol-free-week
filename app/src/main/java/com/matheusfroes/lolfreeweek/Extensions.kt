@@ -1,5 +1,10 @@
 package com.matheusfroes.lolfreeweek
 
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.graphics.BitmapFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -24,4 +29,21 @@ fun nextDayOfWeek(day: Int): Calendar {
 fun getDateDiff(date1: Date, date2: Date, timeUnit: TimeUnit): Long {
     val diffInMillies = date2.time - date1.time
     return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS)
+}
+
+fun sendNotification(notificationId: Int, context: Context, title: String, message: String, intent: PendingIntent) {
+    val notificationManager: NotificationManager =
+            context.getSystemService(android.content.Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    val notification = Notification.Builder(context)
+            .setContentTitle(title)
+            .setContentText(message)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setAutoCancel(true)
+            .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
+            .setPriority(Notification.PRIORITY_HIGH)
+            .setContentIntent(intent)
+            .setDefaults(Notification.DEFAULT_VIBRATE)
+
+    notificationManager.notify(notificationId, notification.build())
 }
