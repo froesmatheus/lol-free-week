@@ -11,6 +11,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.adapters.ChampionAlertAdapter
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
@@ -27,6 +30,9 @@ class AddChampionAlertActivity : AppCompatActivity() {
     }
     var championList: MutableList<Champion>? = null
     var adapter: ChampionAlertAdapter? = null
+    val interstitialAd by lazy {
+        InterstitialAd(applicationContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +73,16 @@ class AddChampionAlertActivity : AppCompatActivity() {
         })
 
 
+        interstitialAd.adUnitId = "ca-app-pub-9931312002048408/1857365378"
+
+        interstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                interstitialAd.show()
+            }
+        }
+
+
+
         btnSaveAlert.setOnClickListener {
             val alertOnChampions = championList?.filter(Champion::alertOn)
 
@@ -78,9 +94,20 @@ class AddChampionAlertActivity : AppCompatActivity() {
             championDAO.updateList(alertOnChampions!!)
 
             toast(getString(R.string.added_alert_success))
+
+            requestNewInterstitial()
             finish()
         }
     }
+
+    private fun requestNewInterstitial() {
+        val adRequest = AdRequest.Builder()
+                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
+                .build()
+
+        interstitialAd.loadAd(adRequest)
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_add_alert, menu)

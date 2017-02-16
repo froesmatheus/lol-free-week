@@ -1,14 +1,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference
-        android:defaultValue="Olá"
         android:key="update_list"
-        android:summary="Atualize a lista de campeões"
-        android:title="Atualizar lista" />
+        android:summary="@string/update_list_summary"
+        android:title="@string/update_list" />
 
     <Preference
-        android:defaultValue="Olá"
         android:key="open_intro"
-        android:summary="Abra a tela de inicialização do aplicativo"
-        android:title="Abrir tela de apresentação" />
+        android:summary="@string/open_intro_summary"
+        android:title="@string/open_intro_title" />
 
+    <Preference
+        android:key="about_app"
+        android:summary="@string/about_app_summary"
+        android:title="@string/about_app" />
 </PreferenceScreen>

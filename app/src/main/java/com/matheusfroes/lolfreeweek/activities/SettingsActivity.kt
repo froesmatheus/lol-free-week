@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.preference.Preference
 import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.view.MenuItem
@@ -15,10 +14,13 @@ import com.matheusfroes.lolfreeweek.db.ChampionDAO
 import com.matheusfroes.lolfreeweek.db.SkinDAO
 import com.matheusfroes.lolfreeweek.db.SpellDAO
 import com.matheusfroes.lolfreeweek.models.Champion
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 import net.rithms.riot.api.RiotApi
 import net.rithms.riot.constant.staticdata.ChampData
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+
 
 /**
  * A [PreferenceActivity] that presents a set of application settings. On
@@ -51,15 +53,30 @@ class SettingsActivity : AppCompatPreferenceActivity() {
 
         val updateListPreference = findPreference("update_list")
         val openIntroPreference = findPreference("open_intro")
+        val aboutApp = findPreference("about_app")
 
-        updateListPreference.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+        updateListPreference.setOnPreferenceClickListener {
             remakeChampionsList()
             true
         }
 
-        openIntroPreference.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+        openIntroPreference.setOnPreferenceClickListener {
             startActivity(Intent(applicationContext, IntroActivity::class.java))
             finish()
+            true
+        }
+
+        aboutApp.setOnPreferenceClickListener {
+            LibsBuilder()
+                    //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                    .withActivityStyle(Libs.ActivityStyle.DARK)
+                    .withAboutIconShown(true)
+                    .withAutoDetect(true)
+                    .withAboutSpecial1("RIOT LICENSE")
+                    .withAboutSpecial1Description(getString(R.string.license_riot))
+                    .withAboutDescription("<a href='https://github.com/froesmatheus'>Matheus Fróes Marques</a>")
+                    .withActivityTitle(getString(R.string.about_app))
+                    .start(this)
             true
         }
     }

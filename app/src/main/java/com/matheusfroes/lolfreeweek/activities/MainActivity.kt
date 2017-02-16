@@ -11,7 +11,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.adapters.ChampionAdapter
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
@@ -32,19 +34,26 @@ class MainActivity : AppCompatActivity() {
         getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Test ads
         val request = AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
-                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")  // My Galaxy Nexus test phone
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
                 .build()
 
         // Official ads
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(request)
+
+
+
+
+
 
         rvChampions.layoutManager = GridLayoutManager(this, 2, GridLayout.VERTICAL, false)
         rvChampions.itemAnimator = DefaultItemAnimator()

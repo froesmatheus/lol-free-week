@@ -3,4 +3,7 @@
     <color name="colorPrimary">#673AB7</color>
     <color name="colorPrimaryDark">#5E35B1</color>
     <color name="colorAccent">#FFFFFF</color>
+
+    <color name="about_libraries_window_background_dark">@android:color/black</color>
+
 </resources>

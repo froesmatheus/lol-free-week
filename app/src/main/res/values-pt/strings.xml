@@ -30,4 +30,10 @@
 
     <string name="champion_alert_message">%1$s está na Free Week</string>
     <string name="add_at_least_one_champion">Você precisa adicionar pelo menos um campeão como favorito</string>
+    <string name="update_list">Atualizar lista</string>
+    <string name="update_list_summary">Atualize a lista de campeões</string>
+    <string name="open_intro_summary">Abra a tela de inicialização do aplicativo</string>
+    <string name="open_intro_title">Abrir tela de apresentação</string>
+    <string name="about_app">Sobre</string>
+    <string name="about_app_summary">Licenças e informações sobre o aplicativo</string>
 </resources>

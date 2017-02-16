@@ -22,4 +22,77 @@
     <string name="info_download_champion_information">Downloading champion information</string>
     <string name="champion_alert">Champion Alert</string>
     <string name="banner_ad_unit_id">ca-app-pub-9931312002048408/3019700971</string>
+    <string name="license_riot">LOL Free Week isn\'t endorsed by Riot Games and doesn\'t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</string>
+
+
+    <string name="define_RiotApiJava"></string>
+    <string name="library_RiotApiJava_author">Taylor Caldwell</string>
+    <string name="library_RiotApiJava_authorWebsite">http://taycaldwell.com/</string>
+    <string name="library_RiotApiJava_libraryName">Riot API Java</string>
+    <string name="library_RiotApiJava_libraryDescription">A simple to use, Riot Games API wrapper for Java. This library makes it easy to gather and use League of Legends data in your apps.</string>
+    <string name="library_RiotApiJava_libraryVersion">3.9.0</string>
+    <string name="library_RiotApiJava_libraryWebsite">https://github.com/taycaldwell/riot-api-java</string>
+    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
+    <string name="library_RiotApiJava_licenseId">apache_2_0</string>
+    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
+    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
+    <string name="library_RiotApiJava_isOpenSource">true</string>
+    <string name="library_RiotApiJava_repositoryLink">https://github.com/taycaldwell/riot-api-java</string>
+
+
+    <string name="define_AndroidJob"></string>
+    <string name="library_AndroidJob_author">Evernote</string>
+    <string name="library_AndroidJob_authorWebsite">http://dev.evernote.com/</string>
+    <string name="library_AndroidJob_libraryName">Android-Job</string>
+    <string name="library_AndroidJob_libraryDescription">
+        An utility library for Android to run jobs delayed in the background.
+        Depending on the Android version either the JobScheduler, GcmNetworkManager or AlarmManager is getting used.
+        You can find out in this blog post or in these slides why you should prefer this library than each separate API.
+        All features from Android Nougat are backward compatible.
+    </string>
+    <string name="library_AndroidJob_libraryVersion">1.1.6</string>
+    <string name="library_AndroidJob_libraryWebsite">http://evernote.github.io/android-job/</string>
+    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
+    <string name="library_AndroidJob_licenseId">apache_2_0</string>
+    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
+    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
+    <string name="library_AndroidJob_isOpenSource">true</string>
+    <string name="library_AndroidJob_repositoryLink">https://github.com/evernote/android-job</string>
+
+
+    <string name="define_AndroidTextJustify"></string>
+    <string name="library_AndroidTextJustify_author">Mathew Kurian</string>
+    <string name="library_AndroidTextJustify_authorWebsite">https://github.com/bluejamesbond/TextJustify-Android</string>
+    <string name="library_AndroidTextJustify_libraryName">Android Text-Justify</string>
+    <string name="library_AndroidTextJustify_libraryDescription">
+        This library will provide you a way to justify text. It supports both plain text and Spannables.
+        Additionally, the library can auto-hyphentate your displayed content
+    </string>
+    <string name="library_AndroidTextJustify_libraryVersion">2.1.6</string>
+    <string name="library_AndroidTextJustify_libraryWebsite">https://github.com/bluejamesbond/TextJustify-Android</string>
+    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
+    <string name="library_AndroidTextJustify_licenseId">apache_2_0</string>
+    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
+    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
+    <string name="library_AndroidTextJustify_isOpenSource">true</string>
+    <string name="library_AndroidTextJustify_repositoryLink">https://github.com/bluejamesbond/TextJustify-Android</string>
+
+
+    <string name="define_MaterialIntroScreen"></string>
+    <string name="library_MaterialIntroScreen_author">Tango Agency</string>
+    <string name="library_MaterialIntroScreen_authorWebsite">http://tango.agency/</string>
+    <string name="library_MaterialIntroScreen_libraryName">Android Material Intro Screen</string>
+    <string name="library_MaterialIntroScreen_libraryDescription">
+        Material intro screen is inspired by Material Intro and developed with love from scratch.
+        I decided to rewrite completely almost all features in order to make Android intro screen easy to use
+        for everyone and extensible as possible.
+    </string>
+    <string name="library_MaterialIntroScreen_libraryVersion">0.0.5</string>
+    <string name="library_MaterialIntroScreen_libraryWebsite">https://github.com/TangoAgency/material-intro-screen</string>
+    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
+    <string name="library_MaterialIntroScreen_licenseId">mit</string>
+    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
+    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
+    <string name="library_MaterialIntroScreen_isOpenSource">true</string>
+    <string name="library_MaterialIntroScreen_repositoryLink">https://github.com/TangoAgency/material-intro-screen</string>
 </resources>
