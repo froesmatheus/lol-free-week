@@ -3,6 +3,7 @@ package com.matheusfroes.lolfreeweek.jobs
 import android.util.Log
 import com.evernote.android.job.Job
 import com.evernote.android.job.JobRequest
+import com.matheusfroes.lolfreeweek.NotificationSender
 import com.matheusfroes.lolfreeweek.getDateDiff
 import com.matheusfroes.lolfreeweek.nextDayOfWeek
 import java.util.*
@@ -12,6 +13,10 @@ import java.util.concurrent.TimeUnit
  * Created by matheusfroes on 12/02/2017.
  */
 class CreateFirstFetchJob : Job() {
+    val notificationSender by lazy {
+        NotificationSender(context)
+    }
+
     companion object {
         val TAG = "create_first_fetch_job"
 
@@ -50,6 +55,7 @@ class CreateFirstFetchJob : Job() {
                 .schedule()
 
         Log.d("LOL-FREE-WEEK", "Job was triggered")
+        notificationSender.notifyUser()
 
         return Result.SUCCESS
     }

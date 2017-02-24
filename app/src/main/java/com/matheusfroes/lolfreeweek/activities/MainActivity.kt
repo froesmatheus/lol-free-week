@@ -11,17 +11,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.adapters.ChampionAdapter
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
 import com.matheusfroes.lolfreeweek.jobs.CreateFirstFetchJob
-import com.matheusfroes.lolfreeweek.models.Champion
 import kotlinx.android.synthetic.main.activity_main.*
 import net.rithms.riot.api.RiotApi
-import net.rithms.riot.constant.staticdata.ChampData
+import net.rithms.riot.constant.Region
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -35,23 +32,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Test ads
-        val request = AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
-                .build()
+//        val request = AdRequest.Builder()
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
+//                .build()
 
-        // Official ads
+//        // Official ads
         val adRequest = AdRequest.Builder().build()
-        adView.loadAd(request)
-
-
-
+        adView.loadAd(adRequest)
 
 
 
@@ -64,31 +57,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddChampionAlertActivity::class.java))
         }
 
+
         // Check if it's the user first access
         if (preferences.getBoolean("FIRST_ACCESS", true)) {
             CreateFirstFetchJob.scheduleFirstWeeklyJob()
-
-            startActivity(Intent(this, IntroActivity::class.java))
-            preferences.edit().putBoolean("FIRST_ACCESS", false).apply()
-
-
-            doAsync {
-                val response = api.freeToPlayChampions
-
-                downloadChampionsData()
-
-                val freeChampionsIds = response.champions.map { it.id }
-
-                dao.deleteFreeChampions()
-                dao.insertFreeChampions(freeChampionsIds)
-
-                uiThread {
-                    val adapter = ChampionAdapter(context, dao.getFreeToPlayChampions())
-                    rvChampions.adapter = adapter
-                    rvChampions.visibility = View.VISIBLE
-                    progressBar.visibility = View.GONE
-                }
-            }
+            startActivity(Intent(this, DownloadChampionDataActivity::class.java))
+            return
         } else {
             val adapter = ChampionAdapter(context, dao.getFreeToPlayChampions())
             rvChampions.adapter = adapter
@@ -120,7 +94,9 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
 
         doAsync {
-            val response = api.freeToPlayChampions
+            val region = Region.valueOf(preferences.getString("REGION", "NA"))
+
+            val response = api.getFreeToPlayChampions(region)
 
             val freeChampionsIds = response.champions.map { it.id }
 
@@ -134,21 +110,5 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
             }
         }
-
-
-    }
-
-    fun downloadChampionsData() {
-        val current = resources.configuration.locale
-
-        val response = api.getDataChampionList(current.toString(), null, true, ChampData.IMAGE, ChampData.SKINS, ChampData.SPELLS, ChampData.LORE)
-
-        val champList = response.data.map {
-            val champ = Champion()
-            champ.copyChampion(it.value)
-            champ
-        }
-
-        dao.insertList(champList)
     }
 }

@@ -38,7 +38,7 @@ fun sendNotification(notificationId: Int, context: Context, title: String, messa
     val notification = Notification.Builder(context)
             .setContentTitle(title)
             .setContentText(message)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.mipmap.ic_small_icon)
             .setAutoCancel(true)
             .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
             .setPriority(Notification.PRIORITY_HIGH)

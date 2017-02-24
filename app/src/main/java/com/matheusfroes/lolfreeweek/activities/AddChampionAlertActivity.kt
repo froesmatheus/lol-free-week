@@ -101,10 +101,10 @@ class AddChampionAlertActivity : AppCompatActivity() {
     }
 
     private fun requestNewInterstitial() {
-        val adRequest = AdRequest.Builder()
-                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
-                .build()
-
+//        val adRequest = AdRequest.Builder()
+//                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
+//                .build()
+        val adRequest = AdRequest.Builder().build()
         interstitialAd.loadAd(adRequest)
     }
 

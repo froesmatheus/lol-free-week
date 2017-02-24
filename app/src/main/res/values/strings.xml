@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LOL Free Week</string>
+    <string name="app_name">Free Week Guide for LoL</string>
     <string name="title_activity_champion_details">ChampionDetailsActivity</string>
 
     <string name="title_activity_scrolling">ScrollingActivity</string>
@@ -8,7 +8,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="alert_message">Adicione alertas para que quando seus campeões favoritos estejam na Free Week você seja notificado</string>
+    <string name="alert_message">Add your favorite champions alerts to be notified when they become available on the Free Week</string>
     <string name="habilidades">Spells</string>
     <string name="skins">Skins</string>
     <string name="descricao">Description</string>
@@ -21,78 +21,128 @@
     <string name="help">Help</string>
     <string name="info_download_champion_information">Downloading champion information</string>
     <string name="champion_alert">Champion Alert</string>
-    <string name="banner_ad_unit_id">ca-app-pub-9931312002048408/3019700971</string>
-    <string name="license_riot">LOL Free Week isn\'t endorsed by Riot Games and doesn\'t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9931312002048408/3019700971</string>
+    <string name="license_riot" translatable="false">LOL Free Week isn\'t endorsed by Riot Games and doesn\'t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</string>
+    <string name="about_app">About</string>
+    <string name="about_app_summary">Licenses and app information</string>
+    <string name="update_list">Update List</string>
+    <string name="update_list_summary">Update the champion list</string>
+    <string name="open_intro_title">Open Intro Screen</string>
+    <string name="added_alert_success">The alert was successfully added</string>
+    <string name="add_at_least_one_champion">You need to add at least one champion as favorite</string>
+    <string name="champion_alert_message">%1$s is on the Free Week</string>
+    <string name="empty_alerts_list">You haven\'t added any alerts</string>
+    <string name="info_add_alert">Add your favorite champions alerts to be notified when they become available on the Free Week</string>
+    <string name="info_intro_1_description">Check out information about the Champions (Skills, Skins, Description)</string>
+    <string name="info_intro_1_title">Information about the champions</string>
+    <string name="info_intro_2_title">Alerts</string>
+    <string name="intro_1">Check out the champions that are on the League of Legends™ Free Week</string>
+    <string name="open_intro_summary">Open app introduction screen</string>
+
+    <string name="choose_region">Choose your region</string>
+    <string-array name="lol_regions">
+        <item>North America</item>
+        <item>Latin America North</item>
+        <item>Latin America South</item>
+        <item>Brazil</item>
+        <item>Korea</item>
+        <item>EU Nordic and East</item>
+        <item>EU West</item>
+        <item>Japan</item>
+        <item>Oceania</item>
+        <item>Russia</item>
+        <item>Turkey</item>
+    </string-array>
+
+    <string-array name="lol_regions_values">
+        <item>NA</item>
+        <item>LAN</item>
+        <item>LAS</item>
+        <item>BR</item>
+        <item>KR</item>
+        <item>EUNE</item>
+        <item>EUW</item>
+        <item>JP</item>
+        <item>OCE</item>
+        <item>RU</item>
+        <item>TR</item>
+    </string-array>
 
 
-    <string name="define_RiotApiJava"></string>
-    <string name="library_RiotApiJava_author">Taylor Caldwell</string>
-    <string name="library_RiotApiJava_authorWebsite">http://taycaldwell.com/</string>
-    <string name="library_RiotApiJava_libraryName">Riot API Java</string>
-    <string name="library_RiotApiJava_libraryDescription">A simple to use, Riot Games API wrapper for Java. This library makes it easy to gather and use League of Legends data in your apps.</string>
-    <string name="library_RiotApiJava_libraryVersion">3.9.0</string>
-    <string name="library_RiotApiJava_libraryWebsite">https://github.com/taycaldwell/riot-api-java</string>
+    <!-- ABOUT APPS -->
+
+    <string name="define_RiotApiJava" translatable="false"></string>
+    <string name="library_RiotApiJava_author" translatable="false">Taylor Caldwell</string>
+    <string name="library_RiotApiJava_authorWebsite" translatable="false">http://taycaldwell.com/</string>
+    <string name="library_RiotApiJava_libraryName" translatable="false">Riot API Java</string>
+    <string name="library_RiotApiJava_libraryDescription" translatable="false">A simple to use, Riot Games API wrapper for Java. This library makes it easy to gather and use League of Legends data in your apps.</string>
+    <string name="library_RiotApiJava_libraryVersion" translatable="false">3.9.0</string>
+    <string name="library_RiotApiJava_libraryWebsite" translatable="false">https://github.com/taycaldwell/riot-api-java</string>
     <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_RiotApiJava_licenseId">apache_2_0</string>
+    <string name="library_RiotApiJava_licenseId" translatable="false">apache_2_0</string>
     <!-- you still can define the license within your library definition, but it is recommend to use the id -->
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_RiotApiJava_isOpenSource">true</string>
-    <string name="library_RiotApiJava_repositoryLink">https://github.com/taycaldwell/riot-api-java</string>
+    <string name="library_RiotApiJava_isOpenSource" translatable="false">true</string>
+    <string name="library_RiotApiJava_repositoryLink" translatable="false">https://github.com/taycaldwell/riot-api-java</string>
 
 
-    <string name="define_AndroidJob"></string>
-    <string name="library_AndroidJob_author">Evernote</string>
-    <string name="library_AndroidJob_authorWebsite">http://dev.evernote.com/</string>
-    <string name="library_AndroidJob_libraryName">Android-Job</string>
-    <string name="library_AndroidJob_libraryDescription">
+    <string name="define_AndroidJob" translatable="false"></string>
+    <string name="library_AndroidJob_author" translatable="false">Evernote</string>
+    <string name="library_AndroidJob_authorWebsite" translatable="false">http://dev.evernote.com/</string>
+    <string name="library_AndroidJob_libraryName" translatable="false">Android-Job</string>
+    <string name="library_AndroidJob_libraryDescription" translatable="false">
         An utility library for Android to run jobs delayed in the background.
         Depending on the Android version either the JobScheduler, GcmNetworkManager or AlarmManager is getting used.
         You can find out in this blog post or in these slides why you should prefer this library than each separate API.
         All features from Android Nougat are backward compatible.
     </string>
-    <string name="library_AndroidJob_libraryVersion">1.1.6</string>
-    <string name="library_AndroidJob_libraryWebsite">http://evernote.github.io/android-job/</string>
+    <string name="library_AndroidJob_libraryVersion" translatable="false">1.1.6</string>
+    <string name="library_AndroidJob_libraryWebsite" translatable="false">http://evernote.github.io/android-job/</string>
     <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_AndroidJob_licenseId">apache_2_0</string>
+    <string name="library_AndroidJob_licenseId" translatable="false">apache_2_0</string>
     <!-- you still can define the license within your library definition, but it is recommend to use the id -->
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_AndroidJob_isOpenSource">true</string>
-    <string name="library_AndroidJob_repositoryLink">https://github.com/evernote/android-job</string>
+    <string name="library_AndroidJob_isOpenSource" translatable="false">true</string>
+    <string name="library_AndroidJob_repositoryLink" translatable="false">https://github.com/evernote/android-job</string>
 
 
-    <string name="define_AndroidTextJustify"></string>
-    <string name="library_AndroidTextJustify_author">Mathew Kurian</string>
-    <string name="library_AndroidTextJustify_authorWebsite">https://github.com/bluejamesbond/TextJustify-Android</string>
-    <string name="library_AndroidTextJustify_libraryName">Android Text-Justify</string>
-    <string name="library_AndroidTextJustify_libraryDescription">
+    <string name="define_AndroidTextJustify" translatable="false"></string>
+    <string name="library_AndroidTextJustify_author" translatable="false">Mathew Kurian</string>
+    <string name="library_AndroidTextJustify_authorWebsite" translatable="false">https://github.com/bluejamesbond/TextJustify-Android</string>
+    <string name="library_AndroidTextJustify_libraryName" translatable="false">Android Text-Justify</string>
+    <string name="library_AndroidTextJustify_libraryDescription" translatable="false">
         This library will provide you a way to justify text. It supports both plain text and Spannables.
         Additionally, the library can auto-hyphentate your displayed content
     </string>
-    <string name="library_AndroidTextJustify_libraryVersion">2.1.6</string>
-    <string name="library_AndroidTextJustify_libraryWebsite">https://github.com/bluejamesbond/TextJustify-Android</string>
+    <string name="library_AndroidTextJustify_libraryVersion" translatable="false">2.1.6</string>
+    <string name="library_AndroidTextJustify_libraryWebsite" translatable="false">https://github.com/bluejamesbond/TextJustify-Android</string>
     <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_AndroidTextJustify_licenseId">apache_2_0</string>
+    <string name="library_AndroidTextJustify_licenseId" translatable="false">apache_2_0</string>
     <!-- you still can define the license within your library definition, but it is recommend to use the id -->
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_AndroidTextJustify_isOpenSource">true</string>
-    <string name="library_AndroidTextJustify_repositoryLink">https://github.com/bluejamesbond/TextJustify-Android</string>
+    <string name="library_AndroidTextJustify_isOpenSource" translatable="false">true</string>
+    <string name="library_AndroidTextJustify_repositoryLink" translatable="false">https://github.com/bluejamesbond/TextJustify-Android</string>
 
 
-    <string name="define_MaterialIntroScreen"></string>
-    <string name="library_MaterialIntroScreen_author">Tango Agency</string>
-    <string name="library_MaterialIntroScreen_authorWebsite">http://tango.agency/</string>
-    <string name="library_MaterialIntroScreen_libraryName">Android Material Intro Screen</string>
-    <string name="library_MaterialIntroScreen_libraryDescription">
+    <string name="define_MaterialIntroScreen" translatable="false"></string>
+    <string name="library_MaterialIntroScreen_author" translatable="false">Tango Agency</string>
+    <string name="library_MaterialIntroScreen_authorWebsite" translatable="false">http://tango.agency/</string>
+    <string name="library_MaterialIntroScreen_libraryName" translatable="false">Android Material Intro Screen</string>
+    <string name="library_MaterialIntroScreen_libraryDescription" translatable="false">
         Material intro screen is inspired by Material Intro and developed with love from scratch.
         I decided to rewrite completely almost all features in order to make Android intro screen easy to use
         for everyone and extensible as possible.
     </string>
-    <string name="library_MaterialIntroScreen_libraryVersion">0.0.5</string>
-    <string name="library_MaterialIntroScreen_libraryWebsite">https://github.com/TangoAgency/material-intro-screen</string>
+    <string name="library_MaterialIntroScreen_libraryVersion" translatable="false">0.0.5</string>
+    <string name="library_MaterialIntroScreen_libraryWebsite" translatable="false">https://github.com/TangoAgency/material-intro-screen</string>
     <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_MaterialIntroScreen_licenseId">mit</string>
+    <string name="library_MaterialIntroScreen_licenseId" translatable="false">mit</string>
     <!-- you still can define the license within your library definition, but it is recommend to use the id -->
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_MaterialIntroScreen_isOpenSource">true</string>
-    <string name="library_MaterialIntroScreen_repositoryLink">https://github.com/TangoAgency/material-intro-screen</string>
+    <string name="library_MaterialIntroScreen_isOpenSource" translatable="false">true</string>
+    <string name="library_MaterialIntroScreen_repositoryLink" translatable="false">https://github.com/TangoAgency/material-intro-screen</string>
+    <string name="region">Region</string>
+    <string name="download_failed">Download failed</string>
+    <string name="download_champ_data">Downloading champion data</string>
+
 </resources>

@@ -1,5 +1,7 @@
 package com.matheusfroes.lolfreeweek.activities
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -19,13 +21,16 @@ import kotlinx.android.synthetic.main.champion_details_content.*
 class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
     val dao by lazy { ChampionDAO(this) }
     var champion: Champion? = null
-
+    val preferences: SharedPreferences by lazy {
+        getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.champion_details_content)
 
         if (intent == null) return
 
+        val currentApiVersion = preferences.getString("CURRENT_API_VERSION", "7.2.1")
         val championId = intent.getIntExtra("championId", -1)
 
         champion = dao.getChampion(championId.toLong())
@@ -44,35 +49,35 @@ class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
         Picasso
                 .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/${champion?.image}")
+                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/champion/${champion?.image}")
                 .fit()
                 .centerCrop()
                 .into(ivChampionImage)
 
         Picasso
                 .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/7.2.1/img/spell/${champion!!.spells[0].image}")
+                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[0].image}")
                 .fit()
                 .centerCrop()
                 .into(ivSpellQ)
 
         Picasso
                 .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/7.2.1/img/spell/${champion!!.spells[1].image}")
+                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[1].image}")
                 .fit()
                 .centerCrop()
                 .into(ivSpellW)
 
         Picasso
                 .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/7.2.1/img/spell/${champion!!.spells[2].image}")
+                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[2].image}")
                 .fit()
                 .centerCrop()
                 .into(ivSpellE)
 
         Picasso
                 .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/7.2.1/img/spell/${champion!!.spells[3].image}")
+                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[3].image}")
                 .fit()
                 .centerCrop()
                 .into(ivSpellR)

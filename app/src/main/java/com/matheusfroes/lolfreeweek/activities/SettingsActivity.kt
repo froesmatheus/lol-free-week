@@ -3,9 +3,10 @@ package com.matheusfroes.lolfreeweek.activities
 
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.preference.ListPreference
 import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.view.MenuItem
@@ -17,6 +18,7 @@ import com.matheusfroes.lolfreeweek.models.Champion
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import net.rithms.riot.api.RiotApi
+import net.rithms.riot.constant.Region
 import net.rithms.riot.constant.staticdata.ChampData
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -44,6 +46,9 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         SkinDAO(this)
     }
     val api = RiotApi("RGAPI-0fc93c3d-27bb-4eec-bc2b-f110489aa27d")
+    val preferences: SharedPreferences by lazy {
+        getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,17 +57,30 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         addPreferencesFromResource(R.xml.pref_general)
 
         val updateListPreference = findPreference("update_list")
-        val openIntroPreference = findPreference("open_intro")
         val aboutApp = findPreference("about_app")
+        val chooseRegion = findPreference("choose_region") as ListPreference
+        val regions = resources.getStringArray(R.array.lol_regions_values)
 
-        updateListPreference.setOnPreferenceClickListener {
-            remakeChampionsList()
+        var region = preferences.getString("REGION", "NA")
+        var index = regions.indexOf(region)
+        chooseRegion.setValueIndex(index)
+
+        chooseRegion.setOnPreferenceClickListener {
+            region = preferences.getString("REGION", "NA")
+            index = regions.indexOf(region)
+            chooseRegion.setValueIndex(index)
             true
         }
 
-        openIntroPreference.setOnPreferenceClickListener {
-            startActivity(Intent(applicationContext, IntroActivity::class.java))
-            finish()
+
+        chooseRegion.setOnPreferenceChangeListener { preference, newValue ->
+            preferences.edit().putString("REGION", newValue.toString()).apply()
+            true
+        }
+
+
+        updateListPreference.setOnPreferenceClickListener {
+            remakeChampionsList()
             true
         }
 
@@ -74,6 +92,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                     .withAutoDetect(true)
                     .withAboutSpecial1("RIOT LICENSE")
                     .withAboutSpecial1Description(getString(R.string.license_riot))
+                    .withAboutSpecial2("ICON LICENSE")
+                    .withAboutSpecial2Description("<div>Icons made by <a href='http://www.freepik.com' title='Freepik'>Freepik</a> from <a href='http://www.flaticon.com' title='Flaticon'>www.flaticon.com</a> is licensed by <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons BY 3.0' target='_blank'>CC 3.0 BY</a></div>")
                     .withAboutDescription("<a href='https://github.com/froesmatheus'>Matheus Fróes Marques</a>")
                     .withActivityTitle(getString(R.string.about_app))
                     .start(this)
@@ -92,9 +112,10 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             skinsDAO.deleteAll()
             championDAO.deleteAll()
 
-            val current = resources.configuration.locale
+            val region = Region.valueOf(preferences.getString("REGION", "NA"))
+            val locale = preferences.getString("LOCALE", "en_US")
 
-            val response = api.getDataChampionList(current.toString(), null, true, ChampData.IMAGE, ChampData.SKINS, ChampData.SPELLS, ChampData.LORE)
+            val response = api.getDataChampionList(region, locale, null, true, ChampData.IMAGE, ChampData.SKINS, ChampData.SPELLS, ChampData.LORE)
 
             var i = 1
             val champList = response.data.map {

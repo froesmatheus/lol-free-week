@@ -4,10 +4,12 @@
         android:summary="@string/update_list_summary"
         android:title="@string/update_list" />
 
-    <Preference
-        android:key="open_intro"
-        android:summary="@string/open_intro_summary"
-        android:title="@string/open_intro_title" />
+    <ListPreference
+        android:entries="@array/lol_regions"
+        android:entryValues="@array/lol_regions_values"
+        android:key="choose_region"
+        android:summary="@string/choose_region"
+        android:title="@string/region" />
 
     <Preference
         android:key="about_app"

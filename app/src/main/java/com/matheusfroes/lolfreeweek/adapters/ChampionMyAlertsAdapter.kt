@@ -1,6 +1,7 @@
 package com.matheusfroes.lolfreeweek.adapters
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,9 @@ import kotlinx.android.synthetic.main.champion_my_alert_view.view.*
 
 class ChampionMyAlertsAdapter(val context: Context, var championList: List<Champion>) :
         RecyclerView.Adapter<ChampionMyAlertsAdapter.ViewHolder>() {
+    val preferences: SharedPreferences by lazy {
+        context.getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
+    }
 
     var listener: OnChampionClickListener? = null
 
@@ -26,9 +30,11 @@ class ChampionMyAlertsAdapter(val context: Context, var championList: List<Champ
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val champion = championList[position]
 
+        val currentApiVersion = preferences.getString("CURRENT_API_VERSION", "7.2.1")
+
         Picasso
                 .with(context)
-                .load("http://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/${champion.image}")
+                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/champion/${champion.image}")
                 .fit()
                 .centerCrop()
                 .into(holder.itemView.ivChampion)

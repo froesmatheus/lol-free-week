@@ -2,11 +2,17 @@ package com.matheusfroes.lolfreeweek.activities
 
 import agency.tango.materialintroscreen.MaterialIntroActivity
 import agency.tango.materialintroscreen.SlideFragmentBuilder
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.matheusfroes.lolfreeweek.R
 
 
 class IntroActivity : MaterialIntroActivity() {
+    val preferences: SharedPreferences by lazy {
+        getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,12 @@ class IntroActivity : MaterialIntroActivity() {
                 .title(getString(R.string.info_intro_2_title))
                 .description(resources.getString(R.string.alert_message))
                 .build())
-
     }
+
+    override fun onFinish() {
+        preferences.edit().putBoolean("FIRST_ACCESS", false).apply()
+        startActivity(Intent(applicationContext, MainActivity::class.java))
+        finish()
+    }
+
 }

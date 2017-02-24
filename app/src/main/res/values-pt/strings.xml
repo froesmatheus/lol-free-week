@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LOL Free Week</string>
+    <string name="app_name">Free Week Guia do LoL</string>
     <string name="title_activity_champion_details">ChampionDetailsActivity</string>
 
     <string name="title_activity_scrolling">ScrollingActivity</string>
@@ -9,7 +9,7 @@
 
     <string name="action_settings">Configurações</string>
 
-    <string name="alert_message">Adicione alertas para que quando seus campeões favoritos estejam na Free Week você seja notificado</string>
+    <string name="alert_message">Adicione alertas para que quando seus campeões favoritos estejam na Free Week você seja notificado!</string>
     <string name="habilidades">Habilidades</string>
     <string name="skins">Skins</string>
     <string name="descricao">Descrição</string>
@@ -19,11 +19,11 @@
     <string name="title_activity_settings">Configurações</string>
     <string name="refresh_list">Atualizar Free Week</string>
     <string name="free_week_notification_message">Confira os campeões da Free Week nesta semana!</string>
-    <string name="intro_1">Veja os campeões que estão na Free Week no LOL</string>
+    <string name="intro_1">Veja os campeões que estão na Free Week do League of Legends™</string>
     <string name="added_alert_success">Alerta adicionado com sucesso</string>
     <string name="info_add_alert">Adicione alertas dos seus campeões favoritos para ser notificado quando eles entrarem na Free Week</string>
     <string name="info_intro_1_title">Informações sobre os campeões</string>
-    <string name="info_intro_1_description">Veja as informações sobre os campeões \\n(Habilidades, Skins, Descrição)</string>
+    <string name="info_intro_1_description">Veja as informações sobre os campeões \n(Habilidades, Skins, Descrição)</string>
     <string name="info_intro_2_title">Alertas</string>
     <string name="info_download_champion_information">Baixando informações sobre os campeões</string>
     <string name="empty_alerts_list">Você ainda não adicionou nenhum alerta</string>
@@ -36,4 +36,42 @@
     <string name="open_intro_title">Abrir tela de apresentação</string>
     <string name="about_app">Sobre</string>
     <string name="about_app_summary">Licenças e informações sobre o aplicativo</string>
+    <string name="champion_alert">Alerta de Campeão</string>
+    <string name="help">Ajuda</string>
+
+
+    <string-array name="lol_regions">
+        <item>América do Norte</item>
+        <item>América Latina do Norte</item>
+        <item>América Latina do Sul</item>
+        <item>Brasil</item>
+        <item>Coréia</item>
+        <item>Europe Norte/Leste</item>
+        <item>Europa Ocidental</item>
+        <item>Japão</item>
+        <item>Oceania</item>
+        <item>Russia</item>
+        <item>Turquia</item>
+    </string-array>
+
+    <string-array name="lol_regions_values">
+        <item>NA</item>
+        <item>LAN</item>
+        <item>LAS</item>
+        <item>BR</item>
+        <item>KR</item>
+        <item>EUNE</item>
+        <item>EUW</item>
+        <item>JP</item>
+        <item>OCE</item>
+        <item>RU</item>
+        <item>TR</item>
+    </string-array>
+
+    <string name="choose_region">Escolha a sua região</string>
+    <string name="region">Região</string>
+    <string name="download_failed">Download falhou</string>
+    <string name="download_champ_data">Baixando dados sobre os campeões</string>
+
+
 </resources>
