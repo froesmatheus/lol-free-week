@@ -1,4 +1,4 @@
-# Wit.NET
+# Free Week Guide for LoL
 
 `Wit.NET` is the C# SDK for [Wit.ai](http://wit.ai).
 
