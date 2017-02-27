@@ -1,6 +1,6 @@
 # Free Week Guide for LoL
 
-Check out the League of Legends Free Week using this app
+Check out the League of Legends Free Week using this app<br>
 Add alerts so when your favorite champions become available you're notified!
 
 ## Install
@@ -11,6 +11,10 @@ Add alerts so when your favorite champions become available you're notified!
 
 Free Week Guide for LoL isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
 
-### Contribute
+### Images
 
-If you would like to contribute to this project, just send a pull request, open an issue or email me
+<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image1.png">
+<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image2.png">
+<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image3.png">
+<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image4.png">
+<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image5.png">
