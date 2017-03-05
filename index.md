@@ -13,8 +13,8 @@ Free Week Guide for LoL isn't endorsed by Riot Games and doesn't reflect the vie
 
 ## Images
 
-<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image1.png">
-<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image2.png">
-<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image3.png">
-<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image4.png">
-<img width="200px" src="https://raw.githubusercontent.com/froesmatheus/lol-free-week/master/images/image5.png">
+<img width="200px" src="http://imgur.com/a/VWJSH">
+<img width="200px" src="http://imgur.com/a/yVxUN">
+<img width="200px" src="http://imgur.com/a/zJMZ0">
+<img width="200px" src="http://imgur.com/a/tv5H7">
+<img width="200px" src="http://imgur.com/a/f2vv3">
