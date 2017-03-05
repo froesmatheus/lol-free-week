@@ -13,8 +13,8 @@ Free Week Guide for LoL isn't endorsed by Riot Games and doesn't reflect the vie
 
 ## Images
 
-<img width="200px" src="http://imgur.com/a/VWJSH">
-<img width="200px" src="http://imgur.com/a/yVxUN">
-<img width="200px" src="http://imgur.com/a/zJMZ0">
-<img width="200px" src="http://imgur.com/a/tv5H7">
-<img width="200px" src="http://imgur.com/a/f2vv3">
+<img width="200px" src="http://i.imgur.com/oAMUFKW.png">
+<img width="200px" src="http://i.imgur.com/D2sIPH4.png">
+<img width="200px" src="http://i.imgur.com/8yBwcDw.png">
+<img width="200px" src="http://i.imgur.com/jSjyQWe.png">
+<img width="200px" src="http://i.imgur.com/QBKR0vJ.png">
