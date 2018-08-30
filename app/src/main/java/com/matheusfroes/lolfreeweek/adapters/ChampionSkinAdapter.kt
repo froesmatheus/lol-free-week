@@ -24,7 +24,7 @@ class ChampionSkinAdapter(val context: Context, val skins: MutableList<Skin>) : 
                 .into(holder.itemView.ivChampionSkin)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.champion_skin_content, parent, false)
         return ViewHolder(view)
     }

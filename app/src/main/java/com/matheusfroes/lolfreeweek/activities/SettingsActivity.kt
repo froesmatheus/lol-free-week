@@ -3,7 +3,6 @@ package com.matheusfroes.lolfreeweek.activities
 
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.preference.ListPreference
@@ -11,6 +10,8 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.view.MenuItem
 import com.matheusfroes.lolfreeweek.R
+import com.matheusfroes.lolfreeweek.UserPreferences
+import com.matheusfroes.lolfreeweek.appInjector
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
 import com.matheusfroes.lolfreeweek.db.SkinDAO
 import com.matheusfroes.lolfreeweek.db.SpellDAO
@@ -18,10 +19,12 @@ import com.matheusfroes.lolfreeweek.models.Champion
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import net.rithms.riot.api.RiotApi
-import net.rithms.riot.constant.Region
-import net.rithms.riot.constant.staticdata.ChampData
+import net.rithms.riot.api.endpoints.static_data.constant.ChampionListTags
+import net.rithms.riot.api.endpoints.static_data.constant.Locale
+import net.rithms.riot.constant.Platform
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import javax.inject.Inject
 
 
 /**
@@ -45,15 +48,16 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     val skinsDAO by lazy {
         SkinDAO(this)
     }
-    val api = RiotApi("RGAPI-0fc93c3d-27bb-4eec-bc2b-f110489aa27d")
-    val preferences: SharedPreferences by lazy {
-        getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
-    }
+    @Inject
+    lateinit var api: RiotApi
 
+    @Inject
+    lateinit var preferences: UserPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupActionBar()
+        appInjector.inject(this)
         addPreferencesFromResource(R.xml.pref_general)
 
         val updateListPreference = findPreference("update_list")
@@ -61,20 +65,20 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         val chooseRegion = findPreference("choose_region") as ListPreference
         val regions = resources.getStringArray(R.array.lol_regions_values)
 
-        var region = preferences.getString("REGION", "NA")
-        var index = regions.indexOf(region)
+        var region = preferences.currentPlatform
+        var index = regions.indexOf(region.getName())
         chooseRegion.setValueIndex(index)
 
         chooseRegion.setOnPreferenceClickListener {
-            region = preferences.getString("REGION", "NA")
-            index = regions.indexOf(region)
+            region = preferences.currentPlatform
+            index = regions.indexOf(region.getName())
             chooseRegion.setValueIndex(index)
             true
         }
 
 
         chooseRegion.setOnPreferenceChangeListener { preference, newValue ->
-            preferences.edit().putString("REGION", newValue.toString()).apply()
+            preferences.currentPlatform = Platform.valueOf(newValue.toString())
             true
         }
 
@@ -112,10 +116,9 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             skinsDAO.deleteAll()
             championDAO.deleteAll()
 
-            val region = Region.valueOf(preferences.getString("REGION", "NA"))
-            val locale = preferences.getString("LOCALE", "en_US")
+            val region = preferences.currentPlatform
 
-            val response = api.getDataChampionList(region, locale, null, true, ChampData.IMAGE, ChampData.SKINS, ChampData.SPELLS, ChampData.LORE)
+            val response = api.getDataChampionList(region, Locale.EN_US, null, true, ChampionListTags.IMAGE, ChampionListTags.SKINS, ChampionListTags.SPELLS, ChampionListTags.LORE)
 
             var i = 1
             val champList = response.data.map {

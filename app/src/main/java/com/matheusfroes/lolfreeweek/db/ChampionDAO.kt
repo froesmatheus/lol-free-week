@@ -155,8 +155,7 @@ class ChampionDAO(context: Context) {
                 Db.COLUMN_ALERT_ON_CHAMPIONS)
 
         val alertInt = if (alert) 1 else 0
-        val cursor = db.
-                query(Db.TABLE_CHAMPIONS, columns, "${Db.COLUMN_ALERT_ON_CHAMPIONS} = ?", arrayOf(alertInt.toString()), null, null, null)
+        val cursor = db.query(Db.TABLE_CHAMPIONS, columns, "${Db.COLUMN_ALERT_ON_CHAMPIONS} = ?", arrayOf(alertInt.toString()), null, null, null)
 
         if (cursor.count > 0) {
             cursor.moveToFirst()
@@ -219,8 +218,7 @@ class ChampionDAO(context: Context) {
         val columns = arrayOf(
                 Db.COLUMN_CHAMPION_ID_FREE_CHAMPIONS)
 
-        val cursor = db.
-                query(Db.TABLE_FREE_CHAMPIONS, columns, null, null, null, null, null)
+        val cursor = db.query(Db.TABLE_FREE_CHAMPIONS, columns, null, null, null, null, null)
 
 
         if (cursor.count > 0) {
@@ -237,7 +235,7 @@ class ChampionDAO(context: Context) {
         return champions
     }
 
-    fun insertFreeChampions(championIds: List<Long>) {
+    fun insertFreeChampions(championIds: List<Int>) {
         db.beginTransaction()
         try {
             val cv = ContentValues()

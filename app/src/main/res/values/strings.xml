@@ -55,17 +55,17 @@
     </string-array>
 
     <string-array name="lol_regions_values">
-        <item>NA</item>
-        <item>LAN</item>
-        <item>LAS</item>
-        <item>BR</item>
-        <item>KR</item>
-        <item>EUNE</item>
-        <item>EUW</item>
-        <item>JP</item>
-        <item>OCE</item>
-        <item>RU</item>
-        <item>TR</item>
+        <item>na</item>
+        <item>lan</item>
+        <item>las</item>
+        <item>br</item>
+        <item>kr</item>
+        <item>eune</item>
+        <item>euw</item>
+        <item>jp</item>
+        <item>oce</item>
+        <item>ru</item>
+        <item>tr</item>
     </string-array>
 
 

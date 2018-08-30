@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "679921436079",
+    "firebase_url": "https://lol-free-week.firebaseio.com",
+    "project_id": "lol-free-week",
+    "storage_bucket": "lol-free-week.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679921436079:android:6793ea0b9a8e317f",
+        "android_client_info": {
+          "package_name": "com.matheusfroes.lolfreeweek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679921436079-000tu10ek20ckegfo16gh0f6bnsk8d46.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.matheusfroes.lolfreeweek",
+            "certificate_hash": "ad500ebb91310baff8578bc2792a2aecd970b500"
+          }
+        },
+        {
+          "client_id": "679921436079-u3b1kof5bju4u40pusap8c0h63sf5vi1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdD1-51ErGELFo5-9WHvtffnkmwCk9cbc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679921436079-u3b1kof5bju4u40pusap8c0h63sf5vi1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-9931312002048408~6112768170"
+    }
+  ],
+  "configuration_version": "1"
+}

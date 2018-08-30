@@ -8,17 +8,17 @@ import com.matheusfroes.lolfreeweek.getDateDiff
 import com.matheusfroes.lolfreeweek.nextDayOfWeek
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 /**
  * Created by matheusfroes on 12/02/2017.
  */
-class CreateFirstFetchJob : Job() {
-    val notificationSender by lazy {
-        NotificationSender(context)
-    }
+class CreateFirstFetchJob @Inject constructor(
+        private val notificationSender: NotificationSender
+) : Job() {
 
     companion object {
-        val TAG = "create_first_fetch_job"
+        const val TAG = "create_first_fetch_job"
 
         fun scheduleFirstWeeklyJob() {
             val today = nextDayOfWeek(Calendar.TUESDAY)
@@ -36,7 +36,6 @@ class CreateFirstFetchJob : Job() {
 
             val jobId = JobRequest.Builder(TAG)
                     .setExact(differenceInMillis)
-                    .setPersisted(true)
                     .build()
                     .schedule()
 
@@ -44,12 +43,11 @@ class CreateFirstFetchJob : Job() {
         }
     }
 
-    override fun onRunJob(params: Params?): Result {
+    override fun onRunJob(params: Params): Result {
         val jobId = JobRequest.Builder(FetchFreeWeekChampionsJob.TAG)
                 .setPeriodic(TimeUnit.DAYS.toMillis(7), TimeUnit.MINUTES.toMillis(5))
                 .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
                 .setRequirementsEnforced(true)
-                .setPersisted(true)
                 .setUpdateCurrent(true)
                 .build()
                 .schedule()

@@ -1,6 +1,6 @@
 package com.matheusfroes.lolfreeweek.models
 
-import net.rithms.riot.dto.Static.Champion
+import net.rithms.riot.api.endpoints.static_data.dto.Champion
 
 
 data class Champion(var id: Int = 0,

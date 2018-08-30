@@ -39,9 +39,9 @@
 
         <activity
             android:name="com.matheusfroes.lolfreeweek.activities.DownloadChampionDataActivity"
-            android:theme="@style/AppTheme.DownloadChampion">
+            android:theme="@style/AppTheme.DownloadChampion"></activity>
 
-        </activity>
+        <activity android:name=".activities.BaseActivity" />
     </application>
 
 </manifest>

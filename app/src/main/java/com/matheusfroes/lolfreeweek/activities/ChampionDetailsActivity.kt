@@ -1,7 +1,5 @@
 package com.matheusfroes.lolfreeweek.activities
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -11,32 +9,37 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.Html
 import android.view.View
 import com.matheusfroes.lolfreeweek.R
+import com.matheusfroes.lolfreeweek.UserPreferences
 import com.matheusfroes.lolfreeweek.adapters.ChampionSkinAdapter
+import com.matheusfroes.lolfreeweek.appInjector
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
 import com.matheusfroes.lolfreeweek.models.Champion
 import com.matheusfroes.lolfreeweek.models.Spell
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_details_content.*
+import javax.inject.Inject
 
 class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
     val dao by lazy { ChampionDAO(this) }
     var champion: Champion? = null
-    val preferences: SharedPreferences by lazy {
-        getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
-    }
+
+    @Inject
+    lateinit var preferences: UserPreferences
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.champion_details_content)
+        appInjector.inject(this)
 
         if (intent == null) return
 
-        val currentApiVersion = preferences.getString("CURRENT_API_VERSION", "7.2.1")
+        val currentApiVersion = preferences.currentApiVersion
         val championId = intent.getIntExtra("championId", -1)
 
         champion = dao.getChampion(championId.toLong())
 
         title = champion?.name
-
 
         tvChampionName.text = champion?.name
         tvChampionTitle.text = champion?.title

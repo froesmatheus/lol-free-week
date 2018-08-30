@@ -1,10 +1,7 @@
 package com.matheusfroes.lolfreeweek.activities
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
@@ -14,36 +11,40 @@ import android.widget.GridLayout
 import com.google.android.gms.ads.AdRequest
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.adapters.ChampionAdapter
+import com.matheusfroes.lolfreeweek.appInjector
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
-import com.matheusfroes.lolfreeweek.jobs.CreateFirstFetchJob
+import com.matheusfroes.lolfreeweek.jobs.FetchFreeWeekChampionsJob
 import kotlinx.android.synthetic.main.activity_main.*
 import net.rithms.riot.api.RiotApi
-import net.rithms.riot.constant.Region
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     val context = this
     val dao by lazy { ChampionDAO(this) }
-    val api = RiotApi("RGAPI-0fc93c3d-27bb-4eec-bc2b-f110489aa27d")
-    val preferences: SharedPreferences by lazy {
-        getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
-    }
+    @Inject
+    lateinit var api: RiotApi
 
+//    @Inject
+//    lateinit var preferences: UserPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        appInjector.inject(this)
+
+        FetchFreeWeekChampionsJob.scheduleFreeWeekJob()
 
         // Test ads
-//        val request = AdRequest.Builder()
-//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
-//                .build()
+        val adRequest = AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
+                .build()
 
 //        // Official ads
-        val adRequest = AdRequest.Builder().build()
+//        val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
 
 
@@ -59,8 +60,8 @@ class MainActivity : AppCompatActivity() {
 
 
         // Check if it's the user first access
-        if (preferences.getBoolean("FIRST_ACCESS", true)) {
-            CreateFirstFetchJob.scheduleFirstWeeklyJob()
+        if (preferences.firstAccess) {
+//            CreateFirstFetchJob.scheduleFirstWeeklyJob()
             startActivity(Intent(this, DownloadChampionDataActivity::class.java))
             return
         } else {
@@ -94,9 +95,9 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
 
         doAsync {
-            val region = Region.valueOf(preferences.getString("REGION", "NA"))
+            val region = preferences.currentPlatform
 
-            val response = api.getFreeToPlayChampions(region)
+            val response = api.getChampions(region, true)
 
             val freeChampionsIds = response.champions.map { it.id }
 

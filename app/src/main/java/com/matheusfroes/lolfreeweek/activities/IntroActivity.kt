@@ -2,20 +2,22 @@ package com.matheusfroes.lolfreeweek.activities
 
 import agency.tango.materialintroscreen.MaterialIntroActivity
 import agency.tango.materialintroscreen.SlideFragmentBuilder
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import com.matheusfroes.lolfreeweek.R
+import com.matheusfroes.lolfreeweek.UserPreferences
+import com.matheusfroes.lolfreeweek.appInjector
+import javax.inject.Inject
 
 
 class IntroActivity : MaterialIntroActivity() {
-    val preferences: SharedPreferences by lazy {
-        getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
-    }
+
+    @Inject
+    lateinit var preferences: UserPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appInjector.inject(this)
 
         addSlide(SlideFragmentBuilder()
                 .backgroundColor(R.color.colorPrimary)
@@ -43,7 +45,7 @@ class IntroActivity : MaterialIntroActivity() {
     }
 
     override fun onFinish() {
-        preferences.edit().putBoolean("FIRST_ACCESS", false).apply()
+        preferences.firstAccess = false
         startActivity(Intent(applicationContext, MainActivity::class.java))
         finish()
     }
