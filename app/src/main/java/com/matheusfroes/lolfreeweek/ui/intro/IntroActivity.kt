@@ -1,12 +1,13 @@
-package com.matheusfroes.lolfreeweek.activities
+package com.matheusfroes.lolfreeweek.ui.intro
 
 import agency.tango.materialintroscreen.MaterialIntroActivity
 import agency.tango.materialintroscreen.SlideFragmentBuilder
 import android.content.Intent
 import android.os.Bundle
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.UserPreferences
+import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.appInjector
+import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList
 import javax.inject.Inject
 
 
@@ -46,7 +47,7 @@ class IntroActivity : MaterialIntroActivity() {
 
     override fun onFinish() {
         preferences.firstAccess = false
-        startActivity(Intent(applicationContext, MainActivity::class.java))
+        startActivity(Intent(applicationContext, FreeWeekList::class.java))
         finish()
     }
 

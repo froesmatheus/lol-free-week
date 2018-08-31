@@ -3,18 +3,19 @@ package com.matheusfroes.lolfreeweek.db
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.matheusfroes.lolfreeweek.models.Champion
+import com.matheusfroes.lolfreeweek.data.model.Champion
+import javax.inject.Inject
 
 
-class ChampionDAO(context: Context) {
+class ChampionDAO @Inject constructor(context: Context) {
     val db: SQLiteDatabase by lazy {
         Db(context).writableDatabase
     }
-    val spellDAO by lazy {
+    private val spellDAO by lazy {
         SpellDAO(context)
     }
 
-    val skinDAO by lazy {
+    private val skinDAO by lazy {
         SkinDAO(context)
     }
 

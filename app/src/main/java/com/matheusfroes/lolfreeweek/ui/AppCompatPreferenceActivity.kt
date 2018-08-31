@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.activities
+package com.matheusfroes.lolfreeweek.ui
 
 import android.content.res.Configuration
 import android.os.Bundle

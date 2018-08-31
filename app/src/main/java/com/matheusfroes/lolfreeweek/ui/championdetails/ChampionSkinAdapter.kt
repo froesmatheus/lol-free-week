@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.adapters
+package com.matheusfroes.lolfreeweek.ui.championdetails
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.models.Skin
+import com.matheusfroes.lolfreeweek.data.model.Skin
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_skin_content.view.*
 

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:context="com.matheusfroes.lolfreeweek.activities.MyAlertsActivity"
+        tools:context="com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity"
         tools:listitem="@layout/champion_my_alert_view" />
 
     <LinearLayout

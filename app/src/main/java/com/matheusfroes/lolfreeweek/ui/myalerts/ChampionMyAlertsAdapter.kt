@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.adapters
+package com.matheusfroes.lolfreeweek.ui.myalerts
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.UserPreferences
-import com.matheusfroes.lolfreeweek.models.Champion
+import com.matheusfroes.lolfreeweek.data.UserPreferences
+import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_my_alert_view.view.*
 

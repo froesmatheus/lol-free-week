@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.activities
+package com.matheusfroes.lolfreeweek.ui.myalerts
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -6,9 +6,8 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.adapters.ChampionMyAlertsAdapter
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
-import com.matheusfroes.lolfreeweek.models.Champion
+import com.matheusfroes.lolfreeweek.data.model.Champion
 import kotlinx.android.synthetic.main.activity_my_alerts.*
 
 class MyAlertsActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek
+package com.matheusfroes.lolfreeweek.data
 
 import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.enumpref.enumValuePref

@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.activities
+package com.matheusfroes.lolfreeweek.ui.fetchchampiondata
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,11 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.UserPreferences
+import com.matheusfroes.lolfreeweek.data.UserPreferences
+import com.matheusfroes.lolfreeweek.ui.intro.IntroActivity
 import com.matheusfroes.lolfreeweek.appInjector
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
-import com.matheusfroes.lolfreeweek.models.Champion
+import com.matheusfroes.lolfreeweek.data.model.Champion
 import kotlinx.android.synthetic.main.activity_download_champion_data.*
 import net.rithms.riot.api.RiotApi
 import net.rithms.riot.api.endpoints.static_data.constant.ChampionListTags

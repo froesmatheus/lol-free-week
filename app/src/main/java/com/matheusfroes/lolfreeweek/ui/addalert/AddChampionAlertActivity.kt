@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.activities
+package com.matheusfroes.lolfreeweek.ui.addalert
 
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -15,9 +15,8 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.adapters.ChampionAlertAdapter
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
-import com.matheusfroes.lolfreeweek.models.Champion
+import com.matheusfroes.lolfreeweek.data.model.Champion
 import kotlinx.android.synthetic.main.activity_add_champion_alert.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast

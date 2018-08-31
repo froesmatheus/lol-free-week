@@ -3,7 +3,7 @@ package com.matheusfroes.lolfreeweek.db
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.matheusfroes.lolfreeweek.models.Skin
+import com.matheusfroes.lolfreeweek.data.model.Skin
 
 
 class SkinDAO(context: Context) {

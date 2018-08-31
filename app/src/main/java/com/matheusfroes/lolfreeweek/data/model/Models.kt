@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.models
+package com.matheusfroes.lolfreeweek.data.model
 
 import net.rithms.riot.api.endpoints.static_data.dto.Champion
 

@@ -4,9 +4,13 @@ import android.app.Activity
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
 import com.matheusfroes.lolfreeweek.di.Injector
 import java.util.*
@@ -59,3 +63,34 @@ fun sendNotification(notificationId: Int, context: Context, title: String, messa
 
     notificationManager.notify(notificationId, notification.build())
 }
+
+
+/**
+ * For Fragments, allows declarations like
+ * ```
+ * val myViewModel = viewModelProvider(myViewModelFactory)
+ * ```
+ */
+inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
+        provider: ViewModelProvider.Factory
+) =
+        ViewModelProviders.of(this, provider).get(VM::class.java)
+
+/**
+ * Like [Fragment.viewModelProvider] for Fragments that want a [ViewModel] scoped to the Activity.
+ */
+inline fun <reified VM : ViewModel> Fragment.activityViewModelProvider(
+        provider: ViewModelProvider.Factory
+) =
+        ViewModelProviders.of(requireActivity(), provider).get(VM::class.java)
+
+/**
+ * For Actvities, allows declarations like
+ * ```
+ * val myViewModel = viewModelProvider(myViewModelFactory)
+ * ```
+ */
+inline fun <reified VM : ViewModel> FragmentActivity.viewModelProvider(
+        provider: ViewModelProvider.Factory
+) =
+        ViewModelProviders.of(this, provider).get(VM::class.java)

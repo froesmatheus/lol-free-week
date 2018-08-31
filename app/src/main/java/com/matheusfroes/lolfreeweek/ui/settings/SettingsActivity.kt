@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.activities
+package com.matheusfroes.lolfreeweek.ui.settings
 
 
 import android.app.ProgressDialog
@@ -10,12 +10,13 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.view.MenuItem
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.UserPreferences
+import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.appInjector
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
 import com.matheusfroes.lolfreeweek.db.SkinDAO
 import com.matheusfroes.lolfreeweek.db.SpellDAO
-import com.matheusfroes.lolfreeweek.models.Champion
+import com.matheusfroes.lolfreeweek.data.model.Champion
+import com.matheusfroes.lolfreeweek.ui.AppCompatPreferenceActivity
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import net.rithms.riot.api.RiotApi

@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.matheusfroes.lolfreeweek.activities.MainActivity">
+        <activity android:name="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,28 +20,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.matheusfroes.lolfreeweek.activities.ChampionDetailsActivity"
-            android:parentActivityName="com.matheusfroes.lolfreeweek.activities.MainActivity" />
+            android:name="com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity"
+            android:parentActivityName="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.activities.AddChampionAlertActivity"
+            android:name="com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity"
             android:label="@string/add_alert" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.activities.IntroActivity"
+            android:name="com.matheusfroes.lolfreeweek.ui.intro.IntroActivity"
             android:theme="@style/Theme.Intro" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.activities.MyAlertsActivity"
+            android:name="com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity"
             android:label="@string/my_alerts"
-            android:parentActivityName="com.matheusfroes.lolfreeweek.activities.MainActivity" />
+            android:parentActivityName="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.activities.SettingsActivity"
+            android:name="com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity"
             android:label="@string/action_settings"
-            android:parentActivityName="com.matheusfroes.lolfreeweek.activities.MainActivity" />
+            android:parentActivityName="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList" />
 
         <activity
-            android:name="com.matheusfroes.lolfreeweek.activities.DownloadChampionDataActivity"
+            android:name="com.matheusfroes.lolfreeweek.ui.fetchchampiondata.DownloadChampionDataActivity"
             android:theme="@style/AppTheme.DownloadChampion"></activity>
 
-        <activity android:name=".activities.BaseActivity" />
+        <activity android:name=".ui.BaseActivity" />
     </application>
 
 </manifest>

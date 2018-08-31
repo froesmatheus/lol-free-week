@@ -1,10 +1,10 @@
-package com.matheusfroes.lolfreeweek.activities
+package com.matheusfroes.lolfreeweek.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.chibatching.kotpref.Kotpref
 import com.evernote.android.job.JobManager
-import com.matheusfroes.lolfreeweek.UserPreferences
+import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.appInjector
 import com.matheusfroes.lolfreeweek.jobs.JobCreator
 import net.rithms.riot.api.RiotApi
