@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import net.rithms.riot.api.ApiConfig
 import net.rithms.riot.api.RiotApi
+import java.util.logging.Level
 import javax.inject.Singleton
 
 @Module()
@@ -21,5 +22,6 @@ class NetworkModule {
     fun riotApiConfig(): ApiConfig {
         return ApiConfig()
                 .setKey(BuildConfig.RIOT_API_KEY)
+                .setDebugLevel(Level.ALL)
     }
 }

@@ -1,6 +1,5 @@
 package com.matheusfroes.lolfreeweek.ui.myalerts
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,30 +11,26 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_my_alert_view.view.*
 
 
-class ChampionMyAlertsAdapter(val context: Context, var championList: List<Champion>) :
-        RecyclerView.Adapter<ChampionMyAlertsAdapter.ViewHolder>() {
+class ChampionMyAlertsAdapter : RecyclerView.Adapter<ChampionMyAlertsAdapter.ViewHolder>() {
+    var champions: List<Champion> = listOf()
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
 
     var listener: OnChampionClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.champion_my_alert_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.champion_my_alert_view, parent, false)
         return ViewHolder(view)
     }
 
-    override fun getItemCount() = championList.size
+    override fun getItemCount() = champions.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val champion = championList[position]
+        val champion = champions[position]
 
-        Picasso
-                .with(context)
-                .load("http://ddragon.leagueoflegends.com/cdn/${UserPreferences().currentApiVersion}/img/champion/${champion.image}")
-                .fit()
-                .centerCrop()
-                .into(holder.itemView.ivChampion)
-
-        holder.itemView.tvChampionName.text = champion.name
-        holder.itemView.tvChampionTitle.text = champion.title
+        holder.bind(champion)
     }
 
     interface OnChampionClickListener {
@@ -47,6 +42,18 @@ class ChampionMyAlertsAdapter(val context: Context, var championList: List<Champ
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(champion: Champion) {
+            Picasso
+                    .with(itemView.context)
+                    .load("http://ddragon.leagueoflegends.com/cdn/${UserPreferences().currentApiVersion}/img/champion/${champion.image}")
+                    .fit()
+                    .centerCrop()
+                    .into(itemView.ivChampion)
+
+            itemView.tvChampionName.text = champion.name
+            itemView.tvChampionTitle.text = champion.title
+        }
+
         init {
             itemView.ivDeleteAlert.setOnClickListener {
                 listener?.onClick(itemView.ivDeleteAlert, adapterPosition)

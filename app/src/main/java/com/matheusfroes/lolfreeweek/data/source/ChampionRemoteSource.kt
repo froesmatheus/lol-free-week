@@ -2,6 +2,7 @@ package com.matheusfroes.lolfreeweek.data.source
 
 import com.matheusfroes.lolfreeweek.data.mapper.ChampionMapper
 import com.matheusfroes.lolfreeweek.data.UserPreferences
+import com.matheusfroes.lolfreeweek.extra.networkContext
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.withContext
 import net.rithms.riot.api.RiotApi
@@ -13,11 +14,11 @@ class ChampionRemoteSource @Inject constructor(
         private val api: RiotApi,
         private val preferences: UserPreferences) {
 
-    suspend fun fetchFreeWeekChampions(): List<Int> = withContext(CommonPool) {
+    suspend fun fetchFreeWeekChampions(): List<Int> = withContext(networkContext) {
         api.getChampions(preferences.currentPlatform, true).champions.map { it.id }
     }
 
-    suspend fun fetchChampionsData(): List<com.matheusfroes.lolfreeweek.data.model.Champion> = withContext(CommonPool) {
+    suspend fun fetchChampionsData(): List<com.matheusfroes.lolfreeweek.data.model.Champion> = withContext(networkContext) {
         val response = api.getDataChampionList(
                 preferences.currentPlatform,
                 null,

@@ -15,6 +15,7 @@ import com.matheusfroes.lolfreeweek.extra.viewModelProvider
 import com.matheusfroes.lolfreeweek.ui.intro.IntroActivity
 import kotlinx.android.synthetic.main.activity_download_champion_data.*
 import net.rithms.riot.constant.Platform
+import timber.log.Timber
 import javax.inject.Inject
 
 class FetchChampionsDataActivity : AppCompatActivity() {
@@ -81,6 +82,7 @@ class FetchChampionsDataActivity : AppCompatActivity() {
                     progressBar.isIndeterminate = true
                 }
                 is Result.Error -> {
+                    Timber.e(result.error)
                     progressBar.isIndeterminate = false
                     toast(getString(R.string.download_failed))
                 }

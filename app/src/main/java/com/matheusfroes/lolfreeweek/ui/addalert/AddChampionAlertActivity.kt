@@ -14,8 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
 import com.google.android.gms.ads.InterstitialAd
-import com.matheusfroes.lolfreeweek.*
-import com.matheusfroes.lolfreeweek.db.ChampionDAO
+import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.extra.toast
@@ -24,10 +23,7 @@ import kotlinx.android.synthetic.main.activity_add_champion_alert.*
 import javax.inject.Inject
 
 class AddChampionAlertActivity : AppCompatActivity() {
-    val championDAO by lazy {
-        ChampionDAO(this)
-    }
-    val adapter: ChampionAlertAdapter by lazy { ChampionAlertAdapter() }
+    private val adapter: ChampionAlertAdapter by lazy { ChampionAlertAdapter() }
     val interstitialAd by lazy {
         InterstitialAd(applicationContext)
     }

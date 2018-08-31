@@ -11,6 +11,7 @@ import com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity
 import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList
 import com.matheusfroes.lolfreeweek.ui.intro.IntroActivity
+import com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity
 import com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -26,4 +27,5 @@ interface Injector {
     fun inject(baseActivity: BaseActivity)
     fun inject(fetchFreeWeekChampionsWorker: FetchFreeWeekChampionsWorker)
     fun inject(addChampionAlertActivity: AddChampionAlertActivity)
+    fun inject(myAlertsActivity: MyAlertsActivity)
 }

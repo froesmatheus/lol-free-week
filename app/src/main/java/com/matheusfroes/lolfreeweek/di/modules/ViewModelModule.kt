@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertViewModel
 import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataViewModel
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListViewModel
+import com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -45,4 +46,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddChampionAlertViewModel::class)
     internal abstract fun addChampionAlertViewModel(viewModel: AddChampionAlertViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MyAlertsViewModel::class)
+    internal abstract fun myAlertsViewModel(viewModel: MyAlertsViewModel): ViewModel
 }
