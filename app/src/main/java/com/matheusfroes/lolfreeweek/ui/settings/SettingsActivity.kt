@@ -10,21 +10,16 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.view.MenuItem
 import com.matheusfroes.lolfreeweek.R
+import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.data.UserPreferences
-import com.matheusfroes.lolfreeweek.appInjector
-import com.matheusfroes.lolfreeweek.db.ChampionDAO
-import com.matheusfroes.lolfreeweek.db.SkinDAO
-import com.matheusfroes.lolfreeweek.db.SpellDAO
-import com.matheusfroes.lolfreeweek.data.model.Champion
+import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
+import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
 import com.matheusfroes.lolfreeweek.ui.AppCompatPreferenceActivity
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
-import net.rithms.riot.api.RiotApi
-import net.rithms.riot.api.endpoints.static_data.constant.ChampionListTags
-import net.rithms.riot.api.endpoints.static_data.constant.Locale
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 import net.rithms.riot.constant.Platform
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import javax.inject.Inject
 
 
@@ -40,17 +35,11 @@ import javax.inject.Inject
    * API Guide](http://developer.android.com/guide/topics/ui/settings.html) for more information on developing a Settings UI.
  */
 class SettingsActivity : AppCompatPreferenceActivity() {
-    val championDAO by lazy {
-        ChampionDAO(this)
-    }
-    val spellsDAO by lazy {
-        SpellDAO(this)
-    }
-    val skinsDAO by lazy {
-        SkinDAO(this)
-    }
     @Inject
-    lateinit var api: RiotApi
+    lateinit var localSource: ChampionLocalSource
+
+    @Inject
+    lateinit var remoteSource: ChampionRemoteSource
 
     @Inject
     lateinit var preferences: UserPreferences
@@ -109,30 +98,16 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     private fun remakeChampionsList() {
         val progress = ProgressDialog(this)
         progress.setMessage(getString(R.string.info_download_champion_information))
-        progress.isIndeterminate = false
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
         progress.show()
-        doAsync {
-            spellsDAO.deleteAll()
-            skinsDAO.deleteAll()
-            championDAO.deleteAll()
 
-            val region = preferences.currentPlatform
+        launch(UI) {
+            localSource.deleteDatabase()
 
-            val response = api.getDataChampionList(region, Locale.EN_US, null, true, ChampionListTags.IMAGE, ChampionListTags.SKINS, ChampionListTags.SPELLS, ChampionListTags.LORE)
+            val champions = remoteSource.fetchChampionsData()
+            localSource.insertChampions(champions)
 
-            var i = 1
-            val champList = response.data.map {
-                val champ = Champion()
-                champ.copyChampion(it.value)
-                progress.progress = i++
-                champ
-            }
-
-            championDAO.insertList(champList)
-            uiThread {
-                progress.cancel()
-            }
+            progress.cancel()
         }
     }
 

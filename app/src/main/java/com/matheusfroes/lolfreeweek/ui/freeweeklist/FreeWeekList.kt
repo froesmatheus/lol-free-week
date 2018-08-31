@@ -11,26 +11,19 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.Result
-import com.matheusfroes.lolfreeweek.appInjector
-import com.matheusfroes.lolfreeweek.db.ChampionDAO
+import com.matheusfroes.lolfreeweek.extra.Result
+import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.ui.BaseActivity
 import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity
-import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.DownloadChampionDataActivity
+import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity
 import com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity
 import com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity
-import com.matheusfroes.lolfreeweek.viewModelProvider
+import com.matheusfroes.lolfreeweek.extra.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
-import net.rithms.riot.api.RiotApi
 import javax.inject.Inject
 
 
 class FreeWeekList : BaseActivity() {
-    val context = this
-    val dao by lazy { ChampionDAO(this) }
-    @Inject
-    lateinit var api: RiotApi
-
     private val adapter: ChampionAdapter by lazy { ChampionAdapter() }
 
     @Inject
@@ -45,7 +38,7 @@ class FreeWeekList : BaseActivity() {
         viewModel = viewModelProvider(viewModelFactory)
 
         if (preferences.firstAccess) {
-            startActivity(Intent(this, DownloadChampionDataActivity::class.java))
+            startActivity(Intent(this, FetchChampionsDataActivity::class.java))
             return
         }
 

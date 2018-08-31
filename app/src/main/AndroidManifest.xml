@@ -38,7 +38,7 @@
             android:parentActivityName="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList" />
 
         <activity
-            android:name="com.matheusfroes.lolfreeweek.ui.fetchchampiondata.DownloadChampionDataActivity"
+            android:name="com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity"
             android:theme="@style/AppTheme.DownloadChampion"></activity>
 
         <activity android:name=".ui.BaseActivity" />

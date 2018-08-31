@@ -15,3 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn com.google.errorprone.annotations.**
+-keep class .R
+-keep class **.R$* {
+    <fields>;
+}
+-dontwarn com.squareup.okhttp.**

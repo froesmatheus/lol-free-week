@@ -2,7 +2,7 @@ package com.matheusfroes.lolfreeweek.jobs
 
 import androidx.work.Worker
 import com.matheusfroes.lolfreeweek.CustomApplication
-import com.matheusfroes.lolfreeweek.NotificationSender
+import com.matheusfroes.lolfreeweek.extra.NotificationSender
 import javax.inject.Inject
 
 class FetchFreeWeekChampionsWorker : Worker() {

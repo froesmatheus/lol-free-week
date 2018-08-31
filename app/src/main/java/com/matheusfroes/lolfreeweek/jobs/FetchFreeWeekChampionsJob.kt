@@ -3,7 +3,7 @@ package com.matheusfroes.lolfreeweek.jobs
 import android.util.Log
 import com.evernote.android.job.Job
 import com.evernote.android.job.JobRequest
-import com.matheusfroes.lolfreeweek.NotificationSender
+import com.matheusfroes.lolfreeweek.extra.NotificationSender
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

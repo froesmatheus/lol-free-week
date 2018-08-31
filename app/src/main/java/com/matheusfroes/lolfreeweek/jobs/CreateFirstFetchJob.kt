@@ -3,9 +3,9 @@ package com.matheusfroes.lolfreeweek.jobs
 import android.util.Log
 import com.evernote.android.job.Job
 import com.evernote.android.job.JobRequest
-import com.matheusfroes.lolfreeweek.NotificationSender
-import com.matheusfroes.lolfreeweek.getDateDiff
-import com.matheusfroes.lolfreeweek.nextDayOfWeek
+import com.matheusfroes.lolfreeweek.extra.NotificationSender
+import com.matheusfroes.lolfreeweek.extra.getDateDiff
+import com.matheusfroes.lolfreeweek.extra.nextDayOfWeek
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

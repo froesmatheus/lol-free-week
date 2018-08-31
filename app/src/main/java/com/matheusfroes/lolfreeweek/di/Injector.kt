@@ -6,8 +6,9 @@ import com.matheusfroes.lolfreeweek.di.modules.NetworkModule
 import com.matheusfroes.lolfreeweek.di.modules.ViewModelModule
 import com.matheusfroes.lolfreeweek.jobs.FetchFreeWeekChampionsWorker
 import com.matheusfroes.lolfreeweek.ui.BaseActivity
+import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity
 import com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity
-import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.DownloadChampionDataActivity
+import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList
 import com.matheusfroes.lolfreeweek.ui.intro.IntroActivity
 import com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity
@@ -19,9 +20,10 @@ import javax.inject.Singleton
 interface Injector {
     fun inject(freeWeekList: FreeWeekList)
     fun inject(mainActivity: SettingsActivity)
-    fun inject(downloadChampionDataActivity: DownloadChampionDataActivity)
+    fun inject(fetchChampionsDataActivity: FetchChampionsDataActivity)
     fun inject(championDetailsActivity: ChampionDetailsActivity)
     fun inject(introActivity: IntroActivity)
     fun inject(baseActivity: BaseActivity)
     fun inject(fetchFreeWeekChampionsWorker: FetchFreeWeekChampionsWorker)
+    fun inject(addChampionAlertActivity: AddChampionAlertActivity)
 }

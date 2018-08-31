@@ -103,6 +103,12 @@ class ChampionDAO @Inject constructor(context: Context) {
 
     fun deleteAll() = db.delete(Db.TABLE_CHAMPIONS, "1", null)
 
+    fun deleteDB() {
+        deleteAll()
+        skinDAO.deleteAll()
+        spellDAO.deleteAll()
+    }
+
 
     fun getChampions(): List<Champion> {
         val champions = mutableListOf<Champion>()

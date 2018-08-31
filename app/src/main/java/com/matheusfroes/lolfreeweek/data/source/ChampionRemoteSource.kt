@@ -13,8 +13,8 @@ class ChampionRemoteSource @Inject constructor(
         private val api: RiotApi,
         private val preferences: UserPreferences) {
 
-    suspend fun fetchFreeWeekChampions(): List<Champion> = withContext(CommonPool) {
-        api.getChampions(preferences.currentPlatform, true).champions
+    suspend fun fetchFreeWeekChampions(): List<Int> = withContext(CommonPool) {
+        api.getChampions(preferences.currentPlatform, true).champions.map { it.id }
     }
 
     suspend fun fetchChampionsData(): List<com.matheusfroes.lolfreeweek.data.model.Champion> = withContext(CommonPool) {

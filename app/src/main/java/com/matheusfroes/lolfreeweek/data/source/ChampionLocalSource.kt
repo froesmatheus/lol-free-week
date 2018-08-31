@@ -2,26 +2,44 @@ package com.matheusfroes.lolfreeweek.data.source
 
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
+import com.matheusfroes.lolfreeweek.extra.ioContext
+import kotlinx.coroutines.experimental.withContext
 import javax.inject.Inject
 
 class ChampionLocalSource @Inject constructor(
         private val championDAO: ChampionDAO) {
 
 
-    fun getFreeToPlayChampions(): List<Champion> {
-        return championDAO.getFreeToPlayChampions()
+    suspend fun getFreeToPlayChampions(): List<Champion> = withContext(ioContext)  {
+        championDAO.getFreeToPlayChampions()
     }
 
-    fun deleteFreeToPlayChampions() {
+    private suspend fun deleteFreeToPlayChampions() = withContext(ioContext) {
         championDAO.deleteFreeChampions()
     }
 
-    fun insertFreeChampions(championIds: List<Int>) {
+    private suspend fun insertFreeChampions(championIds: List<Int>) = withContext(ioContext) {
         championDAO.insertFreeChampions(championIds)
     }
 
-    fun resetFreeToPlayList(champions: List<Int>) {
+    suspend fun insertChampions(champions: List<Champion>) = withContext(ioContext) {
+        championDAO.insertList(champions)
+    }
+
+    suspend fun resetFreeToPlayList(champions: List<Int>) = withContext(ioContext) {
         deleteFreeToPlayChampions()
         insertFreeChampions(champions)
+    }
+
+    suspend fun getChampionsByAlert(alert: Boolean): List<Champion> = withContext(ioContext) {
+        championDAO.getChampionsByAlert(alert)
+    }
+
+    fun updateChampionAlerts(champions: List<Champion>) {
+        championDAO.updateList(champions)
+    }
+
+    fun deleteDatabase() {
+        championDAO.deleteDB()
     }
 }

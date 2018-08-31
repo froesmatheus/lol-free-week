@@ -2,6 +2,8 @@ package com.matheusfroes.lolfreeweek.di.modules
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertViewModel
+import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataViewModel
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -34,4 +36,13 @@ abstract class ViewModelModule {
     @ViewModelKey(FreeWeekListViewModel::class)
     internal abstract fun freeWeekListViewModel(viewModel: FreeWeekListViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(FetchChampionsDataViewModel::class)
+    internal abstract fun fetchChampionsDataViewModel(viewModel: FetchChampionsDataViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddChampionAlertViewModel::class)
+    internal abstract fun addChampionAlertViewModel(viewModel: AddChampionAlertViewModel): ViewModel
 }
