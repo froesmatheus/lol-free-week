@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.UserPreferences
-import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList
+import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
 import com.matheusfroes.lolfreeweek.db.ChampionDAO
 import net.rithms.riot.api.RiotApi
 import java.util.*
@@ -28,7 +28,7 @@ class NotificationSender @Inject constructor(
     }
 
     private fun notifyUserFromJob(title: String, message: String) {
-        val intent = Intent(context, FreeWeekList::class.java)
+        val intent = Intent(context, FreeWeekListActivity::class.java)
         stackBuilder.addNextIntent(intent)
         val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 

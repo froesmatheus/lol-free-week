@@ -14,6 +14,6 @@ class UserPreferences @Inject constructor() : KotprefModel() {
     }
 
     var currentPlatform by enumValuePref(Platform.NA, key = CURRENT_PLATFORM)
-    var currentApiVersion by stringPref(key = CURRENT_API_VERSION, default = "7.2.1")
+    var currentApiVersion by stringPref(key = CURRENT_API_VERSION, default = "8.17.1")
     var firstAccess by booleanPref(key = FIRST_ACCESS, default = true)
 }

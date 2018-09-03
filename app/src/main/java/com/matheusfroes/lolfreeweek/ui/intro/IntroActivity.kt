@@ -7,7 +7,7 @@ import android.os.Bundle
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.extra.appInjector
-import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekList
+import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
 import javax.inject.Inject
 
 
@@ -47,7 +47,7 @@ class IntroActivity : MaterialIntroActivity() {
 
     override fun onFinish() {
         preferences.firstAccess = false
-        startActivity(Intent(applicationContext, FreeWeekList::class.java))
+        startActivity(Intent(applicationContext, FreeWeekListActivity::class.java))
         finish()
     }
 

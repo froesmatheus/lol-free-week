@@ -8,10 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import com.matheusfroes.lolfreeweek.*
 import com.matheusfroes.lolfreeweek.data.UserPreferences
-import com.matheusfroes.lolfreeweek.extra.Result
-import com.matheusfroes.lolfreeweek.extra.appInjector
-import com.matheusfroes.lolfreeweek.extra.toast
-import com.matheusfroes.lolfreeweek.extra.viewModelProvider
+import com.matheusfroes.lolfreeweek.extra.*
 import com.matheusfroes.lolfreeweek.ui.intro.IntroActivity
 import kotlinx.android.synthetic.main.activity_download_champion_data.*
 import net.rithms.riot.constant.Platform
@@ -60,7 +57,7 @@ class FetchChampionsDataActivity : AppCompatActivity() {
                         }
                     }
                     preferences.currentPlatform = platform
-                    downloadChampionData()
+                    downloadChampions()
                 }
                 .setCancelable(false)
                 .setTitle(resources.getString(R.string.choose_region))
@@ -84,6 +81,28 @@ class FetchChampionsDataActivity : AppCompatActivity() {
                 is Result.Error -> {
                     Timber.e(result.error)
                     progressBar.isIndeterminate = false
+                    toast(getString(R.string.download_failed))
+                }
+            }
+        })
+    }
+
+
+    private fun downloadChampions() {
+        viewModel.downloadChampionData()
+
+        viewModel.downloadChampions.observe(this, android.arch.lifecycle.Observer {result ->
+            when (result) {
+                is ResultDownload.Complete -> {
+                    startActivity(Intent(applicationContext, IntroActivity::class.java))
+                    finish()
+                }
+                is ResultDownload.InProgress -> {
+                    progressBar.max = result.max
+                    progressBar.progress = result.progress
+                }
+                is ResultDownload.Error -> {
+                    Timber.e(result.error)
                     toast(getString(R.string.download_failed))
                 }
             }

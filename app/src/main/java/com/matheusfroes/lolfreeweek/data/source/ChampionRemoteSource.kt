@@ -1,18 +1,19 @@
 package com.matheusfroes.lolfreeweek.data.source
 
-import com.matheusfroes.lolfreeweek.data.mapper.ChampionMapper
 import com.matheusfroes.lolfreeweek.data.UserPreferences
+import com.matheusfroes.lolfreeweek.data.mapper.ChampionMapper
+import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.extra.networkContext
-import kotlinx.coroutines.experimental.CommonPool
+import com.matheusfroes.lolfreeweek.network.RiotService
 import kotlinx.coroutines.experimental.withContext
 import net.rithms.riot.api.RiotApi
-import net.rithms.riot.api.endpoints.champion.dto.Champion
 import net.rithms.riot.api.endpoints.static_data.constant.ChampionListTags
 import javax.inject.Inject
 
 class ChampionRemoteSource @Inject constructor(
         private val api: RiotApi,
-        private val preferences: UserPreferences) {
+        private val preferences: UserPreferences,
+        private val riotService: RiotService) {
 
     suspend fun fetchFreeWeekChampions(): List<Int> = withContext(networkContext) {
         api.getChampions(preferences.currentPlatform, true).champions.map { it.id }
@@ -30,5 +31,18 @@ class ChampionRemoteSource @Inject constructor(
                 ChampionListTags.LORE).data
 
         ChampionMapper.map(response.map { it.value })
+    }
+
+    suspend fun getChampions(): List<String> = withContext(networkContext) {
+        riotService.getChampions(preferences.currentApiVersion, "pt_BR").await()
+                .data.map { it.key }
+    }
+
+
+    suspend fun getChampion(championName: String): Champion = withContext(networkContext) {
+        val championResponse = riotService.getChampion(preferences.currentApiVersion, "pt_BR", championName).await().data[championName]
+                ?: throw IllegalStateException("Champion response cannot be null")
+
+        ChampionMapper.map(championResponse)
     }
 }
