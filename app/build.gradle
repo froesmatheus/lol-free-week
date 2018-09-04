@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
+def apiKeyPropertiesFile = rootProject.file("apikey.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
 android {
     compileSdkVersion 28
 
@@ -16,11 +20,11 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField 'String', "RIOT_API_KEY", RIOT_API_KEY
+            buildConfigField 'String', "RIOT_API_KEY", apiKeyProperties['RIOT_API_KEY']
             buildConfigField 'String', "RIOT_API_BASE_URL", RIOT_API_BASE_URL
         }
         release {
-            buildConfigField 'String', "RIOT_API_KEY", RIOT_API_KEY
+            buildConfigField 'String', "RIOT_API_KEY", apiKeyProperties['RIOT_API_KEY']
             buildConfigField 'String', "RIOT_API_BASE_URL", RIOT_API_BASE_URL
 
             minifyEnabled true
