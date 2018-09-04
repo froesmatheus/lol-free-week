@@ -7,7 +7,7 @@ import android.content.Intent
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
-import com.matheusfroes.lolfreeweek.db.ChampionDAO
+import com.matheusfroes.lolfreeweek.data.dao.ChampionDAO
 import net.rithms.riot.api.RiotApi
 import java.util.*
 import javax.inject.Inject

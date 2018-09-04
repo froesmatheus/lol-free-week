@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.db
+package com.matheusfroes.lolfreeweek.data.dao
 
 import android.content.ContentValues
 import android.content.Context

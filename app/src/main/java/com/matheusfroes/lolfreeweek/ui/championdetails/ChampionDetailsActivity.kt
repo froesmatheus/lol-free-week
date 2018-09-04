@@ -11,7 +11,7 @@ import android.view.View
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.extra.appInjector
-import com.matheusfroes.lolfreeweek.db.ChampionDAO
+import com.matheusfroes.lolfreeweek.data.dao.ChampionDAO
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.model.Spell
 import com.squareup.picasso.Picasso

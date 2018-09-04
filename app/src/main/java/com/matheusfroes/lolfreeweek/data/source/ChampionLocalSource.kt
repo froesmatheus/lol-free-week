@@ -1,7 +1,7 @@
 package com.matheusfroes.lolfreeweek.data.source
 
 import com.matheusfroes.lolfreeweek.data.model.Champion
-import com.matheusfroes.lolfreeweek.db.ChampionDAO
+import com.matheusfroes.lolfreeweek.data.dao.ChampionDAO
 import com.matheusfroes.lolfreeweek.extra.ioContext
 import kotlinx.coroutines.experimental.withContext
 import javax.inject.Inject

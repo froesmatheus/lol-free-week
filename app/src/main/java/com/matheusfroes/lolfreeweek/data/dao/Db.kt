@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.db
+package com.matheusfroes.lolfreeweek.data.dao
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
