@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
-def apiKeyPropertiesFile = rootProject.file("apikey.properties")
+def apiKeyPropertiesFile = rootProject.file("keys.properties")
 def apiKeyProperties = new Properties()
 apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
 
