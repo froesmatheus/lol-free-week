@@ -1,4 +1,5 @@
 # Free Week Guide for LOL
+https://froesmatheus.github.io/lol-free-week/
 
 Create the `keys.properties` file in the project's root directory and put your credential as below:
 
