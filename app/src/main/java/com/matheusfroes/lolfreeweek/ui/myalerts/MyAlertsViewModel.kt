@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.extra.Result
+import com.matheusfroes.lolfreeweek.extra.SingleLiveEvent
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
@@ -23,6 +24,7 @@ class MyAlertsViewModel @Inject constructor(
     private val _champions = MutableLiveData<Result<List<Champion>>>()
     val champions: LiveData<Result<List<Champion>>> = _champions
 
+
     fun getChampions() = launch(UI) {
         _champions.value = Result.InProgress()
 
@@ -33,5 +35,11 @@ class MyAlertsViewModel @Inject constructor(
         } catch (e: Exception) {
             _champions.value = Result.Error(e)
         }
+    }
+
+    fun deleteAlert(champion: Champion) = launch(UI) {
+        champion.alertOn = false
+        localSource.updateChampion(champion)
+        _champions.value = Result.Complete(localSource.getChampionsByAlert(alert = true))
     }
 }

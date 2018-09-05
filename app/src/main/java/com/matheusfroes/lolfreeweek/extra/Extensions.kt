@@ -16,8 +16,10 @@ import android.widget.Toast
 import com.matheusfroes.lolfreeweek.CustomApplication
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.di.Injector
+import kotlinx.coroutines.experimental.async
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.coroutines.experimental.CoroutineContext
 
 
 /**
@@ -98,12 +100,23 @@ inline fun <reified VM : ViewModel> FragmentActivity.viewModelProvider(
 ) =
         ViewModelProviders.of(this, provider).get(VM::class.java)
 
-
-
-
-
 fun Context.toast(message: CharSequence): Toast = Toast
         .makeText(this, message, Toast.LENGTH_SHORT)
         .apply {
             show()
         }
+
+suspend fun <A, B> List<A>.parallelMap(
+        context: CoroutineContext = networkContext,
+        block: suspend (A) -> B
+): List<B> {
+    return map {
+        // Use async to start a coroutine for each item
+        async(context) {
+            block(it)
+        }
+    }.map {
+        // We now have a map of Deferred<T> so we await() each
+        it.await()
+    }
+}

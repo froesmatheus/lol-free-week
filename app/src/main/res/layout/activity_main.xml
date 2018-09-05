@@ -9,26 +9,10 @@
     android:orientation="vertical"
     tools:context="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity">
 
-    <!--<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--android:id="@+id/toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="?attr/colorPrimary"-->
-    <!--android:minHeight="?attr/actionBarSize"-->
-    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-    <!--app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />-->
-
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/adView">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvChampions"
@@ -48,6 +32,12 @@
             app:fabSize="normal"
             app:rippleColor="@color/colorPrimaryDark"
             app:useCompatPadding="true" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
     </FrameLayout>
 
     <com.google.android.gms.ads.AdView

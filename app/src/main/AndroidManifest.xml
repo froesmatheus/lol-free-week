@@ -39,7 +39,7 @@
 
         <activity
             android:name="com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity"
-            android:theme="@style/AppTheme.DownloadChampion"></activity>
+            android:theme="@style/AppTheme.DownloadChampion"/>
 
         <activity android:name=".ui.BaseActivity" />
     </application>

@@ -18,7 +18,7 @@ class ChampionMyAlertsAdapter : RecyclerView.Adapter<ChampionMyAlertsAdapter.Vie
         notifyDataSetChanged()
     }
 
-    var listener: OnChampionClickListener? = null
+    var deleteChampionEvent: ((Champion) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.champion_my_alert_view, parent, false)
@@ -31,14 +31,6 @@ class ChampionMyAlertsAdapter : RecyclerView.Adapter<ChampionMyAlertsAdapter.Vie
         val champion = champions[position]
 
         holder.bind(champion)
-    }
-
-    interface OnChampionClickListener {
-        fun onClick(view: View, position: Int)
-    }
-
-    fun setOnChampionImageClick(listener: OnChampionClickListener) {
-        this.listener = listener
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -56,7 +48,7 @@ class ChampionMyAlertsAdapter : RecyclerView.Adapter<ChampionMyAlertsAdapter.Vie
 
         init {
             itemView.ivDeleteAlert.setOnClickListener {
-                listener?.onClick(itemView.ivDeleteAlert, adapterPosition)
+                deleteChampionEvent?.invoke(champions[adapterPosition])
             }
         }
     }

@@ -38,6 +38,10 @@ class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
         val currentApiVersion = preferences.currentApiVersion
         val championId = intent.getIntExtra("championId", -1)
 
+        scrollView.post {
+            scrollView.scrollTo(0, 0)
+        }
+
         champion = dao.getChampion(championId.toLong())
 
         title = champion?.name
@@ -47,7 +51,7 @@ class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
         tvChampionLore.text = Html.fromHtml(champion?.lore)
 
         val skinsWithChampionName = champion?.skins.orEmpty().map { skin ->
-            SkinWithChampionName(skin, champion?.name.orEmpty())
+            SkinWithChampionName(skin, champion?.key.orEmpty())
         }
         adapter.skins = skinsWithChampionName
         rvChampionSkins.adapter = adapter

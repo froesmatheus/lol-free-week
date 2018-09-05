@@ -1,5 +1,6 @@
 package com.matheusfroes.lolfreeweek.data.source
 
+import com.matheusfroes.lolfreeweek.BuildConfig
 import com.matheusfroes.lolfreeweek.data.Platform
 import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.data.mapper.ChampionMapper
@@ -17,7 +18,7 @@ class ChampionRemoteSource @Inject constructor(
         private val riotService: RiotService) {
 
     suspend fun fetchFreeWeekChampions(): List<Int> = withContext(networkContext) {
-        api.getChampions(preferences.currentPlatform, true).champions.map { it.id }
+        riotService.getChampionRotation(preferences.currentPlatform.id, BuildConfig.RIOT_API_KEY).await().freeChampionIds
     }
 
     suspend fun fetchChampionsData(): List<com.matheusfroes.lolfreeweek.data.model.Champion> = withContext(networkContext) {

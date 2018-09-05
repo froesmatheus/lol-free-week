@@ -43,6 +43,10 @@ class ChampionLocalSource @Inject constructor(
         championDAO.updateList(champions)
     }
 
+    suspend fun updateChampion(champion: Champion) = withContext(ioContext) {
+        championDAO.update(champion)
+    }
+
     fun deleteDatabase() {
         championDAO.deleteDB()
     }

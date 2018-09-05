@@ -5,6 +5,7 @@ import com.facebook.stetho.Stetho
 import com.matheusfroes.lolfreeweek.di.DaggerInjector
 import com.matheusfroes.lolfreeweek.di.Injector
 import com.matheusfroes.lolfreeweek.di.modules.AppModule
+import timber.log.Timber
 
 
 open class CustomApplication : Application() {
@@ -14,6 +15,8 @@ open class CustomApplication : Application() {
         super.onCreate()
         setupDagger()
         Stetho.initializeWithDefaults(this)
+
+        Timber.plant(Timber.DebugTree())
     }
 
     private fun setupDagger() {

@@ -7,9 +7,12 @@ import dagger.Provides
 import net.rithms.riot.api.ApiConfig
 import net.rithms.riot.api.RiotApi
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.util.logging.Level
 import javax.inject.Singleton
+
 
 @Module()
 class NetworkModule {
@@ -29,9 +32,17 @@ class NetworkModule {
     }
 
     @Provides
+    fun loggingInterceptor(): HttpLoggingInterceptor {
+        val logger = HttpLoggingInterceptor.Logger { Timber.d(it) }
+
+        return HttpLoggingInterceptor(logger).setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    @Provides
     @Singleton
-    fun okHttp(): OkHttpClient {
+    fun okHttp(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
                 .build()
     }
 

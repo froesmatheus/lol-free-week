@@ -7,6 +7,7 @@ import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.ResultDownload
+import com.matheusfroes.lolfreeweek.extra.parallelMap
 import com.matheusfroes.lolfreeweek.extra.uiContext
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
@@ -15,29 +16,9 @@ class FetchChampionsDataViewModel @Inject constructor(
         private val localSource: ChampionLocalSource,
         private val remoteSource: ChampionRemoteSource) : ViewModel() {
 
-
-    private val _fetchChampionData = MutableLiveData<Result<Unit>>()
     private val _downloadChampions = MutableLiveData<ResultDownload<Unit>>()
 
-    val fetchChampionData: LiveData<Result<Unit>> = _fetchChampionData
     val downloadChampions: LiveData<ResultDownload<Unit>> = _downloadChampions
-
-    fun fetchChampionData() = launch(uiContext) {
-        _fetchChampionData.value = Result.InProgress()
-
-        try {
-            val champions = remoteSource.fetchChampionsData()
-            localSource.insertChampions(champions)
-
-            val freeWeekChampions = remoteSource.fetchFreeWeekChampions()
-            localSource.resetFreeToPlayList(freeWeekChampions)
-
-            _fetchChampionData.value = Result.Complete(Unit)
-        } catch (e: Exception) {
-            _fetchChampionData.value = Result.Error(e)
-        }
-    }
-
 
     fun downloadChampionData() = launch(uiContext) {
         _downloadChampions.value = ResultDownload.InProgress(0, 0)
@@ -45,8 +26,8 @@ class FetchChampionsDataViewModel @Inject constructor(
         try {
             val championNames = remoteSource.getChampions()
 
-            val champions = championNames.mapIndexed { index, championName ->
-                _downloadChampions.value = ResultDownload.InProgress(index, championNames.size)
+            val champions = championNames.parallelMap { championName ->
+//                _downloadChampions.value = ResultDownload.InProgress(index, championNames.size)
                 remoteSource.getChampion(championName)
             }
 

@@ -66,28 +66,6 @@ class FetchChampionsDataActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun downloadChampionData() {
-        viewModel.fetchChampionData()
-
-        viewModel.fetchChampionData.observe(this, android.arch.lifecycle.Observer {result ->
-            when (result) {
-                is Result.Complete -> {
-                    startActivity(Intent(applicationContext, IntroActivity::class.java))
-                    finish()
-                }
-                is Result.InProgress -> {
-                    progressBar.isIndeterminate = true
-                }
-                is Result.Error -> {
-                    Timber.e(result.error)
-                    progressBar.isIndeterminate = false
-                    toast(getString(R.string.download_failed))
-                }
-            }
-        })
-    }
-
-
     private fun downloadChampions() {
         viewModel.downloadChampionData()
 

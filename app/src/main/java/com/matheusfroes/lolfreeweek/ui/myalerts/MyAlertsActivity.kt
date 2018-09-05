@@ -14,6 +14,7 @@ import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.extra.viewModelProvider
 import kotlinx.android.synthetic.main.activity_my_alerts.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class MyAlertsActivity : AppCompatActivity() {
@@ -32,32 +33,28 @@ class MyAlertsActivity : AppCompatActivity() {
 
         viewModel.champions.observe(this, Observer { result ->
             when (result) {
-                is Result.Complete -> {}
-                is Result.InProgress -> {}
-                is Result.Error -> {}
+                is Result.Complete -> {
+                    adapter.champions = result.data
+                    checkIfListEmpty(result.data)
+                    hideProgressBar()
+                }
+                is Result.InProgress -> {
+                    showProgressBar()
+                }
+                is Result.Error -> {
+                    hideProgressBar()
+                    Timber.e(result.error)
+                }
             }
         })
 
-        val championDAO = ChampionDAO(this)
-
-        val championList = championDAO.getChampionsByAlert(alert = true)
         rvChampions.adapter = adapter
         rvChampions.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvChampions.itemAnimator = DefaultItemAnimator()
 
-        checkIfListEmpty(championList)
-
-        adapter.setOnChampionImageClick(object : ChampionMyAlertsAdapter.OnChampionClickListener {
-            override fun onClick(view: View, position: Int) {
-                championList[position].alertOn = false
-                championDAO.update(championList[position])
-
-                championList.removeAt(position)
-                adapter.notifyDataSetChanged()
-                adapter.notifyItemRemoved(position)
-                checkIfListEmpty(championList)
-            }
-        })
+        adapter.deleteChampionEvent = { champion ->
+            viewModel.deleteAlert(champion)
+        }
     }
 
     private fun checkIfListEmpty(championList: List<Champion>) {
@@ -68,5 +65,13 @@ class MyAlertsActivity : AppCompatActivity() {
             rvChampions.visibility = View.VISIBLE
             emptyListLayout.visibility = View.INVISIBLE
         }
+    }
+
+    fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideProgressBar() {
+        progressBar.visibility = View.GONE
     }
 }
