@@ -4,9 +4,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
-def apiKeyPropertiesFile = rootProject.file("keys.properties")
-def apiKeyProperties = new Properties()
-apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+def keyPropertiesFile = rootProject.file("keys.properties")
+def keyProperties = new Properties()
+keyProperties.load(new FileInputStream(keyPropertiesFile))
 
 android {
     compileSdkVersion 28
@@ -20,12 +20,18 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField 'String', "RIOT_API_KEY", apiKeyProperties['RIOT_API_KEY']
+            buildConfigField 'String', "RIOT_API_KEY", keyProperties['RIOT_API_KEY']
             buildConfigField 'String', "RIOT_API_BASE_URL", RIOT_API_BASE_URL
+
+            resValue "string", "ADMOB_MAIN_BANNER_ID", keyProperties['ADMOB_MAIN_BANNER_ID']
+            buildConfigField 'String', "ADMOB_INTERSTITIAL_BANNER_ID", keyProperties['ADMOB_INTERSTITIAL_BANNER_ID']
         }
         release {
-            buildConfigField 'String', "RIOT_API_KEY", apiKeyProperties['RIOT_API_KEY']
+            buildConfigField 'String', "RIOT_API_KEY", keyProperties['RIOT_API_KEY']
             buildConfigField 'String', "RIOT_API_BASE_URL", RIOT_API_BASE_URL
+
+            resValue "string", "ADMOB_MAIN_BANNER_ID", keyProperties['ADMOB_MAIN_BANNER_ID']
+            buildConfigField 'String', "ADMOB_INTERSTITIAL_BANNER_ID", keyProperties['ADMOB_INTERSTITIAL_BANNER_ID']
 
             minifyEnabled true
             useProguard true

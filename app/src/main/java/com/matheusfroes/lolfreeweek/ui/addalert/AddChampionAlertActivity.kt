@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
 import com.google.android.gms.ads.InterstitialAd
+import com.matheusfroes.lolfreeweek.BuildConfig
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.appInjector
@@ -24,7 +25,7 @@ import javax.inject.Inject
 
 class AddChampionAlertActivity : AppCompatActivity() {
     private val adapter: ChampionAlertAdapter by lazy { ChampionAlertAdapter() }
-    val interstitialAd by lazy {
+    private val interstitialAd by lazy {
         InterstitialAd(applicationContext)
     }
 
@@ -77,7 +78,7 @@ class AddChampionAlertActivity : AppCompatActivity() {
         })
 
 
-//        interstitialAd.adUnitId = "ca-app-pub-9931312002048408/1857365378"
+        interstitialAd.adUnitId = BuildConfig.ADMOB_INTERSTITIAL_BANNER_ID
 //
 //        interstitialAd.adListener = object : AdListener() {
 //            override fun onAdLoaded() {

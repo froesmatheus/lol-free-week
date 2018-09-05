@@ -21,7 +21,6 @@
     <string name="help">Help</string>
     <string name="info_download_champion_information">Downloading champion information</string>
     <string name="champion_alert">Champion Alert</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9931312002048408/3019700971</string>
     <string name="license_riot" translatable="false">LOL Free Week isn\'t endorsed by Riot Games and doesn\'t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</string>
     <string name="about_app">About</string>
     <string name="about_app_summary">Licenses and app information</string>
