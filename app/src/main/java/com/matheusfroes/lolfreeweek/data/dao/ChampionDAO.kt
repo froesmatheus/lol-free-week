@@ -2,13 +2,14 @@ package com.matheusfroes.lolfreeweek.data.dao
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import javax.inject.Inject
 
 
 class ChampionDAO @Inject constructor(context: Context) {
-    val db: SQLiteDatabase by lazy {
+    private val db: SQLiteDatabase by lazy {
         Db(context).writableDatabase
     }
     private val spellDAO by lazy {
@@ -240,6 +241,14 @@ class ChampionDAO @Inject constructor(context: Context) {
 
         cursor.close()
         return champions
+    }
+
+    fun championCached(id: Int): Boolean {
+        return DatabaseUtils.queryNumEntries(
+                db,
+                Db.TABLE_CHAMPIONS,
+                "_id = ?",
+                arrayOf(id.toString())) > 0
     }
 
     fun insertFreeChampions(championIds: List<Int>) {

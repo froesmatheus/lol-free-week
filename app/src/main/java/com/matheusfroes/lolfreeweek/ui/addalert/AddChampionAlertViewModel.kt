@@ -14,11 +14,6 @@ import javax.inject.Inject
 class AddChampionAlertViewModel @Inject constructor(
         private val localSource: ChampionLocalSource
 ) : ViewModel() {
-
-    init {
-        getChampions()
-    }
-
     private var championsList = listOf<Champion>()
 
     private val _champions = MutableLiveData<Result<List<Champion>>>()

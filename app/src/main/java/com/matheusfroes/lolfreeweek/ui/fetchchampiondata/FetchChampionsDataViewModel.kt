@@ -3,10 +3,9 @@ package com.matheusfroes.lolfreeweek.ui.fetchchampiondata
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.matheusfroes.lolfreeweek.data.model.Champion
-import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
+import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.ResultDownload
 import com.matheusfroes.lolfreeweek.extra.uiContext
 import kotlinx.coroutines.experimental.launch

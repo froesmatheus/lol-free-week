@@ -8,8 +8,8 @@ data class Champion(
         var lore: String = "",
         var name: String = "",
         var title: String = "",
-        var spells: MutableList<Spell> = mutableListOf(),
-        var skins: MutableList<Skin> = mutableListOf(),
+        var spells: List<Spell> = listOf(),
+        var skins: List<Skin> = listOf(),
         var alertOn: Boolean = false)
 
 data class Spell(

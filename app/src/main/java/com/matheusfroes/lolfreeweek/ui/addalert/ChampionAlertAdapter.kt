@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.champion_alert_view.view.*
 
 class ChampionAlertAdapter : RecyclerView.Adapter<ChampionAlertAdapter.ViewHolder>() {
 
-    var champions: List<Champion> = listOf()
+    var champions: MutableList<Champion> = mutableListOf()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -47,7 +47,8 @@ class ChampionAlertAdapter : RecyclerView.Adapter<ChampionAlertAdapter.ViewHolde
             itemView.cbCheckAlert.isChecked = champion.alertOn
 
             itemView.cbCheckAlert.setOnCheckedChangeListener { _, isChecked ->
-                champion.alertOn = isChecked
+                val champ = champions[adapterPosition]
+                champ.alertOn = isChecked
             }
 
             itemView.cardChampion.setOnClickListener {

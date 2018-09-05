@@ -1,7 +1,7 @@
 package com.matheusfroes.lolfreeweek.data.source
 
-import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.dao.ChampionDAO
+import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.extra.ioContext
 import kotlinx.coroutines.experimental.withContext
 import javax.inject.Inject
@@ -10,7 +10,7 @@ class ChampionLocalSource @Inject constructor(
         private val championDAO: ChampionDAO) {
 
 
-    suspend fun getFreeToPlayChampions(): List<Champion> = withContext(ioContext)  {
+    suspend fun getFreeToPlayChampions(): List<Champion> = withContext(ioContext) {
         championDAO.getFreeToPlayChampions()
     }
 
@@ -33,6 +33,10 @@ class ChampionLocalSource @Inject constructor(
 
     suspend fun getChampionsByAlert(alert: Boolean): List<Champion> = withContext(ioContext) {
         championDAO.getChampionsByAlert(alert)
+    }
+
+    suspend fun championCached(id: Int): Boolean = withContext(ioContext) {
+        championDAO.championCached(id)
     }
 
     fun updateChampionAlerts(champions: List<Champion>) {

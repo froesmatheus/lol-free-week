@@ -41,11 +41,14 @@ class AddChampionAlertActivity : AppCompatActivity() {
 
         rvChampions.layoutManager = GridLayoutManager(this, 3, GridLayout.VERTICAL, false)
         rvChampions.itemAnimator = DefaultItemAnimator()
+        rvChampions.adapter = adapter
 
-        viewModel.champions.observe(this, Observer {result ->
-            when(result) {
+        viewModel.getChampions()
+
+        viewModel.champions.observe(this, Observer { result ->
+            when (result) {
                 is Result.Complete -> {
-                    adapter.champions = result.data
+                    adapter.champions = result.data.toMutableList()
                     rvChampions.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
                 }

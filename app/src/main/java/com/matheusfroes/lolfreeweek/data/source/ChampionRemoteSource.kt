@@ -1,5 +1,6 @@
 package com.matheusfroes.lolfreeweek.data.source
 
+import com.matheusfroes.lolfreeweek.data.Platform
 import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.data.mapper.ChampionMapper
 import com.matheusfroes.lolfreeweek.data.model.Champion
@@ -34,13 +35,13 @@ class ChampionRemoteSource @Inject constructor(
     }
 
     suspend fun getChampions(): List<String> = withContext(networkContext) {
-        riotService.getChampions(preferences.currentApiVersion, "pt_BR").await()
+        riotService.getChampions(preferences.currentApiVersion, Platform.getDefaultLocale()).await()
                 .data.map { it.key }
     }
 
 
     suspend fun getChampion(championName: String): Champion = withContext(networkContext) {
-        val championResponse = riotService.getChampion(preferences.currentApiVersion, "pt_BR", championName).await().data[championName]
+        val championResponse = riotService.getChampion(preferences.currentApiVersion, Platform.getDefaultLocale(), championName).await().data[championName]
                 ?: throw IllegalStateException("Champion response cannot be null")
 
         ChampionMapper.map(championResponse)

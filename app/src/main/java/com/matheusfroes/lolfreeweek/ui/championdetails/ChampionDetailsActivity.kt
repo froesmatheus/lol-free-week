@@ -10,10 +10,11 @@ import android.text.Html
 import android.view.View
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.UserPreferences
-import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.data.dao.ChampionDAO
+import com.matheusfroes.lolfreeweek.data.dto.SkinWithChampionName
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.model.Spell
+import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_details_content.*
 import javax.inject.Inject
@@ -21,6 +22,7 @@ import javax.inject.Inject
 class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
     val dao by lazy { ChampionDAO(this) }
     var champion: Champion? = null
+    val adapter: ChampionSkinAdapter by lazy { ChampionSkinAdapter() }
 
     @Inject
     lateinit var preferences: UserPreferences
@@ -44,7 +46,11 @@ class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
         tvChampionTitle.text = champion?.title
         tvChampionLore.text = Html.fromHtml(champion?.lore)
 
-        rvChampionSkins.adapter = ChampionSkinAdapter(this, champion!!.skins)
+        val skinsWithChampionName = champion?.skins.orEmpty().map { skin ->
+            SkinWithChampionName(skin, champion?.name.orEmpty())
+        }
+        adapter.skins = skinsWithChampionName
+        rvChampionSkins.adapter = adapter
         rvChampionSkins.layoutManager = LinearLayoutManager(this, LinearLayoutCompat.HORIZONTAL, false)
         rvChampionSkins.itemAnimator = DefaultItemAnimator()
 
