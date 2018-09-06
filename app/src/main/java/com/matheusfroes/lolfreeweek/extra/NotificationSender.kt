@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
+import com.chibatching.kotpref.Kotpref
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.data.dao.ChampionDAO
@@ -25,6 +26,10 @@ class NotificationSender @Inject constructor(
 
     fun notifyUser() {
         fetchFreeWeekChampions()
+    }
+
+    init {
+        Kotpref.init(context)
     }
 
     private fun notifyUserFromJob(title: String, message: String) {

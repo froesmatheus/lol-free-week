@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -44,9 +45,10 @@ class FreeWeekListActivity : BaseActivity() {
             return
         }
 
+        scheduleJobs()
+
         viewModel = viewModelProvider(viewModelFactory)
 
-        scheduleJobs()
 
         viewModel.freeToPlayChampions.observe(this, Observer { result ->
             when (result) {
@@ -94,17 +96,18 @@ class FreeWeekListActivity : BaseActivity() {
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
-        val workRequest = PeriodicWorkRequestBuilder<FetchFreeWeekChampionsWorker>(
-                1, TimeUnit.HOURS, 5, TimeUnit.MINUTES)
+        val workRequest = PeriodicWorkRequestBuilder<FetchFreeWeekChampionsWorker>(15, TimeUnit.MINUTES, 1, TimeUnit.MINUTES)
                 .setConstraints(constraints)
-                .setBackoffCriteria(BackoffPolicy.LINEAR, 15, TimeUnit.MINUTES)
+                .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
                 .build()
 
+
         WorkManager.getInstance()
-                .enqueueUniquePeriodicWork(
-                        "FETCH_FREE_WEEK",
-                        ExistingPeriodicWorkPolicy.KEEP,
-                        workRequest)
+                .enqueueUniquePeriodicWork("FETCH_FREE_WEEK", ExistingPeriodicWorkPolicy.KEEP, workRequest)
+
+        WorkManager.getInstance().getStatusById(workRequest.id).observe(this, Observer { status ->
+            Log.d("WORKMANAGER", status.toString())
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
