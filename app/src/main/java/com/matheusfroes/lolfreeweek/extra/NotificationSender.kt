@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.Intent
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.UserPreferences
-import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
 import com.matheusfroes.lolfreeweek.data.dao.ChampionDAO
+import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
 import net.rithms.riot.api.RiotApi
 import java.util.*
 import javax.inject.Inject
@@ -44,31 +44,28 @@ class NotificationSender @Inject constructor(
             champion.id != currentFreeChampion.id
         }
 
-        notifyUserFromJob("Testando notificações", "Olá olá olá")
+//        if (newChampions) {
+        val title = context.resources.getString(R.string.app_name)
+        val message = context.resources.getString(R.string.free_week_notification_message)
 
+        // notify user with the free champion rotation
+        notifyUserFromJob(title, message)
 
-        if (newChampions) {
-            val title = context.resources.getString(R.string.app_name)
-            val message = context.resources.getString(R.string.free_week_notification_message)
+        val championsByAlert = dao.getChampionsByAlert(true)
 
-            // notify user with the free champion rotation
-            notifyUserFromJob(title, message)
-
-            val championsByAlert = dao.getChampionsByAlert(true)
-
-            response.champions.forEach { champ ->
-                championsByAlert.forEach {
-                    if (it.id == champ.id) {
-                        val championName = dao.getChampion(it.id.toLong())?.name
-                        notifyUserFromJob(context.getString(R.string.champion_alert), context.getString(R.string.champion_alert_message, championName))
-                    }
+        response.champions.forEach { champ ->
+            championsByAlert.forEach {
+                if (it.id == champ.id) {
+                    val championName = dao.getChampion(it.id.toLong())?.name
+                    notifyUserFromJob(context.getString(R.string.champion_alert), context.getString(R.string.champion_alert_message, championName))
                 }
             }
-
-            val freeChampionsIds = response.champions.map { it.id }
-
-            dao.deleteFreeChampions()
-            dao.insertFreeChampions(freeChampionsIds)
         }
+
+        val freeChampionsIds = response.champions.map { it.id }
+
+        dao.deleteFreeChampions()
+        dao.insertFreeChampions(freeChampionsIds)
+//        }
     }
 }

@@ -45,10 +45,11 @@ class IntroActivity : MaterialIntroActivity() {
                 .build())
     }
 
+    override fun onBackPressed() {}
+
     override fun onFinish() {
         preferences.firstAccess = false
         startActivity(Intent(applicationContext, FreeWeekListActivity::class.java))
         finish()
     }
-
 }

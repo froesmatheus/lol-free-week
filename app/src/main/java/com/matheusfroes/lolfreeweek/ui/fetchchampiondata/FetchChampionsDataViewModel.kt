@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModel
 import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
 import com.matheusfroes.lolfreeweek.extra.Result
-import com.matheusfroes.lolfreeweek.extra.ResultDownload
 import com.matheusfroes.lolfreeweek.extra.parallelMap
 import com.matheusfroes.lolfreeweek.extra.uiContext
 import kotlinx.coroutines.experimental.launch
@@ -16,18 +15,17 @@ class FetchChampionsDataViewModel @Inject constructor(
         private val localSource: ChampionLocalSource,
         private val remoteSource: ChampionRemoteSource) : ViewModel() {
 
-    private val _downloadChampions = MutableLiveData<ResultDownload<Unit>>()
+    private val _downloadChampions = MutableLiveData<Result<Unit>>()
 
-    val downloadChampions: LiveData<ResultDownload<Unit>> = _downloadChampions
+    val downloadChampions: LiveData<Result<Unit>> = _downloadChampions
 
     fun downloadChampionData() = launch(uiContext) {
-        _downloadChampions.value = ResultDownload.InProgress(0, 0)
+        _downloadChampions.value = Result.InProgress()
 
         try {
             val championNames = remoteSource.getChampions()
 
             val champions = championNames.parallelMap { championName ->
-//                _downloadChampions.value = ResultDownload.InProgress(index, championNames.size)
                 remoteSource.getChampion(championName)
             }
 
@@ -36,9 +34,9 @@ class FetchChampionsDataViewModel @Inject constructor(
             val freeWeekChampions = remoteSource.fetchFreeWeekChampions()
             localSource.resetFreeToPlayList(freeWeekChampions)
 
-            _downloadChampions.value = ResultDownload.Complete()
+            _downloadChampions.value = Result.Complete(Unit)
         } catch (e: Exception) {
-            _downloadChampions.value = ResultDownload.Error(e)
+            _downloadChampions.value = Result.Error(e)
         }
     }
 }

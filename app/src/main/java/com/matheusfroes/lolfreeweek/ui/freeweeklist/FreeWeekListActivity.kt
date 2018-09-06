@@ -10,16 +10,19 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
+import androidx.work.*
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.appInjector
+import com.matheusfroes.lolfreeweek.extra.viewModelProvider
+import com.matheusfroes.lolfreeweek.jobs.FetchFreeWeekChampionsWorker
 import com.matheusfroes.lolfreeweek.ui.BaseActivity
 import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity
 import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity
 import com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity
 import com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity
-import com.matheusfroes.lolfreeweek.extra.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -35,12 +38,15 @@ class FreeWeekListActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         appInjector.inject(this)
 
-        viewModel = viewModelProvider(viewModelFactory)
-
         if (preferences.firstAccess) {
             startActivity(Intent(this, FetchChampionsDataActivity::class.java))
+            finish()
             return
         }
+
+        viewModel = viewModelProvider(viewModelFactory)
+
+        scheduleJobs()
 
         viewModel.freeToPlayChampions.observe(this, Observer { result ->
             when (result) {
@@ -82,6 +88,24 @@ class FreeWeekListActivity : BaseActivity() {
         }
     }
 
+    private fun scheduleJobs() {
+
+        val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+
+        val workRequest = PeriodicWorkRequestBuilder<FetchFreeWeekChampionsWorker>(
+                1, TimeUnit.HOURS, 5, TimeUnit.MINUTES)
+                .setConstraints(constraints)
+                .setBackoffCriteria(BackoffPolicy.LINEAR, 15, TimeUnit.MINUTES)
+                .build()
+
+        WorkManager.getInstance()
+                .enqueueUniquePeriodicWork(
+                        "FETCH_FREE_WEEK",
+                        ExistingPeriodicWorkPolicy.KEEP,
+                        workRequest)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
