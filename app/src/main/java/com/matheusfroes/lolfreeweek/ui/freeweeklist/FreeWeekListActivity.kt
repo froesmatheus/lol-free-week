@@ -91,7 +91,6 @@ class FreeWeekListActivity : BaseActivity() {
     }
 
     private fun scheduleJobs() {
-
         val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
@@ -100,7 +99,6 @@ class FreeWeekListActivity : BaseActivity() {
                 .setConstraints(constraints)
                 .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
                 .build()
-
 
         WorkManager.getInstance()
                 .enqueueUniquePeriodicWork("FETCH_FREE_WEEK", ExistingPeriodicWorkPolicy.KEEP, workRequest)

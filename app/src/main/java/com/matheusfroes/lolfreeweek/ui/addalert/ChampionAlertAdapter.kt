@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.data.model.Champion
+import com.matheusfroes.lolfreeweek.data.source.UserPreferences
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_alert_view.view.*
 
@@ -14,10 +14,10 @@ import kotlinx.android.synthetic.main.champion_alert_view.view.*
 class ChampionAlertAdapter : RecyclerView.Adapter<ChampionAlertAdapter.ViewHolder>() {
 
     var champions: MutableList<Champion> = mutableListOf()
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.champion_alert_view, parent, false)

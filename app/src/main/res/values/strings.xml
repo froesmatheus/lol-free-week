@@ -70,42 +70,7 @@
 
     <!-- ABOUT APPS -->
 
-    <string name="define_RiotApiJava" translatable="false"></string>
-    <string name="library_RiotApiJava_author" translatable="false">Taylor Caldwell</string>
-    <string name="library_RiotApiJava_authorWebsite" translatable="false">http://taycaldwell.com/</string>
-    <string name="library_RiotApiJava_libraryName" translatable="false">Riot API Java</string>
-    <string name="library_RiotApiJava_libraryDescription" translatable="false">A simple to use, Riot Games API wrapper for Java. This library makes it easy to gather and use League of Legends data in your apps.</string>
-    <string name="library_RiotApiJava_libraryVersion" translatable="false">3.9.0</string>
-    <string name="library_RiotApiJava_libraryWebsite" translatable="false">https://github.com/taycaldwell/riot-api-java</string>
-    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_RiotApiJava_licenseId" translatable="false">apache_2_0</string>
-    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
-    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_RiotApiJava_isOpenSource" translatable="false">true</string>
-    <string name="library_RiotApiJava_repositoryLink" translatable="false">https://github.com/taycaldwell/riot-api-java</string>
-
-
-    <string name="define_AndroidJob" translatable="false"></string>
-    <string name="library_AndroidJob_author" translatable="false">Evernote</string>
-    <string name="library_AndroidJob_authorWebsite" translatable="false">http://dev.evernote.com/</string>
-    <string name="library_AndroidJob_libraryName" translatable="false">Android-Job</string>
-    <string name="library_AndroidJob_libraryDescription" translatable="false">
-        An utility library for Android to run jobs delayed in the background.
-        Depending on the Android version either the JobScheduler, GcmNetworkManager or AlarmManager is getting used.
-        You can find out in this blog post or in these slides why you should prefer this library than each separate API.
-        All features from Android Nougat are backward compatible.
-    </string>
-    <string name="library_AndroidJob_libraryVersion" translatable="false">1.1.6</string>
-    <string name="library_AndroidJob_libraryWebsite" translatable="false">http://evernote.github.io/android-job/</string>
-    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_AndroidJob_licenseId" translatable="false">apache_2_0</string>
-    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
-    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_AndroidJob_isOpenSource" translatable="false">true</string>
-    <string name="library_AndroidJob_repositoryLink" translatable="false">https://github.com/evernote/android-job</string>
-
-
-    <string name="define_AndroidTextJustify" translatable="false"></string>
+    <string name="define_AndroidTextJustify" translatable="false" />
     <string name="library_AndroidTextJustify_author" translatable="false">Mathew Kurian</string>
     <string name="library_AndroidTextJustify_authorWebsite" translatable="false">https://github.com/bluejamesbond/TextJustify-Android</string>
     <string name="library_AndroidTextJustify_libraryName" translatable="false">Android Text-Justify</string>
@@ -123,7 +88,7 @@
     <string name="library_AndroidTextJustify_repositoryLink" translatable="false">https://github.com/bluejamesbond/TextJustify-Android</string>
 
 
-    <string name="define_MaterialIntroScreen" translatable="false"></string>
+    <string name="define_MaterialIntroScreen" translatable="false" />
     <string name="library_MaterialIntroScreen_author" translatable="false">Tango Agency</string>
     <string name="library_MaterialIntroScreen_authorWebsite" translatable="false">http://tango.agency/</string>
     <string name="library_MaterialIntroScreen_libraryName" translatable="false">Android Material Intro Screen</string>
@@ -143,5 +108,6 @@
     <string name="region">Region</string>
     <string name="download_failed">Download failed</string>
     <string name="download_champ_data">Downloading champion data</string>
+    <string name="champion_data_updated">Champion data updated</string>
 
 </resources>

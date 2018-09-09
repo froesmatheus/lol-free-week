@@ -3,10 +3,10 @@ package com.matheusfroes.lolfreeweek.ui.freeweeklist
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
+import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.uiContext
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class FreeWeekListViewModel @Inject constructor(
         getFreeToPlayChampions()
     }
 
-    private fun getFreeToPlayChampions() = launch(uiContext)  {
+    private fun getFreeToPlayChampions() = launch(uiContext) {
         _freeToPlayChampions.value = Result.InProgress()
         try {
             val champions = localSource.getFreeToPlayChampions()

@@ -3,10 +3,10 @@ package com.matheusfroes.lolfreeweek.ui.addalert
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.matheusfroes.lolfreeweek.extra.Result
-import com.matheusfroes.lolfreeweek.extra.SingleLiveEvent
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
+import com.matheusfroes.lolfreeweek.extra.Result
+import com.matheusfroes.lolfreeweek.extra.SingleLiveEvent
 import com.matheusfroes.lolfreeweek.extra.uiContext
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
@@ -36,7 +36,7 @@ class AddChampionAlertViewModel @Inject constructor(
     }
 
     fun filterChampions(query: String) {
-        val filter = championsList.filter {champion ->
+        val filter = championsList.filter { champion ->
             champion.name.contains(query, ignoreCase = true)
         }
         _champions.value = Result.Complete(filter)

@@ -1,6 +1,9 @@
 package com.matheusfroes.lolfreeweek.di
 
-import com.matheusfroes.lolfreeweek.di.modules.*
+import com.matheusfroes.lolfreeweek.di.modules.AppModule
+import com.matheusfroes.lolfreeweek.di.modules.NetworkModule
+import com.matheusfroes.lolfreeweek.di.modules.RiotModule
+import com.matheusfroes.lolfreeweek.di.modules.ViewModelModule
 import com.matheusfroes.lolfreeweek.jobs.FetchFreeWeekChampionsWorker
 import com.matheusfroes.lolfreeweek.ui.BaseActivity
 import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity
@@ -14,7 +17,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, NetworkModule::class, JobsModule::class, ViewModelModule::class, RiotModule::class])
+@Component(modules = [AppModule::class, NetworkModule::class, ViewModelModule::class, RiotModule::class])
 interface Injector {
     fun inject(freeWeekListActivity: FreeWeekListActivity)
     fun inject(mainActivity: SettingsActivity)

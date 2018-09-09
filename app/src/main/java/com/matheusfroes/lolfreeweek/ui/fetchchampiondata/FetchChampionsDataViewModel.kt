@@ -25,6 +25,7 @@ class FetchChampionsDataViewModel @Inject constructor(
         try {
             val championNames = remoteSource.getChampions()
 
+            remoteSource.getLatestApiVersion()
             val champions = championNames.parallelMap { championName ->
                 remoteSource.getChampion(championName)
             }

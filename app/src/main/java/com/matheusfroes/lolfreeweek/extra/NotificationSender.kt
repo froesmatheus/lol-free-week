@@ -6,10 +6,10 @@ import android.content.Context
 import android.content.Intent
 import com.chibatching.kotpref.Kotpref
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.data.UserPreferences
-import com.matheusfroes.lolfreeweek.data.dao.ChampionDAO
+import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
+import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
-import net.rithms.riot.api.RiotApi
+import kotlinx.coroutines.experimental.withContext
 import java.util.*
 import javax.inject.Inject
 
@@ -18,15 +18,11 @@ import javax.inject.Inject
  */
 class NotificationSender @Inject constructor(
         private val context: Context,
-        private val api: RiotApi,
-        private val preferences: UserPreferences) {
-    private val dao by lazy { ChampionDAO(context) }
+        private val localSource: ChampionLocalSource,
+        private val remoteSource: ChampionRemoteSource) {
+
     private val stackBuilder: TaskStackBuilder by lazy { TaskStackBuilder.create(context) }
     private val random by lazy { Random() }
-
-    fun notifyUser() {
-        fetchFreeWeekChampions()
-    }
 
     init {
         Kotpref.init(context)
@@ -40,13 +36,13 @@ class NotificationSender @Inject constructor(
         sendNotification(random.nextInt(1000), context, title, message, resultPendingIntent)
     }
 
-    private fun fetchFreeWeekChampions() {
-        val response = api.getChampions(preferences.currentPlatform, true)
-        val currentFreeChampion = dao.getFreeToPlayChampions()[0]
+    suspend fun fetchFreeWeekChampions() = withContext(networkContext) {
+        val freeWeekChampions = remoteSource.fetchFreeWeekChampions()
+        val currentFreeChampion = localSource.getFreeToPlayChampions()[0]
 
         // Verificando se a free week mudou
-        val newChampions = response.champions.all { champion ->
-            champion.id != currentFreeChampion.id
+        val newChampions = freeWeekChampions.all { championId ->
+            championId != currentFreeChampion.id
         }
 
 //        if (newChampions) {
@@ -56,21 +52,19 @@ class NotificationSender @Inject constructor(
         // notify user with the free champion rotation
         notifyUserFromJob(title, message)
 
-        val championsByAlert = dao.getChampionsByAlert(true)
+        val championsByAlert = localSource.getChampionsByAlert(true)
 
-        response.champions.forEach { champ ->
-            championsByAlert.forEach {
-                if (it.id == champ.id) {
-                    val championName = dao.getChampion(it.id.toLong())?.name
+        freeWeekChampions.forEach { championId ->
+            championsByAlert.forEach { champion ->
+                if (champion.id == championId) {
+                    val championName = localSource.getChampion(champion.id.toLong())?.name
                     notifyUserFromJob(context.getString(R.string.champion_alert), context.getString(R.string.champion_alert_message, championName))
                 }
             }
         }
 
-        val freeChampionsIds = response.champions.map { it.id }
-
-        dao.deleteFreeChampions()
-        dao.insertFreeChampions(freeChampionsIds)
+        localSource.deleteFreeChampions()
+        localSource.resetFreeToPlayList(freeWeekChampions)
 //        }
     }
 }

@@ -1,8 +1,8 @@
-package com.matheusfroes.lolfreeweek.data
+package com.matheusfroes.lolfreeweek.data.source
 
 import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.enumpref.enumValuePref
-import net.rithms.riot.constant.Platform
+import com.matheusfroes.lolfreeweek.data.model.Platform
 import javax.inject.Inject
 
 class UserPreferences @Inject constructor() : KotprefModel() {

@@ -27,10 +27,10 @@ data class SkinResponse(
         var num: Int = 0)
 
 data class ImageResponse(
-    val full: String,
-    val group: String,
-    val h: Int,
-    val sprite: String,
-    val w: Int,
-    val x: Int,
-    val y: Int)
+        val full: String,
+        val group: String,
+        val h: Int,
+        val sprite: String,
+        val w: Int,
+        val x: Int,
+        val y: Int)

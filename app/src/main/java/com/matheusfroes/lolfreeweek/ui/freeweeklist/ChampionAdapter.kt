@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.data.model.Champion
+import com.matheusfroes.lolfreeweek.data.source.UserPreferences
 import com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_img.view.*

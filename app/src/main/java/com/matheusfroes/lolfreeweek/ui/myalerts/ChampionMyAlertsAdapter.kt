@@ -5,18 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.data.UserPreferences
 import com.matheusfroes.lolfreeweek.data.model.Champion
+import com.matheusfroes.lolfreeweek.data.source.UserPreferences
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_my_alert_view.view.*
 
 
 class ChampionMyAlertsAdapter : RecyclerView.Adapter<ChampionMyAlertsAdapter.ViewHolder>() {
     var champions: List<Champion> = listOf()
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     var deleteChampionEvent: ((Champion) -> Unit)? = null
 

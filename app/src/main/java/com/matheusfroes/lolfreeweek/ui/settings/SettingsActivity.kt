@@ -10,16 +10,18 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.view.MenuItem
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.extra.appInjector
-import com.matheusfroes.lolfreeweek.data.UserPreferences
+import com.matheusfroes.lolfreeweek.data.model.Platform
 import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
+import com.matheusfroes.lolfreeweek.data.source.UserPreferences
+import com.matheusfroes.lolfreeweek.extra.appInjector
+import com.matheusfroes.lolfreeweek.extra.parallelMap
+import com.matheusfroes.lolfreeweek.extra.toast
 import com.matheusfroes.lolfreeweek.ui.AppCompatPreferenceActivity
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
-import net.rithms.riot.constant.Platform
 import javax.inject.Inject
 
 
@@ -53,25 +55,24 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         val updateListPreference = findPreference("update_list")
         val aboutApp = findPreference("about_app")
         val chooseRegion = findPreference("choose_region") as ListPreference
-        val regions = resources.getStringArray(R.array.lol_regions_values)
 
-        var region = preferences.currentPlatform
-        var index = regions.indexOf(region.getName())
+        val platforms = resources.getStringArray(R.array.lol_regions_values)
+        var currentPlatform = preferences.currentPlatform
+
+        var index = platforms.indexOfFirst { platform -> platform == currentPlatform.getName() }
         chooseRegion.setValueIndex(index)
 
         chooseRegion.setOnPreferenceClickListener {
-            region = preferences.currentPlatform
-            index = regions.indexOf(region.getName())
+            currentPlatform = preferences.currentPlatform
+            index = platforms.indexOfFirst { platform -> platform == currentPlatform.getName() }
             chooseRegion.setValueIndex(index)
             true
         }
 
-
-        chooseRegion.setOnPreferenceChangeListener { preference, newValue ->
-            preferences.currentPlatform = Platform.valueOf(newValue.toString())
+        chooseRegion.setOnPreferenceChangeListener { _, newValue ->
+            preferences.currentPlatform = Platform.getPlatformByName(newValue.toString())
             true
         }
-
 
         updateListPreference.setOnPreferenceClickListener {
             remakeChampionsList()
@@ -98,16 +99,21 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     private fun remakeChampionsList() {
         val progress = ProgressDialog(this)
         progress.setMessage(getString(R.string.info_download_champion_information))
-        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+        progress.isIndeterminate = true
         progress.show()
 
         launch(UI) {
             localSource.deleteDatabase()
 
-            val champions = remoteSource.fetchChampionsData()
+            val championNames = remoteSource.getChampions()
+            val champions = championNames.parallelMap { championName ->
+                remoteSource.getChampion(championName)
+            }
+
             localSource.insertChampions(champions)
 
             progress.cancel()
+            toast(getString(R.string.champion_data_updated))
         }
     }
 

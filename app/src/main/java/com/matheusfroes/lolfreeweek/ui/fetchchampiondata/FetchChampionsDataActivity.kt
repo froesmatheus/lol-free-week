@@ -7,14 +7,14 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.data.UserPreferences
+import com.matheusfroes.lolfreeweek.data.model.Platform
+import com.matheusfroes.lolfreeweek.data.source.UserPreferences
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.extra.toast
 import com.matheusfroes.lolfreeweek.extra.viewModelProvider
 import com.matheusfroes.lolfreeweek.ui.intro.IntroActivity
 import kotlinx.android.synthetic.main.activity_download_champion_data.*
-import net.rithms.riot.constant.Platform
 import timber.log.Timber
 import javax.inject.Inject
 

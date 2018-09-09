@@ -54,20 +54,6 @@
         <item>Turquia</item>
     </string-array>
 
-    <string-array name="lol_regions_values">
-        <item>NA</item>
-        <item>LAN</item>
-        <item>LAS</item>
-        <item>BR</item>
-        <item>KR</item>
-        <item>EUNE</item>
-        <item>EUW</item>
-        <item>JP</item>
-        <item>OCE</item>
-        <item>RU</item>
-        <item>TR</item>
-    </string-array>
-
     <string name="choose_region">Escolha a sua região</string>
     <string name="region">Região</string>
     <string name="download_failed">Download falhou</string>

@@ -7,7 +7,6 @@ import kotlinx.coroutines.experimental.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
-import retrofit2.http.Url
 
 interface RiotService {
     @GET("{apiVersion}/data/{locale}/champion.json")
@@ -25,4 +24,7 @@ interface RiotService {
     fun getChampionRotation(
             @Path("region") region: String,
             @Header("X-Riot-Token") riotToken: String): Deferred<GetChampionRotationResponse>
+
+    @GET("https://ddragon.leagueoflegends.com/api/versions.json")
+    fun getLatestApiVersion(): Deferred<List<String>>
 }

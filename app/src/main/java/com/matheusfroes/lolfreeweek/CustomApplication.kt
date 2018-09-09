@@ -5,6 +5,7 @@ import com.facebook.stetho.Stetho
 import com.matheusfroes.lolfreeweek.di.DaggerInjector
 import com.matheusfroes.lolfreeweek.di.Injector
 import com.matheusfroes.lolfreeweek.di.modules.AppModule
+import com.matheusfroes.lolfreeweek.extra.CrashlyticsTree
 import timber.log.Timber
 
 
@@ -16,7 +17,11 @@ open class CustomApplication : Application() {
         setupDagger()
         Stetho.initializeWithDefaults(this)
 
-        Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(CrashlyticsTree())
+        }
     }
 
     private fun setupDagger() {

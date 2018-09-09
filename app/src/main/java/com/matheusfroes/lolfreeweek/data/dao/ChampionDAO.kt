@@ -2,49 +2,15 @@ package com.matheusfroes.lolfreeweek.data.dao
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import javax.inject.Inject
 
 
 class ChampionDAO @Inject constructor(context: Context) {
-    private val db: SQLiteDatabase by lazy {
-        Db(context).writableDatabase
-    }
-    private val spellDAO by lazy {
-        SpellDAO(context)
-    }
-
-    private val skinDAO by lazy {
-        SkinDAO(context)
-    }
-
-    fun insert(champion: Champion): Boolean {
-        val cvChampion = ContentValues()
-
-        cvChampion.put(Db.COLUMN_ID_CHAMPIONS, champion.id)
-        cvChampion.put(Db.COLUMN_NAME_CHAMPIONS, champion.name)
-        cvChampion.put(Db.COLUMN_KEY_CHAMPIONS, champion.key)
-        cvChampion.put(Db.COLUMN_IMAGE_CHAMPIONS, champion.image)
-        cvChampion.put(Db.COLUMN_LORE_CHAMPIONS, champion.lore)
-        cvChampion.put(Db.COLUMN_TITLE_CHAMPIONS, champion.title)
-        cvChampion.put(Db.COLUMN_ALERT_ON_CHAMPIONS, if (champion.alertOn) 1 else 0)
-
-        // Inserting champion spells
-        champion.spells.forEach {
-            spellDAO.insert(it, champion.id)
-        }
-
-        // Inserting champion skins
-        champion.skins.forEach {
-            skinDAO.insert(it, champion.id)
-        }
-
-        val insertedId = db.insert(Db.TABLE_CHAMPIONS, null, cvChampion)
-
-        return insertedId != -1L
-    }
+    private val db: SQLiteDatabase by lazy { Db(context).writableDatabase }
+    private val spellDAO by lazy { SpellDAO(context) }
+    private val skinDAO by lazy { SkinDAO(context) }
 
     fun insertList(champions: List<Champion>) {
         db.beginTransaction()
@@ -96,60 +62,12 @@ class ChampionDAO @Inject constructor(context: Context) {
         }
     }
 
-    fun delete(championId: Int): Boolean {
-        val rows = db.delete(Db.TABLE_CHAMPIONS, "${Db.COLUMN_ID_CHAMPIONS} = ?", arrayOf(championId.toString()))
-
-        return rows != 0
-    }
-
-    fun deleteAll() = db.delete(Db.TABLE_CHAMPIONS, "1", null)
+    private fun deleteAll() = db.delete(Db.TABLE_CHAMPIONS, "1", null)
 
     fun deleteDB() {
         deleteAll()
         skinDAO.deleteAll()
         spellDAO.deleteAll()
-    }
-
-
-    fun getChampions(): List<Champion> {
-        val champions = mutableListOf<Champion>()
-
-        val columns = arrayOf(
-                Db.COLUMN_ID_CHAMPIONS,
-                Db.COLUMN_IMAGE_CHAMPIONS,
-                Db.COLUMN_KEY_CHAMPIONS,
-                Db.COLUMN_LORE_CHAMPIONS,
-                Db.COLUMN_NAME_CHAMPIONS,
-                Db.COLUMN_TITLE_CHAMPIONS,
-                Db.COLUMN_ALERT_ON_CHAMPIONS)
-
-        val cursor = db.query(Db.TABLE_CHAMPIONS, columns, null, null, null, null, null)
-
-        if (cursor.count > 0) {
-            cursor.moveToFirst()
-
-            do {
-                val name = cursor.getString(cursor.getColumnIndex(Db.COLUMN_NAME_CHAMPIONS))
-                val id = cursor.getInt(cursor.getColumnIndex(Db.COLUMN_ID_CHAMPIONS))
-                val image = cursor.getString(cursor.getColumnIndex(Db.COLUMN_IMAGE_CHAMPIONS))
-                val key = cursor.getString(cursor.getColumnIndex(Db.COLUMN_KEY_CHAMPIONS))
-                val lore = cursor.getString(cursor.getColumnIndex(Db.COLUMN_LORE_CHAMPIONS))
-                val title = cursor.getString(cursor.getColumnIndex(Db.COLUMN_TITLE_CHAMPIONS))
-
-                val alertOnInt = cursor.getInt(cursor.getColumnIndex(Db.COLUMN_ALERT_ON_CHAMPIONS))
-                val alertOn = alertOnInt == 1
-
-                val champion = Champion(id, image, key, lore, name, title, alertOn = alertOn)
-
-                champion.spells = spellDAO.getSpellsByChampionId(id)
-                champion.skins = skinDAO.getSkinsByChampionId(id)
-
-                champions.add(champion)
-            } while (cursor.moveToNext())
-        }
-
-        cursor.close()
-        return champions
     }
 
     fun getChampionsByAlert(alert: Boolean): MutableList<Champion> {
@@ -241,14 +159,6 @@ class ChampionDAO @Inject constructor(context: Context) {
 
         cursor.close()
         return champions
-    }
-
-    fun championCached(id: Int): Boolean {
-        return DatabaseUtils.queryNumEntries(
-                db,
-                Db.TABLE_CHAMPIONS,
-                "_id = ?",
-                arrayOf(id.toString())) > 0
     }
 
     fun insertFreeChampions(championIds: List<Int>) {

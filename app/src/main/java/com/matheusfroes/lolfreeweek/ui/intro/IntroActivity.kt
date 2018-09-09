@@ -5,7 +5,7 @@ import agency.tango.materialintroscreen.SlideFragmentBuilder
 import android.content.Intent
 import android.os.Bundle
 import com.matheusfroes.lolfreeweek.R
-import com.matheusfroes.lolfreeweek.data.UserPreferences
+import com.matheusfroes.lolfreeweek.data.source.UserPreferences
 import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
 import javax.inject.Inject

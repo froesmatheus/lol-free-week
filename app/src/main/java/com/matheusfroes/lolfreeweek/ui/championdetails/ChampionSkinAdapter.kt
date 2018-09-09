@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.dto.SkinWithChampionName
-import com.matheusfroes.lolfreeweek.data.model.Skin
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_skin_content.view.*
 

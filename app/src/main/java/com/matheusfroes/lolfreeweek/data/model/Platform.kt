@@ -1,16 +1,16 @@
-package com.matheusfroes.lolfreeweek.data
+package com.matheusfroes.lolfreeweek.data.model
 
 import java.util.*
 
 enum class Platform private constructor(val id: String, val initials: String) {
+    NA("NA1", "na"),
+    LAN("LA1", "lan"),
+    LAS("LA2", "las"),
     BR("BR1", "br"),
+    KR("KR", "kr"),
     EUNE("EUN1", "eune"),
     EUW("EUW1", "euw"),
     JP("JP1", "jp"),
-    KR("KR", "kr"),
-    LAN("LA1", "lan"),
-    LAS("LA2", "las"),
-    NA("NA1", "na"),
     OCE("OC1", "oce"),
     RU("RU", "ru"),
     TR("TR1", "tr");
@@ -21,6 +21,8 @@ enum class Platform private constructor(val id: String, val initials: String) {
     override fun toString(): String {
         return id
     }
+
+    fun getName() = initials
 
     companion object {
         private val locales = listOf(
