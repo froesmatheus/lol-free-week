@@ -15,8 +15,8 @@ android {
         applicationId "com.matheusfroes.lolfreeweek"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 2
-        versionName "2.0"
+        versionCode 4
+        versionName "0.1"
     }
     lintOptions {
         checkReleaseBuilds false
@@ -26,14 +26,14 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField 'String', "RIOT_API_KEY", keyProperties['RIOT_API_KEY']
+            buildConfigField 'String', "RIOT_API_KEY", keyProperties['RIOT_DEBUG_API_KEY']
             buildConfigField 'String', "RIOT_API_BASE_URL", RIOT_API_BASE_URL
 
             resValue "string", "ADMOB_MAIN_BANNER_ID", keyProperties['ADMOB_MAIN_BANNER_ID']
             buildConfigField 'String', "ADMOB_INTERSTITIAL_BANNER_ID", keyProperties['ADMOB_INTERSTITIAL_BANNER_ID']
         }
         release {
-            buildConfigField 'String', "RIOT_API_KEY", keyProperties['RIOT_API_KEY']
+            buildConfigField 'String', "RIOT_API_KEY", keyProperties['RIOT_RELEASE_API_KEY']
             buildConfigField 'String', "RIOT_API_BASE_URL", RIOT_API_BASE_URL
 
             resValue "string", "ADMOB_MAIN_BANNER_ID", keyProperties['ADMOB_MAIN_BANNER_ID']

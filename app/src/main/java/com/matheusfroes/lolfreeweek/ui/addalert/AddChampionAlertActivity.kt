@@ -13,6 +13,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.matheusfroes.lolfreeweek.BuildConfig
 import com.matheusfroes.lolfreeweek.R
@@ -79,12 +81,12 @@ class AddChampionAlertActivity : AppCompatActivity() {
 
 
         interstitialAd.adUnitId = BuildConfig.ADMOB_INTERSTITIAL_BANNER_ID
-//
-//        interstitialAd.adListener = object : AdListener() {
-//            override fun onAdLoaded() {
-//                interstitialAd.show()
-//            }
-//        }
+
+        interstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                interstitialAd.show()
+            }
+        }
 
 
         viewModel.emptyAlertListEvent.observe(this, Observer {
@@ -106,8 +108,8 @@ class AddChampionAlertActivity : AppCompatActivity() {
 //        val adRequest = AdRequest.Builder()
 //                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
 //                .build()
-//        val adRequest = AdRequest.Builder().build()
-//        interstitialAd.loadAd(adRequest)
+        val adRequest = AdRequest.Builder().build()
+        interstitialAd.loadAd(adRequest)
     }
 
 

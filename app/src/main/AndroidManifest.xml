@@ -42,6 +42,10 @@
             android:theme="@style/AppTheme.DownloadChampion"/>
 
         <activity android:name=".ui.BaseActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9931312002048408~6112768170"/>
     </application>
 
 </manifest>

@@ -11,6 +11,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
 import androidx.work.*
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.appInjector
@@ -38,6 +41,8 @@ class FreeWeekListActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         appInjector.inject(this)
 
+        MobileAds.initialize(this, "ca-app-pub-9931312002048408~6112768170")
+
         if (preferences.firstAccess) {
             startActivity(Intent(this, FetchChampionsDataActivity::class.java))
             finish()
@@ -45,6 +50,7 @@ class FreeWeekListActivity : BaseActivity() {
         }
 
         scheduleJobs()
+
 
         viewModel = viewModelProvider(viewModelFactory)
 
@@ -76,8 +82,19 @@ class FreeWeekListActivity : BaseActivity() {
 //                .build()
 //
 ////        // Official ads
-////        val adRequest = AdRequest.Builder().build()
-//        adView.loadAd(adRequest)
+        val adRequest = AdRequest.Builder()
+                .build()
+        adView.loadAd(adRequest)
+
+        adView.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                adView.visibility = View.VISIBLE
+            }
+
+            override fun onAdFailedToLoad(p0: Int) {
+                adView.visibility = View.GONE
+            }
+        }
 
 
         rvChampions.layoutManager = GridLayoutManager(this, 2, GridLayout.VERTICAL, false)
