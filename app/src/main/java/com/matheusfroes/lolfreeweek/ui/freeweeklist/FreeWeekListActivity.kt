@@ -111,20 +111,14 @@ class FreeWeekListActivity : BaseActivity() {
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
-//        val workRequest = PeriodicWorkRequestBuilder<FetchFreeWeekChampionsWorker>(15, TimeUnit.MINUTES, 1, TimeUnit.MINUTES)
-//                .setConstraints(constraints)
-//                .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
-//                .build()
 
-        val workRequest = OneTimeWorkRequestBuilder<FetchFreeWeekChampionsWorker>()
-                .setInitialDelay(30, TimeUnit.MINUTES)
+        val workRequest = PeriodicWorkRequestBuilder<FetchFreeWeekChampionsWorker>(1, TimeUnit.HOURS, 10, TimeUnit.MINUTES)
                 .setConstraints(constraints)
-                .setBackoffCriteria(BackoffPolicy.LINEAR, 1, TimeUnit.MINUTES)
+                .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.MINUTES)
                 .build()
 
         WorkManager.getInstance()
-                .beginUniqueWork("FETCH_FREE_WEEK", ExistingWorkPolicy.KEEP, workRequest)
-                .enqueue()
+                .enqueueUniquePeriodicWork("FETCH_FW", ExistingPeriodicWorkPolicy.KEEP, workRequest)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

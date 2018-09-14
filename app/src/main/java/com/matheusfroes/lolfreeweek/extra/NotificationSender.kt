@@ -9,7 +9,7 @@ import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.experimental.async
 import java.util.*
 import javax.inject.Inject
 
@@ -36,7 +36,7 @@ class NotificationSender @Inject constructor(
         sendNotification(random.nextInt(1000), context, title, message, resultPendingIntent)
     }
 
-    suspend fun fetchFreeWeekChampions() = withContext(networkContext) {
+    fun fetchFreeWeekChampions() = async {
         val freeWeekChampions = remoteSource.fetchFreeWeekChampions()
         val currentFreeChampion = localSource.getFreeToPlayChampions()[0]
 
