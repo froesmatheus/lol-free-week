@@ -89,7 +89,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                     .withAboutSpecial1Description(getString(R.string.license_riot))
                     .withAboutSpecial2("ICON LICENSE")
                     .withAboutSpecial2Description("<div>Icons made by <a href='http://www.freepik.com' title='Freepik'>Freepik</a> from <a href='http://www.flaticon.com' title='Flaticon'>www.flaticon.com</a> is licensed by <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons BY 3.0' target='_blank'>CC 3.0 BY</a></div>")
-                    .withAboutDescription("<a href='https://github.com/froesmatheus'>Matheus Fróes Marques</a>")
+                    .withAboutDescription("<a href='https://github.com/froesmatheus'>Matheus Fróes</a>")
                     .withActivityTitle(getString(R.string.about_app))
                     .start(this)
             true

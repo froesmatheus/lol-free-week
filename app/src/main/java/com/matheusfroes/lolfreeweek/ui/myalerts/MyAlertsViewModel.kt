@@ -8,6 +8,7 @@ import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.extra.Result
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class MyAlertsViewModel @Inject constructor(
@@ -32,6 +33,7 @@ class MyAlertsViewModel @Inject constructor(
             championsList = champions
             _champions.value = Result.Complete(champions)
         } catch (e: Exception) {
+            Timber.e(e)
             _champions.value = Result.Error(e)
         }
     }

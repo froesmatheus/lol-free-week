@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.source.UserPreferences
-import com.squareup.picasso.Picasso
+import com.matheusfroes.lolfreeweek.extra.loadImage
 import kotlinx.android.synthetic.main.champion_my_alert_view.view.*
 
 
@@ -35,12 +35,7 @@ class ChampionMyAlertsAdapter : RecyclerView.Adapter<ChampionMyAlertsAdapter.Vie
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(champion: Champion) {
-            Picasso
-                    .with(itemView.context)
-                    .load("http://ddragon.leagueoflegends.com/cdn/${UserPreferences().currentApiVersion}/img/champion/${champion.image}")
-                    .fit()
-                    .centerCrop()
-                    .into(itemView.ivChampion)
+            itemView.ivChampion.loadImage("http://ddragon.leagueoflegends.com/cdn/${UserPreferences().currentApiVersion}/img/champion/${champion.image}")
 
             itemView.tvChampionName.text = champion.name
             itemView.tvChampionTitle.text = champion.title

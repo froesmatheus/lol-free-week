@@ -9,6 +9,7 @@ import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.parallelMap
 import com.matheusfroes.lolfreeweek.extra.uiContext
 import kotlinx.coroutines.experimental.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class FetchChampionsDataViewModel @Inject constructor(
@@ -25,7 +26,6 @@ class FetchChampionsDataViewModel @Inject constructor(
         try {
             val championNames = remoteSource.getChampions()
 
-            remoteSource.getLatestApiVersion()
             val champions = championNames.parallelMap { championName ->
                 remoteSource.getChampion(championName)
             }
@@ -37,6 +37,7 @@ class FetchChampionsDataViewModel @Inject constructor(
 
             _downloadChampions.value = Result.Complete(Unit)
         } catch (e: Exception) {
+            Timber.e(e)
             _downloadChampions.value = Result.Error(e)
         }
     }

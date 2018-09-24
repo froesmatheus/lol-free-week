@@ -9,6 +9,7 @@ import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.uiContext
 import kotlinx.coroutines.experimental.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class FreeWeekListViewModel @Inject constructor(
@@ -28,6 +29,7 @@ class FreeWeekListViewModel @Inject constructor(
             val champions = localSource.getFreeToPlayChampions()
             _freeToPlayChampions.value = Result.Complete(champions)
         } catch (e: Exception) {
+            Timber.e(e)
             _freeToPlayChampions.value = Result.Error(e)
 
         }
@@ -42,6 +44,7 @@ class FreeWeekListViewModel @Inject constructor(
             localSource.resetFreeToPlayList(champions)
             getFreeToPlayChampions()
         } catch (e: Exception) {
+            Timber.e(e)
             _freeToPlayChampions.value = Result.Error(e)
         }
     }

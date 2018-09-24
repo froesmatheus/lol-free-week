@@ -9,9 +9,6 @@ import javax.inject.Inject
 class ChampionLocalSource @Inject constructor(
         private val championDAO: ChampionDAO) {
 
-    suspend fun deleteFreeChampions() = withContext(ioContext) {
-        championDAO.deleteFreeChampions()
-    }
 
     suspend fun getChampion(championId: Long): Champion? = withContext(ioContext) {
         return@withContext championDAO.getChampion(championId)
@@ -21,7 +18,7 @@ class ChampionLocalSource @Inject constructor(
         championDAO.getFreeToPlayChampions()
     }
 
-    private suspend fun deleteFreeToPlayChampions() = withContext(ioContext) {
+    suspend fun deleteFreeToPlayChampions() = withContext(ioContext) {
         championDAO.deleteFreeChampions()
     }
 

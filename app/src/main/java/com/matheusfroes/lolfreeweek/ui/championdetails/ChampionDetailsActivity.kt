@@ -15,7 +15,7 @@ import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.model.Spell
 import com.matheusfroes.lolfreeweek.data.source.UserPreferences
 import com.matheusfroes.lolfreeweek.extra.appInjector
-import com.squareup.picasso.Picasso
+import com.matheusfroes.lolfreeweek.extra.loadImage
 import kotlinx.android.synthetic.main.champion_details_content.*
 import javax.inject.Inject
 
@@ -59,40 +59,13 @@ class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
         rvChampionSkins.itemAnimator = DefaultItemAnimator()
 
 
-        Picasso
-                .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/champion/${champion?.image}")
-                .fit()
-                .centerCrop()
-                .into(ivChampionImage)
 
-        Picasso
-                .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[0].image}")
-                .fit()
-                .centerCrop()
-                .into(ivSpellQ)
+        ivChampionImage.loadImage("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/champion/${champion?.image}")
 
-        Picasso
-                .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[1].image}")
-                .fit()
-                .centerCrop()
-                .into(ivSpellW)
-
-        Picasso
-                .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[2].image}")
-                .fit()
-                .centerCrop()
-                .into(ivSpellE)
-
-        Picasso
-                .with(this)
-                .load("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[3].image}")
-                .fit()
-                .centerCrop()
-                .into(ivSpellR)
+        ivSpellQ.loadImage("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[0].image}")
+        ivSpellW.loadImage("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[1].image}")
+        ivSpellE.loadImage("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[2].image}")
+        ivSpellR.loadImage("http://ddragon.leagueoflegends.com/cdn/$currentApiVersion/img/spell/${champion!!.spells[3].image}")
 
         ivSpellQ.setOnClickListener(this)
         ivSpellW.setOnClickListener(this)

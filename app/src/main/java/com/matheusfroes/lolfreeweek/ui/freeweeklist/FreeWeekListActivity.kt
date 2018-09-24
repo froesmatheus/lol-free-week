@@ -10,22 +10,23 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
-import androidx.work.*
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.matheusfroes.lolfreeweek.BuildConfig
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.appInjector
+import com.matheusfroes.lolfreeweek.extra.createFreeWeekWorkRequest
 import com.matheusfroes.lolfreeweek.extra.viewModelProvider
-import com.matheusfroes.lolfreeweek.jobs.FetchFreeWeekChampionsWorker
 import com.matheusfroes.lolfreeweek.ui.BaseActivity
 import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity
 import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity
 import com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity
 import com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -41,7 +42,7 @@ class FreeWeekListActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         appInjector.inject(this)
 
-        MobileAds.initialize(this, "ca-app-pub-9931312002048408~6112768170")
+        MobileAds.initialize(this, BuildConfig.ADMOB_APP_ID)
 
         if (preferences.firstAccess) {
             startActivity(Intent(this, FetchChampionsDataActivity::class.java))
@@ -107,18 +108,11 @@ class FreeWeekListActivity : BaseActivity() {
     }
 
     private fun scheduleJobs() {
-        val constraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .build()
-
-
-        val workRequest = PeriodicWorkRequestBuilder<FetchFreeWeekChampionsWorker>(1, TimeUnit.HOURS, 10, TimeUnit.MINUTES)
-                .setConstraints(constraints)
-                .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.MINUTES)
-                .build()
+        val workRequest = createFreeWeekWorkRequest()
 
         WorkManager.getInstance()
-                .enqueueUniquePeriodicWork("FETCH_FW", ExistingPeriodicWorkPolicy.KEEP, workRequest)
+                .beginUniqueWork("FETCH_FW", ExistingWorkPolicy.KEEP, workRequest)
+                .enqueue()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

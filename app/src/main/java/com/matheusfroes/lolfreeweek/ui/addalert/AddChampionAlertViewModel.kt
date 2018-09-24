@@ -9,6 +9,7 @@ import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.SingleLiveEvent
 import com.matheusfroes.lolfreeweek.extra.uiContext
 import kotlinx.coroutines.experimental.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class AddChampionAlertViewModel @Inject constructor(
@@ -31,6 +32,7 @@ class AddChampionAlertViewModel @Inject constructor(
 
             _champions.value = Result.Complete(champions)
         } catch (e: Exception) {
+            Timber.e(e)
             _champions.value = Result.Error(e)
         }
     }
@@ -52,7 +54,5 @@ class AddChampionAlertViewModel @Inject constructor(
 
         localSource.updateChampionAlerts(alertOnChampions)
         navigateBackEvent.call()
-
     }
-
 }

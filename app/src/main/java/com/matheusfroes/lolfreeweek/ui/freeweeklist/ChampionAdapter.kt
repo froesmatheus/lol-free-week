@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.source.UserPreferences
+import com.matheusfroes.lolfreeweek.extra.loadImage
 import com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.champion_img.view.*
 
 
@@ -38,12 +38,7 @@ class ChampionAdapter : RecyclerView.Adapter<ChampionAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(champion: Champion) {
             itemView.tvChampionName.text = champion.name
-            Picasso
-                    .with(itemView.context)
-                    .load("http://ddragon.leagueoflegends.com/cdn/${UserPreferences().currentApiVersion}/img/champion/${champion.image}")
-                    .fit()
-                    .centerCrop()
-                    .into(itemView.ivChampion)
+            itemView.ivChampion.loadImage("http://ddragon.leagueoflegends.com/cdn/${UserPreferences().currentApiVersion}/img/champion/${champion.image}")
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, ChampionDetailsActivity::class.java)

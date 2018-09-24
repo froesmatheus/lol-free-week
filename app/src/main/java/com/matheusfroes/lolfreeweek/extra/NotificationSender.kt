@@ -38,33 +38,32 @@ class NotificationSender @Inject constructor(
 
     fun fetchFreeWeekChampions() = async {
         val freeWeekChampions = remoteSource.fetchFreeWeekChampions()
-        val currentFreeChampion = localSource.getFreeToPlayChampions()[0]
+        val currentFreeChampion = localSource.getFreeToPlayChampions().firstOrNull()
 
         // Verificando se a free week mudou
         val newChampions = freeWeekChampions.all { championId ->
-            championId != currentFreeChampion.id
+            championId != currentFreeChampion?.id
         }
 
-//        if (newChampions) {
-        val title = context.resources.getString(R.string.app_name)
-        val message = context.resources.getString(R.string.free_week_notification_message)
+        if (newChampions) {
+            val title = context.resources.getString(R.string.app_name)
+            val message = context.resources.getString(R.string.free_week_notification_message)
 
-        // notify user with the free champion rotation
-        notifyUserFromJob(title, message)
+            // notify user with the free champion rotation
+            notifyUserFromJob(title, message)
 
-        val championsByAlert = localSource.getChampionsByAlert(true)
+            val championsByAlert = localSource.getChampionsByAlert(true)
 
-        freeWeekChampions.forEach { championId ->
-            championsByAlert.forEach { champion ->
-                if (champion.id == championId) {
-                    val championName = localSource.getChampion(champion.id.toLong())?.name
-                    notifyUserFromJob(context.getString(R.string.champion_alert), context.getString(R.string.champion_alert_message, championName))
+            freeWeekChampions.forEach { championId ->
+                championsByAlert.forEach { champion ->
+                    if (champion.id == championId) {
+                        val championName = localSource.getChampion(champion.id.toLong())?.name
+                        notifyUserFromJob(context.getString(R.string.champion_alert), context.getString(R.string.champion_alert_message, championName))
+                    }
                 }
             }
-        }
 
-        localSource.deleteFreeChampions()
-        localSource.resetFreeToPlayList(freeWeekChampions)
-//        }
+            localSource.resetFreeToPlayList(freeWeekChampions)
+        }
     }
 }

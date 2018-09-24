@@ -1,23 +1,26 @@
 package com.matheusfroes.lolfreeweek.extra
 
-import android.app.Activity
-import android.app.Notification
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.support.v4.app.NotificationCompat
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.work.*
 import com.matheusfroes.lolfreeweek.CustomApplication
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.di.Injector
+import com.matheusfroes.lolfreeweek.jobs.FetchFreeWeekChampionsWorker
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.experimental.async
-import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -33,30 +36,22 @@ val Fragment.appCompatActivity: AppCompatActivity get() = activity as AppCompatA
 val Fragment.appInjector: Injector get() = app.injector
 val Activity.appInjector: Injector get() = app.injector
 
-fun nextDayOfWeek(day: Int): Calendar {
-    val date = Calendar.getInstance()
-    var diff = day - date.get(Calendar.DAY_OF_WEEK)
-    if (diff <= 0) {
-        diff += 7
-    }
-    date.add(Calendar.DAY_OF_MONTH, diff)
-    date.set(Calendar.HOUR_OF_DAY, 0)
-    date.set(Calendar.MINUTE, 0)
-    date.set(Calendar.SECOND, 0)
-    date.set(Calendar.MILLISECOND, 0)
-    return date
-}
-
-fun getDateDiff(date1: Date, date2: Date, timeUnit: TimeUnit): Long {
-    val diffInMillies = date2.time - date1.time
-    return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS)
-}
 
 fun sendNotification(notificationId: Int, context: Context, title: String, message: String, intent: PendingIntent) {
     val notificationManager: NotificationManager =
             context.getSystemService(android.content.Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    val notification = Notification.Builder(context)
+    val channelName = "free_week_channel"
+    val lightColor = Color.argb(255, 103, 58, 183)
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channel = NotificationChannel(channelName, "Free Week alerts", NotificationManager.IMPORTANCE_HIGH)
+        channel.enableLights(true)
+        channel.enableVibration(true)
+        channel.lightColor = lightColor
+        notificationManager.createNotificationChannel(channel)
+    }
+    val notification = NotificationCompat.Builder(context, channelName)
             .setContentTitle(title)
             .setContentText(message)
             .setSmallIcon(R.mipmap.ic_small_icon)
@@ -64,9 +59,32 @@ fun sendNotification(notificationId: Int, context: Context, title: String, messa
             .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
             .setPriority(Notification.PRIORITY_HIGH)
             .setContentIntent(intent)
+            .setLights(lightColor, 500, 2000)
             .setDefaults(Notification.DEFAULT_VIBRATE)
+            .build()
 
-    notificationManager.notify(notificationId, notification.build())
+    notificationManager.notify(notificationId, notification)
+}
+
+fun createFreeWeekWorkRequest(): OneTimeWorkRequest {
+    val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+    return OneTimeWorkRequestBuilder<FetchFreeWeekChampionsWorker>()
+            .setInitialDelay(1, TimeUnit.HOURS)
+            .setConstraints(constraints)
+            .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.MINUTES)
+            .build()
+}
+
+fun ImageView.loadImage(url: String) {
+    Picasso
+            .with(context)
+            .load(url)
+            .fit()
+            .centerCrop()
+            .into(this)
 }
 
 

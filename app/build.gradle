@@ -15,8 +15,8 @@ android {
         applicationId "com.matheusfroes.lolfreeweek"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 4
-        versionName "0.1"
+        versionCode 5
+        versionName "0.2"
     }
     lintOptions {
         checkReleaseBuilds false
@@ -28,6 +28,7 @@ android {
         debug {
             buildConfigField 'String', "RIOT_API_KEY", keyProperties['RIOT_DEBUG_API_KEY']
             buildConfigField 'String', "RIOT_API_BASE_URL", RIOT_API_BASE_URL
+            buildConfigField 'String', "ADMOB_APP_ID", keyProperties['ADMOB_APP_ID']
 
             resValue "string", "ADMOB_MAIN_BANNER_ID", keyProperties['ADMOB_MAIN_BANNER_ID']
             buildConfigField 'String', "ADMOB_INTERSTITIAL_BANNER_ID", keyProperties['ADMOB_INTERSTITIAL_BANNER_ID']
@@ -35,6 +36,7 @@ android {
         release {
             buildConfigField 'String', "RIOT_API_KEY", keyProperties['RIOT_RELEASE_API_KEY']
             buildConfigField 'String', "RIOT_API_BASE_URL", RIOT_API_BASE_URL
+            buildConfigField 'String', "ADMOB_APP_ID", keyProperties['ADMOB_APP_ID']
 
             resValue "string", "ADMOB_MAIN_BANNER_ID", keyProperties['ADMOB_MAIN_BANNER_ID']
             buildConfigField 'String', "ADMOB_INTERSTITIAL_BANNER_ID", keyProperties['ADMOB_INTERSTITIAL_BANNER_ID']
@@ -42,6 +44,7 @@ android {
             minifyEnabled true
             useProguard true
             shrinkResources true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -96,7 +99,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
 
-    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+//    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
 }
 repositories {

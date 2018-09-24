@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.matheusfroes.lolfreeweek.R
 import com.matheusfroes.lolfreeweek.data.dto.SkinWithChampionName
-import com.squareup.picasso.Picasso
+import com.matheusfroes.lolfreeweek.extra.loadImage
 import kotlinx.android.synthetic.main.champion_skin_content.view.*
 
 
@@ -34,12 +34,8 @@ class ChampionSkinAdapter : RecyclerView.Adapter<ChampionSkinAdapter.ViewHolder>
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(skin: SkinWithChampionName) {
             val url = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${skin.championName}_${skin.skin.num}.jpg"
-            Picasso
-                    .with(itemView.context)
-                    .load(url)
-                    .fit()
-                    .centerCrop()
-                    .into(itemView.ivChampionSkin)
+
+            itemView.ivChampionSkin.loadImage(url)
         }
     }
 }

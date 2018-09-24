@@ -31,7 +31,7 @@ class ChampionRemoteSource @Inject constructor(
         return@withContext ChampionMapper.map(championResponse)
     }
 
-    suspend fun getLatestApiVersion(): String = withContext(networkContext) {
+    private suspend fun getLatestApiVersion(): String = withContext(networkContext) {
         val apiVersions = riotService.getLatestApiVersion().await()
         preferences.currentApiVersion = apiVersions.first()
         return@withContext preferences.currentApiVersion
