@@ -6,13 +6,16 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name="com.matheusfroes.lolfreeweek.CustomApplication"
+        android:name=".CustomApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity">
+        <activity
+            android:name=".ui.freeweeklist.FreeWeekListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,32 +23,50 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity"
-            android:parentActivityName="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity" />
+            android:name=".ui.championdetails.ChampionDetailsActivity"
+            android:parentActivityName=".ui.freeweeklist.FreeWeekListActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity"
-            android:label="@string/add_alert" />
+            android:name=".ui.addalerts.AddChampionAlertActivity"
+            android:label="@string/add_alert"
+            android:parentActivityName=".ui.freeweeklist.FreeWeekListActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.ui.intro.IntroActivity"
+            android:name=".ui.intro.IntroActivity"
             android:theme="@style/Theme.Intro" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity"
+            android:name=".ui.myalerts.MyAlertsActivity"
             android:label="@string/my_alerts"
-            android:parentActivityName="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity" />
+            android:parentActivityName=".ui.freeweeklist.FreeWeekListActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:label="@string/action_settings"
-            android:parentActivityName="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity" />
-
+            android:parentActivityName=".ui.freeweeklist.FreeWeekListActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity"
-            android:theme="@style/AppTheme.DownloadChampion"/>
-
+            android:name=".ui.fetchchampiondata.FetchChampionsDataActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.DownloadChampion" />
         <activity android:name=".ui.BaseActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9931312002048408~6112768170"/>
+            android:value="ca-app-pub-9931312002048408~6112768170" />
+
+        <activity
+            android:name=".ui.privacypolicy.PrivacyPolicyActivity"
+            android:label="@string/privacy_policy"
+            android:parentActivityName=".ui.settings.SettingsActivity" />
+
+        <activity
+            android:name=".ui.termsconditions.TermsConditionsActivity"
+            android:label="@string/terms_conditions"
+            android:parentActivityName=".ui.settings.SettingsActivity" />
+
+        <activity
+            android:name=".ui.chooseregion.ChooseRegionActivity"
+            android:theme="@style/AppTheme.DownloadChampion" />
     </application>
 
 </manifest>

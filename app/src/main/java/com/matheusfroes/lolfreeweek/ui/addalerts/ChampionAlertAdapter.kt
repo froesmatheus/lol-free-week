@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.ui.addalert
+package com.matheusfroes.lolfreeweek.ui.addalerts
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

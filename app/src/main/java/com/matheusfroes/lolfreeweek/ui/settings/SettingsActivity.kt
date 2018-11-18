@@ -3,6 +3,7 @@ package com.matheusfroes.lolfreeweek.ui.settings
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.preference.ListPreference
@@ -18,6 +19,8 @@ import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.extra.parallelMap
 import com.matheusfroes.lolfreeweek.extra.toast
 import com.matheusfroes.lolfreeweek.ui.AppCompatPreferenceActivity
+import com.matheusfroes.lolfreeweek.ui.privacypolicy.PrivacyPolicyActivity
+import com.matheusfroes.lolfreeweek.ui.termsconditions.TermsConditionsActivity
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.coroutines.experimental.android.UI
@@ -55,6 +58,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         val updateListPreference = findPreference("update_list")
         val aboutApp = findPreference("about_app")
         val chooseRegion = findPreference("choose_region") as ListPreference
+        val privacyPolicy = findPreference("privacy_policy")
+        val termsConditions = findPreference("terms_conditions")
 
         val platforms = resources.getStringArray(R.array.lol_regions_values)
         var currentPlatform = preferences.currentPlatform
@@ -92,6 +97,16 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                     .withAboutDescription("<a href='https://github.com/froesmatheus'>Matheus Fróes</a>")
                     .withActivityTitle(getString(R.string.about_app))
                     .start(this)
+            true
+        }
+
+        privacyPolicy.setOnPreferenceClickListener {
+            startActivity(Intent(this, PrivacyPolicyActivity::class.java))
+            true
+        }
+
+        termsConditions.setOnPreferenceClickListener {
+            startActivity(Intent(this, TermsConditionsActivity::class.java))
             true
         }
     }

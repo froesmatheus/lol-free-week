@@ -19,8 +19,8 @@
 
         <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/ivChampion"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:contentDescription="Champion Image"
             android:minHeight="200dp"
             android:src="@drawable/lucian" />
@@ -31,8 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/ivChampion"
-            android:layout_toRightOf="@+id/ivChampion"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:text="Champion Name"
             android:textSize="17sp"
@@ -42,12 +41,9 @@
             android:id="@+id/tvChampionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/tvChampionName"
-            android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/ivChampion"
-            android:layout_toRightOf="@+id/ivChampion"
             android:paddingLeft="10dp"
             android:text="Champion Title" />
 
@@ -57,7 +53,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ivChampion"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:clickable="true"
             android:padding="10dp"
             android:src="@drawable/ic_delete" />

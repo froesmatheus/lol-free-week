@@ -1,16 +1,13 @@
-package com.matheusfroes.lolfreeweek.ui.addalert
+package com.matheusfroes.lolfreeweek.ui.addalerts
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.GridLayout
 import com.google.android.gms.ads.AdListener
@@ -110,31 +107,5 @@ class AddChampionAlertActivity : AppCompatActivity() {
 //                .build()
         val adRequest = AdRequest.Builder().build()
         interstitialAd.loadAd(adRequest)
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_add_alert, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-            R.id.actionInfo -> {
-                showHelpDialog()
-                return true
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun showHelpDialog() {
-        val dialog = AlertDialog.Builder(this)
-                .setMessage(getString(R.string.info_add_alert))
-                .create()
-
-        dialog.show()
     }
 }

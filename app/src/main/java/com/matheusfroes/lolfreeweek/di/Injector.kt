@@ -6,8 +6,9 @@ import com.matheusfroes.lolfreeweek.di.modules.RiotModule
 import com.matheusfroes.lolfreeweek.di.modules.ViewModelModule
 import com.matheusfroes.lolfreeweek.jobs.FetchFreeWeekChampionsWorker
 import com.matheusfroes.lolfreeweek.ui.BaseActivity
-import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity
+import com.matheusfroes.lolfreeweek.ui.addalerts.AddChampionAlertActivity
 import com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity
+import com.matheusfroes.lolfreeweek.ui.chooseregion.ChooseRegionActivity
 import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity
 import com.matheusfroes.lolfreeweek.ui.intro.IntroActivity
@@ -28,4 +29,5 @@ interface Injector {
     fun inject(fetchFreeWeekChampionsWorker: FetchFreeWeekChampionsWorker)
     fun inject(addChampionAlertActivity: AddChampionAlertActivity)
     fun inject(myAlertsActivity: MyAlertsActivity)
+    fun inject(chooseRegionActivity: ChooseRegionActivity)
 }

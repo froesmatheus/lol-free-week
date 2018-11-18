@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,10 +9,12 @@
     android:orientation="vertical"
     tools:context="com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListActivity">
 
+    <include layout="@layout/toolbar" />
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/adView">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvChampions"
@@ -43,12 +45,9 @@
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_height="50dp"
         android:visibility="gone"
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/ADMOB_MAIN_BANNER_ID" />
-
-</RelativeLayout>
+</LinearLayout>
 

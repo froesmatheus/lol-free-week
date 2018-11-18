@@ -22,11 +22,12 @@ import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.extra.createFreeWeekWorkRequest
 import com.matheusfroes.lolfreeweek.extra.viewModelProvider
 import com.matheusfroes.lolfreeweek.ui.BaseActivity
-import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertActivity
-import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity
+import com.matheusfroes.lolfreeweek.ui.addalerts.AddChampionAlertActivity
+import com.matheusfroes.lolfreeweek.ui.chooseregion.ChooseRegionActivity
 import com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity
 import com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 
@@ -41,20 +42,20 @@ class FreeWeekListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         appInjector.inject(this)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         MobileAds.initialize(this, BuildConfig.ADMOB_APP_ID)
 
         if (preferences.firstAccess) {
-            startActivity(Intent(this, FetchChampionsDataActivity::class.java))
+            ChooseRegionActivity.start(this)
             finish()
             return
         }
 
         scheduleJobs()
 
-
         viewModel = viewModelProvider(viewModelFactory)
-
 
         viewModel.freeToPlayChampions.observe(this, Observer { result ->
             when (result) {
@@ -76,13 +77,12 @@ class FreeWeekListActivity : BaseActivity() {
         })
 
 
-//        // Test ads
+        // Test ads
 //        val adRequest = AdRequest.Builder()
-//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                .addTestDevice("9A0EBA02F3FE24F712EA9B61624675BA")
+//                .addTestDevice("C58FEA4AB37733E06742616B51CA6280")
 //                .build()
-//
-////        // Official ads
+
+//        // Official ads
         val adRequest = AdRequest.Builder()
                 .build()
         adView.loadAd(adRequest)
@@ -127,7 +127,6 @@ class FreeWeekListActivity : BaseActivity() {
             R.id.actionConfigs -> startActivity(Intent(this, SettingsActivity::class.java))
             R.id.actionRefreshList -> viewModel.refreshFreeWeekList()
         }
-
 
         return super.onOptionsItemSelected(item)
     }

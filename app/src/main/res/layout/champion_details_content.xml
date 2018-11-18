@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -27,15 +27,14 @@
                 android:id="@+id/tvChampionName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvChampionTitle"
-                android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/tvChampionTitle"
+                android:layout_alignParentTop="true"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:lineSpacingExtra="8dp"
-                android:text="Lucian"
                 android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Lucian" />
 
             <TextView
                 android:id="@+id/tvChampionTitle"
@@ -43,20 +42,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvChampionName"
                 android:layout_toEndOf="@+id/ivChampionImage"
-                android:layout_toRightOf="@+id/ivChampionImage"
                 android:gravity="center"
-                android:text="O Atirador"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="O Atirador" />
         </RelativeLayout>
-
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="@string/habilidades"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -99,7 +96,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="@string/skins"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
 
@@ -107,16 +104,15 @@
             android:id="@+id/rvChampionSkins"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/champion_skin_content">
-
-        </android.support.v7.widget.RecyclerView>
+            tools:itemcount="2"
+            tools:listitem="@layout/champion_skin_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="@string/descricao"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
@@ -133,7 +129,7 @@
             ext:documentView_textAlignment="justified"
             ext:documentView_textColor="@android:color/white"
             ext:documentView_textFormat="plain"
-            ext:documentView_textSize="18sp"
+            ext:documentView_textSize="16sp"
             ext:documentView_textSubPixel="true" />
     </LinearLayout>
 

@@ -60,17 +60,19 @@ class MyAlertsActivity : AppCompatActivity() {
         if (championList.isEmpty()) {
             rvChampions.visibility = View.INVISIBLE
             emptyListLayout.visibility = View.VISIBLE
+            tvAlertsInfo.visibility = View.GONE
         } else {
             rvChampions.visibility = View.VISIBLE
             emptyListLayout.visibility = View.INVISIBLE
+            tvAlertsInfo.visibility = View.VISIBLE
         }
     }
 
-    fun showProgressBar() {
+    private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
     }
 
-    fun hideProgressBar() {
+    private fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
 }

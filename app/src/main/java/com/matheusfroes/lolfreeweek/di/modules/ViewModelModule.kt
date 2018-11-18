@@ -2,7 +2,7 @@ package com.matheusfroes.lolfreeweek.di.modules
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.matheusfroes.lolfreeweek.ui.addalert.AddChampionAlertViewModel
+import com.matheusfroes.lolfreeweek.ui.addalerts.AddChampionAlertViewModel
 import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataViewModel
 import com.matheusfroes.lolfreeweek.ui.freeweeklist.FreeWeekListViewModel
 import com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsViewModel

@@ -1,4 +1,4 @@
-package com.matheusfroes.lolfreeweek.ui.addalert
+package com.matheusfroes.lolfreeweek.ui.addalerts
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

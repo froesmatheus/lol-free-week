@@ -46,7 +46,7 @@
         <item>América Latina do Sul</item>
         <item>Brasil</item>
         <item>Coréia</item>
-        <item>Europe Norte/Leste</item>
+        <item>Europa Norte/Leste</item>
         <item>Europa Ocidental</item>
         <item>Japão</item>
         <item>Oceania</item>
@@ -58,6 +58,13 @@
     <string name="region">Região</string>
     <string name="download_failed">Download falhou</string>
     <string name="download_champ_data">Baixando dados sobre os campeões</string>
+    <string name="champion_data_updated">Dados atualizados</string>
+    <string name="privacy_policy">Política de privacidade</string>
+    <string name="terms_conditions">Termos e condições</string>
+    <string name="download_champ_data_info">(Isso geralmente leva menos de um minuto)</string>
+    <string name="my_alerts_info_message">Você será notificado quando qualquer um desses campeões ficar disponível na Free Week</string>
+    <string name="choose_your_region">Escolha a sua região</string>
+    <string name="choose_region_message">A Free Week é baseada na sua região</string>
 
 
 </resources>

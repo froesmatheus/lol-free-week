@@ -12,6 +12,14 @@
         android:title="@string/region" />
 
     <Preference
+        android:key="privacy_policy"
+        android:title="@string/privacy_policy" />
+
+    <Preference
+        android:key="terms_conditions"
+        android:title="@string/terms_conditions" />
+
+    <Preference
         android:key="about_app"
         android:summary="@string/about_app_summary"
         android:title="@string/about_app" />

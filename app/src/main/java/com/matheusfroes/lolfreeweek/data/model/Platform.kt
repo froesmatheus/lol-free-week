@@ -2,7 +2,7 @@ package com.matheusfroes.lolfreeweek.data.model
 
 import java.util.*
 
-enum class Platform private constructor(val id: String, val initials: String) {
+enum class Platform(val id: String, private val initials: String) {
     NA("NA1", "na"),
     LAN("LA1", "lan"),
     LAS("LA2", "las"),
@@ -14,9 +14,6 @@ enum class Platform private constructor(val id: String, val initials: String) {
     OCE("OC1", "oce"),
     RU("RU", "ru"),
     TR("TR1", "tr");
-
-    val host: String
-        get() = "https://" + id.toLowerCase() + ".api.riotgames.com"
 
     override fun toString(): String {
         return id
@@ -63,15 +60,6 @@ enum class Platform private constructor(val id: String, val initials: String) {
             return if (locales.contains(localeStr)) localeStr else "en_US"
         }
 
-        fun getPlatformById(id: String): Platform {
-            for (platform in Platform.values()) {
-                if (platform.id.toLowerCase() == id.toLowerCase()) {
-                    return platform
-                }
-            }
-            throw NoSuchElementException("Unknown platform ID: $id")
-        }
-
         fun getPlatformByName(name: String): Platform {
             for (platform in Platform.values()) {
                 if (platform.name.toLowerCase() == name.toLowerCase()) {
@@ -79,6 +67,10 @@ enum class Platform private constructor(val id: String, val initials: String) {
                 }
             }
             throw NoSuchElementException("Unknown platform name: $name")
+        }
+
+        fun getPlatforms(): List<Platform> {
+            return listOf(NA, LAN, LAS, BR, KR, EUNE, EUW, JP, OCE, RU, TR)
         }
     }
 }

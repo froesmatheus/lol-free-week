@@ -17,11 +17,5 @@ open class BaseActivity : AppCompatActivity() {
         appInjector.inject(this)
 
         Kotpref.init(applicationContext)
-
-//        launch(uiContext) {
-//            withContext(networkContext) {
-//                preferences.currentApiVersion = riotApi.getDataVersions(Platform.BR)[0]
-//            }
-//        }
     }
 }
