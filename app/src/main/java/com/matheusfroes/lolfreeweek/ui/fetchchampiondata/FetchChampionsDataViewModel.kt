@@ -30,6 +30,7 @@ class FetchChampionsDataViewModel @Inject constructor(
                 remoteSource.getChampion(championName)
             }
 
+            localSource.deleteDatabase()
             localSource.insertChampions(champions)
 
             val freeWeekChampions = remoteSource.fetchFreeWeekChampions()

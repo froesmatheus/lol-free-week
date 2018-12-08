@@ -67,4 +67,11 @@ class FetchChampionsDataActivity : AppCompatActivity() {
             }
         })
     }
+
+    override fun onBackPressed() {
+        if (viewModel.downloadChampions.value is Result.InProgress) {
+            return
+        }
+        super.onBackPressed()
+    }
 }
