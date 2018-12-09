@@ -21,14 +21,19 @@ class FetchChampionsDataActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel: FetchChampionsDataViewModel
-
     @Inject
     lateinit var preferences: UserPreferences
 
+    lateinit var viewModel: FetchChampionsDataViewModel
+    private var remakeList: Boolean = false
+
     companion object {
-        fun start(context: Context) {
-            context.startActivity(Intent(context, FetchChampionsDataActivity::class.java))
+        private const val REMAKE_LIST = "remake_list"
+
+        fun start(context: Context, remakeList: Boolean = false) {
+            val intent = Intent(context, FetchChampionsDataActivity::class.java)
+            intent.putExtra(REMAKE_LIST, remakeList)
+            context.startActivity(intent)
         }
     }
 
@@ -38,6 +43,7 @@ class FetchChampionsDataActivity : AppCompatActivity() {
         appInjector.inject(this)
 
         viewModel = viewModelProvider(viewModelFactory)
+        remakeList = intent.getBooleanExtra(REMAKE_LIST, false)
 
         btnTryAgain.setOnClickListener {
             downloadChampions()
@@ -52,7 +58,9 @@ class FetchChampionsDataActivity : AppCompatActivity() {
         viewModel.downloadChampions.observe(this, android.arch.lifecycle.Observer { result ->
             when (result) {
                 is Result.Complete -> {
-                    startActivity(Intent(applicationContext, IntroActivity::class.java))
+                    if (!remakeList) {
+                        startActivity(Intent(applicationContext, IntroActivity::class.java))
+                    }
                     finish()
                 }
                 is Result.InProgress -> {

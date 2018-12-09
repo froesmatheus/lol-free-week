@@ -18,7 +18,7 @@ class ChampionLocalSource @Inject constructor(
         championDAO.getFreeToPlayChampions()
     }
 
-    suspend fun deleteFreeToPlayChampions() = withContext(ioContext) {
+    private suspend fun deleteFreeToPlayChampions() = withContext(ioContext) {
         championDAO.deleteFreeChampions()
     }
 
@@ -40,11 +40,11 @@ class ChampionLocalSource @Inject constructor(
     }
 
     fun updateChampionAlerts(champions: List<Champion>) {
-        championDAO.updateList(champions)
+        championDAO.addAlerts(champions)
     }
 
-    suspend fun updateChampion(champion: Champion) = withContext(ioContext) {
-        championDAO.update(champion)
+    suspend fun deleteAlert(championId: Int) = withContext(ioContext) {
+        championDAO.deleteAlert(championId)
     }
 
     fun deleteDatabase() {

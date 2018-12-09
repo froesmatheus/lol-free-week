@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.matheusfroes.lolfreeweek.data.model.Champion
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -24,7 +25,6 @@ class ChampionDAO @Inject constructor(context: Context) {
                 cv.put(Db.COLUMN_IMAGE_CHAMPIONS, champion.image)
                 cv.put(Db.COLUMN_LORE_CHAMPIONS, champion.lore)
                 cv.put(Db.COLUMN_TITLE_CHAMPIONS, champion.title)
-                cv.put(Db.COLUMN_ALERT_ON_CHAMPIONS, if (champion.alertOn) 1 else 0)
 
                 spellDAO.insertList(champion.spells, champion.id, db)
 
@@ -38,28 +38,26 @@ class ChampionDAO @Inject constructor(context: Context) {
         }
     }
 
-    fun update(champion: Champion) {
-        val cv = ContentValues()
-
-        cv.put(Db.COLUMN_ALERT_ON_CHAMPIONS, if (champion.alertOn) 1 else 0)
-
-        db.update(Db.TABLE_CHAMPIONS, cv, "_id = ?", arrayOf(champion.id.toString()))
-    }
-
-    fun updateList(champions: List<Champion>) {
+    fun addAlerts(champions: List<Champion>) {
         db.beginTransaction()
         try {
             val cv = ContentValues()
 
             champions.forEach { champion ->
-                cv.put(Db.COLUMN_ALERT_ON_CHAMPIONS, if (champion.alertOn) 1 else 0)
+                cv.put(Db.COLUMN_ID_CHAMPION, champion.id)
 
-                db.update(Db.TABLE_CHAMPIONS, cv, "_id = ?", arrayOf(champion.id.toString()))
+                db.insert(Db.TABLE_CHAMPION_ALERTS, null, cv)
             }
             db.setTransactionSuccessful()
+        } catch (e: Exception) {
+            Timber.e(e)
         } finally {
             db.endTransaction()
         }
+    }
+
+    fun deleteAlert(championId: Int) {
+        db.delete(Db.TABLE_CHAMPION_ALERTS, "_id = ?", arrayOf(championId.toString()))
     }
 
     private fun deleteAll() = db.delete(Db.TABLE_CHAMPIONS, "1", null)
@@ -73,15 +71,15 @@ class ChampionDAO @Inject constructor(context: Context) {
     fun getChampionsByAlert(alert: Boolean): MutableList<Champion> {
         val champions = mutableListOf<Champion>()
 
-        val columns = arrayOf(
-                Db.COLUMN_ID_CHAMPIONS,
-                Db.COLUMN_IMAGE_CHAMPIONS,
-                Db.COLUMN_NAME_CHAMPIONS,
-                Db.COLUMN_TITLE_CHAMPIONS,
-                Db.COLUMN_ALERT_ON_CHAMPIONS)
+        val query = """
+            SELECT c.*
+            FROM ${Db.TABLE_CHAMPIONS} c
+            WHERE ${if (alert) "EXISTS" else "NOT EXISTS"} (
+                SELECT *
+                FROM ${Db.TABLE_CHAMPION_ALERTS} a
+                WHERE c._id = a._id)""".trimIndent()
 
-        val alertInt = if (alert) 1 else 0
-        val cursor = db.query(Db.TABLE_CHAMPIONS, columns, "${Db.COLUMN_ALERT_ON_CHAMPIONS} = ?", arrayOf(alertInt.toString()), null, null, null)
+        val cursor = db.rawQuery(query, null)
 
         if (cursor.count > 0) {
             cursor.moveToFirst()
@@ -91,12 +89,7 @@ class ChampionDAO @Inject constructor(context: Context) {
                 val id = cursor.getInt(cursor.getColumnIndex(Db.COLUMN_ID_CHAMPIONS))
                 val image = cursor.getString(cursor.getColumnIndex(Db.COLUMN_IMAGE_CHAMPIONS))
                 val title = cursor.getString(cursor.getColumnIndex(Db.COLUMN_TITLE_CHAMPIONS))
-
-                val alertOnInt = cursor.getInt(cursor.getColumnIndex(Db.COLUMN_ALERT_ON_CHAMPIONS))
-                val alertOn = alertOnInt == 1
-
-
-                val champion = Champion(name = name, title = title, id = id, image = image, alertOn = alertOn)
+                val champion = Champion(name = name, title = title, id = id, image = image)
 
                 champions.add(champion)
             } while (cursor.moveToNext())
@@ -121,11 +114,7 @@ class ChampionDAO @Inject constructor(context: Context) {
             val lore = cursor.getString(cursor.getColumnIndex(Db.COLUMN_LORE_CHAMPIONS))
             val title = cursor.getString(cursor.getColumnIndex(Db.COLUMN_TITLE_CHAMPIONS))
 
-            val alertOnInt = cursor.getInt(cursor.getColumnIndex(Db.COLUMN_ALERT_ON_CHAMPIONS))
-            val alertOn = alertOnInt == 1
-
-
-            val champion = Champion(id, image, key, lore, name, title, alertOn = alertOn)
+            val champion = Champion(id, image, key, lore, name, title)
 
             champion.spells = spellDAO.getSpellsByChampionId(id)
             champion.skins = skinDAO.getSkinsByChampionId(id)

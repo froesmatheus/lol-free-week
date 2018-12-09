@@ -3,7 +3,6 @@ package com.matheusfroes.lolfreeweek.ui.addalerts
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.SingleLiveEvent
@@ -15,10 +14,10 @@ import javax.inject.Inject
 class AddChampionAlertViewModel @Inject constructor(
         private val localSource: ChampionLocalSource
 ) : ViewModel() {
-    private var championsList = listOf<Champion>()
+    private var championsList = listOf<ChampionAlertUIModel>()
 
-    private val _champions = MutableLiveData<Result<List<Champion>>>()
-    val champions: LiveData<Result<List<Champion>>> = _champions
+    private val _champions = MutableLiveData<Result<List<ChampionAlertUIModel>>>()
+    val champions: LiveData<Result<List<ChampionAlertUIModel>>> = _champions
 
     val emptyAlertListEvent = SingleLiveEvent<Any>()
     val navigateBackEvent = SingleLiveEvent<Any>()
@@ -28,9 +27,9 @@ class AddChampionAlertViewModel @Inject constructor(
 
         try {
             val champions = localSource.getChampionsByAlert(alert = false)
-            championsList = champions
+            championsList = champions.map { ChampionAlertUIModel(it, null) }
 
-            _champions.value = Result.Complete(champions)
+            _champions.value = Result.Complete(championsList)
         } catch (e: Exception) {
             Timber.e(e)
             _champions.value = Result.Error(e)
@@ -39,20 +38,20 @@ class AddChampionAlertViewModel @Inject constructor(
 
     fun filterChampions(query: String) {
         val filter = championsList.filter { champion ->
-            champion.name.contains(query, ignoreCase = true)
+            champion.champion.name.contains(query, ignoreCase = true)
         }
         _champions.value = Result.Complete(filter)
     }
 
     fun updateChampionAlerts() {
-        val alertOnChampions = championsList.filter(Champion::alertOn)
+        val alertOnChampions = championsList.filter { model -> model.alert != null }
 
         if (alertOnChampions.isEmpty()) {
             emptyAlertListEvent.call()
             return
         }
 
-        localSource.updateChampionAlerts(alertOnChampions)
+        localSource.updateChampionAlerts(alertOnChampions.map { it.champion })
         navigateBackEvent.call()
     }
 }

@@ -1,7 +1,6 @@
 package com.matheusfroes.lolfreeweek.ui.settings
 
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -16,15 +15,12 @@ import com.matheusfroes.lolfreeweek.data.source.ChampionLocalSource
 import com.matheusfroes.lolfreeweek.data.source.ChampionRemoteSource
 import com.matheusfroes.lolfreeweek.data.source.UserPreferences
 import com.matheusfroes.lolfreeweek.extra.appInjector
-import com.matheusfroes.lolfreeweek.extra.parallelMap
-import com.matheusfroes.lolfreeweek.extra.toast
 import com.matheusfroes.lolfreeweek.ui.AppCompatPreferenceActivity
+import com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity
 import com.matheusfroes.lolfreeweek.ui.privacypolicy.PrivacyPolicyActivity
 import com.matheusfroes.lolfreeweek.ui.termsconditions.TermsConditionsActivity
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 
@@ -112,26 +108,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     }
 
     private fun remakeChampionsList() {
-        val progress = ProgressDialog(this)
-        progress.setMessage(getString(R.string.info_download_champion_information))
-        progress.isIndeterminate = true
-        progress.show()
-
-        launch(UI) {
-            localSource.deleteDatabase()
-
-            val championNames = remoteSource.getChampions()
-            val champions = championNames.parallelMap { championName ->
-                remoteSource.getChampion(championName)
-            }
-
-            localSource.insertChampions(champions)
-
-            progress.cancel()
-            toast(getString(R.string.champion_data_updated))
-        }
+        FetchChampionsDataActivity.start(this, remakeList = true)
     }
-
 
     /**
      * Helper method to determine if the device has an extra-large screen. For

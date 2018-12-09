@@ -8,5 +8,4 @@ data class Champion(
         var name: String = "",
         var title: String = "",
         var spells: List<Spell> = listOf(),
-        var skins: List<Skin> = listOf(),
-        var alertOn: Boolean = false)
+        var skins: List<Skin> = listOf())

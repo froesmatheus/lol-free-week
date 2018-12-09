@@ -52,7 +52,7 @@ class MyAlertsActivity : AppCompatActivity() {
         rvChampions.itemAnimator = DefaultItemAnimator()
 
         adapter.deleteChampionEvent = { champion ->
-            viewModel.deleteAlert(champion)
+            viewModel.deleteAlert(champion.id)
         }
     }
 

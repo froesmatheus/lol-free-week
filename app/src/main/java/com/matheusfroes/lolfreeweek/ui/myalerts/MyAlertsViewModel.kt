@@ -38,9 +38,8 @@ class MyAlertsViewModel @Inject constructor(
         }
     }
 
-    fun deleteAlert(champion: Champion) = launch(UI) {
-        champion.alertOn = false
-        localSource.updateChampion(champion)
+    fun deleteAlert(championId: Int) = launch(UI) {
+        localSource.deleteAlert(championId)
         _champions.value = Result.Complete(localSource.getChampionsByAlert(alert = true))
     }
 }

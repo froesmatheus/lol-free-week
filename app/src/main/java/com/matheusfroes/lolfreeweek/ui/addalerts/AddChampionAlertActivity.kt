@@ -48,7 +48,7 @@ class AddChampionAlertActivity : AppCompatActivity() {
         viewModel.champions.observe(this, Observer { result ->
             when (result) {
                 is Result.Complete -> {
-                    adapter.champions = result.data.toMutableList()
+                    adapter.champions = result.data
                     rvChampions.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
                 }
