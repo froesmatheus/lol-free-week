@@ -1,5 +1,7 @@
 package com.matheusfroes.lolfreeweek.ui.championdetails
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -20,13 +22,23 @@ import kotlinx.android.synthetic.main.champion_details_content.*
 import javax.inject.Inject
 
 class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
-    val dao by lazy { ChampionDAO(this) }
-    var champion: Champion? = null
-    val adapter: ChampionSkinAdapter by lazy { ChampionSkinAdapter() }
-
     @Inject
     lateinit var preferences: UserPreferences
 
+    val dao by lazy { ChampionDAO(this) }
+    var champion: Champion? = null
+    val adapter: ChampionSkinAdapter by lazy { ChampionSkinAdapter() }
+    var championId: Long = -1
+
+    companion object {
+        private const val CHAMPION_ID = "champion_id"
+
+        fun start(context: Context, championId: Int) {
+            val intent = Intent(context, ChampionDetailsActivity::class.java)
+            intent.putExtra(CHAMPION_ID, championId.toLong())
+            context.startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +48,13 @@ class ChampionDetailsActivity : AppCompatActivity(), View.OnClickListener {
         if (intent == null) return
 
         val currentApiVersion = preferences.currentApiVersion
-        val championId = intent.getIntExtra("championId", -1)
+        championId = intent.getLongExtra(CHAMPION_ID, -1)
 
         scrollView.post {
             scrollView.scrollTo(0, 0)
         }
 
-        champion = dao.getChampion(championId.toLong())
+        champion = dao.getChampion(championId)
 
         title = champion?.name
 

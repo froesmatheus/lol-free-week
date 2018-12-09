@@ -13,7 +13,7 @@ import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.extra.toast
 import com.matheusfroes.lolfreeweek.extra.viewModelProvider
 import com.matheusfroes.lolfreeweek.ui.intro.IntroActivity
-import kotlinx.android.synthetic.main.activity_download_champion_data2.*
+import kotlinx.android.synthetic.main.activity_download_champion_data.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -39,7 +39,7 @@ class FetchChampionsDataActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_download_champion_data2)
+        setContentView(R.layout.activity_download_champion_data)
         appInjector.inject(this)
 
         viewModel = viewModelProvider(viewModelFactory)

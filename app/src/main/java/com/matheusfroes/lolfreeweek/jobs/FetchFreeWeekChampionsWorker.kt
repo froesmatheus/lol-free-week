@@ -21,7 +21,6 @@ class FetchFreeWeekChampionsWorker : Worker() {
 
         notificationSender.fetchFreeWeekChampions()
 
-
         val workRequest = createFreeWeekWorkRequest()
 
         WorkManager.getInstance()

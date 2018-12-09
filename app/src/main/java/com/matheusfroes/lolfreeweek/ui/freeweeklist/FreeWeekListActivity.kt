@@ -23,6 +23,7 @@ import com.matheusfroes.lolfreeweek.extra.createFreeWeekWorkRequest
 import com.matheusfroes.lolfreeweek.extra.viewModelProvider
 import com.matheusfroes.lolfreeweek.ui.BaseActivity
 import com.matheusfroes.lolfreeweek.ui.addalerts.AddChampionAlertActivity
+import com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity
 import com.matheusfroes.lolfreeweek.ui.chooseregion.ChooseRegionActivity
 import com.matheusfroes.lolfreeweek.ui.myalerts.MyAlertsActivity
 import com.matheusfroes.lolfreeweek.ui.settings.SettingsActivity
@@ -77,14 +78,15 @@ class FreeWeekListActivity : BaseActivity() {
         })
 
 
-        // Test ads
-//        val adRequest = AdRequest.Builder()
-//                .addTestDevice("C58FEA4AB37733E06742616B51CA6280")
-//                .build()
+        val adRequest = if (BuildConfig.DEBUG) {
+            AdRequest.Builder()
+                    .addTestDevice("C58FEA4AB37733E06742616B51CA6280")
+                    .build()
+        } else {
+            AdRequest.Builder()
+                    .build()
+        }
 
-//        // Official ads
-        val adRequest = AdRequest.Builder()
-                .build()
         adView.loadAd(adRequest)
 
         adView.adListener = object : AdListener() {
@@ -101,6 +103,10 @@ class FreeWeekListActivity : BaseActivity() {
         rvChampions.layoutManager = GridLayoutManager(this, 2, GridLayout.VERTICAL, false)
         rvChampions.itemAnimator = DefaultItemAnimator()
         rvChampions.adapter = adapter
+
+        adapter.championClick = { championId ->
+            ChampionDetailsActivity.start(this, championId)
+        }
 
         btnSaveAlert.setOnClickListener {
             startActivity(Intent(this, AddChampionAlertActivity::class.java))

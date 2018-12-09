@@ -65,6 +65,8 @@
     <string name="my_alerts_info_message">Você será notificado quando qualquer um desses campeões ficar disponível na Free Week</string>
     <string name="choose_your_region">Escolha a sua região</string>
     <string name="choose_region_message">A Free Week é baseada na sua região</string>
+    <string name="delete">Apagar</string>
+    <string name="try_again">Tentar novamente</string>
 
 
 </resources>

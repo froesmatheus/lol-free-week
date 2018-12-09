@@ -36,6 +36,7 @@ class ChampionSkinAdapter : RecyclerView.Adapter<ChampionSkinAdapter.ViewHolder>
             val url = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${skin.championName}_${skin.skin.num}.jpg"
 
             itemView.ivChampionSkin.loadImage(url)
+            itemView.tvSkinName.text = if (skin.skin.name == "default") skin.championName else skin.skin.name
         }
     }
 }

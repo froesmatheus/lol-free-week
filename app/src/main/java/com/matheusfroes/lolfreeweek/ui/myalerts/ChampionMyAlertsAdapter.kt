@@ -18,6 +18,7 @@ class ChampionMyAlertsAdapter : RecyclerView.Adapter<ChampionMyAlertsAdapter.Vie
             notifyDataSetChanged()
         }
 
+    var championClick: ((Int) -> Unit)? = null
     var deleteChampionEvent: ((Champion) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,17 +35,21 @@ class ChampionMyAlertsAdapter : RecyclerView.Adapter<ChampionMyAlertsAdapter.Vie
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.ivDeleteAlert.setOnClickListener {
+                deleteChampionEvent?.invoke(champions[adapterPosition])
+            }
+
+            itemView.setOnClickListener {
+                championClick?.invoke(champions[adapterPosition].id)
+            }
+        }
+
         fun bind(champion: Champion) {
             itemView.ivChampion.loadImage("http://ddragon.leagueoflegends.com/cdn/${UserPreferences().currentApiVersion}/img/champion/${champion.image}")
 
             itemView.tvChampionName.text = champion.name
             itemView.tvChampionTitle.text = champion.title
-        }
-
-        init {
-            itemView.ivDeleteAlert.setOnClickListener {
-                deleteChampionEvent?.invoke(champions[adapterPosition])
-            }
         }
     }
 }

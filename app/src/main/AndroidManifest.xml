@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.matheusfroes.lolfreeweek">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,7 +12,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.freeweeklist.FreeWeekListActivity"
             android:screenOrientation="portrait"
@@ -58,12 +60,10 @@
             android:name=".ui.privacypolicy.PrivacyPolicyActivity"
             android:label="@string/privacy_policy"
             android:parentActivityName=".ui.settings.SettingsActivity" />
-
         <activity
             android:name=".ui.termsconditions.TermsConditionsActivity"
             android:label="@string/terms_conditions"
             android:parentActivityName=".ui.settings.SettingsActivity" />
-
         <activity
             android:name=".ui.chooseregion.ChooseRegionActivity"
             android:theme="@style/AppTheme.DownloadChampion" />

@@ -16,7 +16,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="champion_name">Champion name</string>
     <string name="add_alert">Add Alerts</string>
-    <string name="refresh_list">Refresh Free Champion Rotation List</string>
+    <string name="refresh_list">Refresh Free Champion Rotation</string>
     <string name="free_week_notification_message">Check out the free champion rotation!</string>
     <string name="help">Help</string>
     <string name="info_download_champion_information">Downloading champion information</string>
@@ -115,5 +115,6 @@
     <string name="my_alerts_info_message">You will be notified when any of these champions become available on the Free Champion Rotation</string>
     <string name="choose_your_region">Choose your region</string>
     <string name="choose_region_message">The Free Champion Rotation is based on your region</string>
-
+    <string name="delete">Delete</string>
+    <string name="try_again">Try again</string>
 </resources>

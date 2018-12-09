@@ -12,6 +12,7 @@ import com.matheusfroes.lolfreeweek.data.model.Champion
 import com.matheusfroes.lolfreeweek.extra.Result
 import com.matheusfroes.lolfreeweek.extra.appInjector
 import com.matheusfroes.lolfreeweek.extra.viewModelProvider
+import com.matheusfroes.lolfreeweek.ui.championdetails.ChampionDetailsActivity
 import kotlinx.android.synthetic.main.activity_my_alerts.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -50,6 +51,10 @@ class MyAlertsActivity : AppCompatActivity() {
         rvChampions.adapter = adapter
         rvChampions.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvChampions.itemAnimator = DefaultItemAnimator()
+
+        adapter.championClick = { championId ->
+            ChampionDetailsActivity.start(this, championId)
+        }
 
         adapter.deleteChampionEvent = { champion ->
             viewModel.deleteAlert(champion.id)

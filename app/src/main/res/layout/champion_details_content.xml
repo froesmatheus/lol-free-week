@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
@@ -15,13 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/ivChampionImage"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:src="@drawable/lucian"
-                app:civ_border_overlay="true" />
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/lucian" />
 
             <TextView
                 android:id="@+id/tvChampionName"
@@ -32,7 +32,7 @@
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:lineSpacingExtra="8dp"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 tools:text="Lucian" />
 
@@ -42,8 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvChampionName"
                 android:layout_toEndOf="@+id/ivChampionImage"
-                android:gravity="center"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 tools:text="O Atirador" />
         </RelativeLayout>
@@ -66,6 +65,7 @@
                 android:id="@+id/ivSpellQ"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:contentDescription="@null"
                 android:padding="5dp"
                 android:src="@drawable/examplespell" />
 
@@ -73,6 +73,7 @@
                 android:id="@+id/ivSpellW"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:contentDescription="@null"
                 android:padding="5dp"
                 android:src="@drawable/examplespell" />
 
@@ -80,6 +81,7 @@
                 android:id="@+id/ivSpellE"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:contentDescription="@null"
                 android:padding="5dp"
                 android:src="@drawable/examplespell" />
 
@@ -87,6 +89,7 @@
                 android:id="@+id/ivSpellR"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:contentDescription="@null"
                 android:padding="5dp"
                 android:src="@drawable/examplespell" />
         </LinearLayout>
@@ -120,7 +123,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:minHeight="100dp"
             ext:documentView_antialias="true"
             ext:documentView_cacheConfig="auto_quality"
             ext:documentView_hyphen="-"
