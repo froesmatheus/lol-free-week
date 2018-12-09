@@ -67,6 +67,7 @@
     <string name="choose_region_message">A Free Week é baseada na sua região</string>
     <string name="delete">Apagar</string>
     <string name="try_again">Tentar novamente</string>
+    <string name="current_free_champion_rotation">Free Week atual</string>
 
 
 </resources>

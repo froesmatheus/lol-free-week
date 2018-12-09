@@ -23,7 +23,7 @@ class IntroActivity : MaterialIntroActivity() {
         addSlide(SlideFragmentBuilder()
                 .backgroundColor(R.color.colorPrimary)
                 .buttonsColor(R.color.colorPrimaryDark)
-                .image(R.drawable.intro_image)
+                .image(R.drawable.app_logo)
                 .title(resources.getString(R.string.app_name))
                 .description(getString(R.string.intro_1))
                 .build())

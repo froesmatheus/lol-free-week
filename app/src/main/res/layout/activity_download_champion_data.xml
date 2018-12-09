@@ -13,10 +13,10 @@
     tools:context="com.matheusfroes.lolfreeweek.ui.fetchchampiondata.FetchChampionsDataActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:contentDescription="@null"
-        android:src="@drawable/intro_image" />
+        android:src="@drawable/app_logo" />
 
     <TextView
         android:id="@+id/textView"

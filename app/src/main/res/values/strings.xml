@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Free Week Guide for LoL</string>
+    <string name="app_name">Free Week Notifier for LoL</string>
     <string name="title_activity_champion_details">ChampionDetailsActivity</string>
 
     <string name="title_activity_scrolling">ScrollingActivity</string>
@@ -21,7 +21,7 @@
     <string name="help">Help</string>
     <string name="info_download_champion_information">Downloading champion information</string>
     <string name="champion_alert">Champion Alert</string>
-    <string name="license_riot" translatable="false">Free Week Guide for LoL isn\'t endorsed by Riot Games and doesn\'t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</string>
+    <string name="license_riot" translatable="false">Free Week Notifier for LoL isn\'t endorsed by Riot Games and doesn\'t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</string>
     <string name="about_app">About</string>
     <string name="about_app_summary">Licenses and app information</string>
     <string name="update_list">Update List</string>
@@ -117,4 +117,5 @@
     <string name="choose_region_message">The Free Champion Rotation is based on your region</string>
     <string name="delete">Delete</string>
     <string name="try_again">Try again</string>
+    <string name="current_free_champion_rotation">Current Free Champion Rotation</string>
 </resources>
