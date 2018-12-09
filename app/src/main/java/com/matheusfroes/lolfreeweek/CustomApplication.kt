@@ -1,7 +1,6 @@
 package com.matheusfroes.lolfreeweek
 
 import android.app.Application
-import com.facebook.stetho.Stetho
 import com.matheusfroes.lolfreeweek.di.DaggerInjector
 import com.matheusfroes.lolfreeweek.di.Injector
 import com.matheusfroes.lolfreeweek.di.modules.AppModule
@@ -18,7 +17,6 @@ open class CustomApplication : Application() {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
-            Stetho.initializeWithDefaults(this);
         } else {
             Timber.plant(CrashlyticsTree())
         }
